@@ -6,69 +6,80 @@
 <title>NextGen Academy Admin</title>
 
 <style>
-* {
-    box-sizing: border-box;
+*{box-sizing:border-box}
+
+body{
+ margin:0;
+ font-family:Arial,sans-serif;
+ background:#f1f5ff;
+ color:#172554;
 }
 
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f1f5ff;
+.container{
+ max-width:850px;
+ margin:35px auto;
+ padding:25px;
+ background:white;
+ border-radius:15px;
+ box-shadow:0 5px 25px #0002;
 }
 
-.container {
-    max-width: 420px;
-    margin: 70px auto;
-    padding: 30px;
-    background: white;
-    border-radius: 15px;
-    box-shadow: 0 5px 25px #0002;
+h2{text-align:center;color:#2445a5}
+
+input,select,textarea{
+ width:100%;
+ padding:13px;
+ margin:8px 0 15px;
+ border:1px solid #ccd3e0;
+ border-radius:8px;
+ font-size:15px;
 }
 
-h2 {
-    text-align: center;
-    color: #2445a5;
+button{
+ padding:12px 18px;
+ background:#2849c7;
+ color:white;
+ border:0;
+ border-radius:8px;
+ cursor:pointer;
+ font-size:15px;
 }
 
-input {
-    width: 100%;
-    padding: 14px;
-    margin: 12px 0;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 16px;
+button:hover{opacity:.85}
+
+#dashboard{display:none}
+
+.card{
+ padding:20px;
+ margin:15px 0;
+ background:#edf2ff;
+ border-radius:10px;
 }
 
-button {
-    width: 100%;
-    padding: 14px;
-    background: #2849c7;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 17px;
-    cursor: pointer;
+.course{
+ background:#fff;
+ padding:15px;
+ margin:12px 0;
+ border:1px solid #dbe3f3;
+ border-radius:10px;
 }
 
-#dashboard {
-    display: none;
-}
+.course button{margin:5px}
 
-.card {
-    padding: 20px;
-    margin-top: 15px;
-    background: #edf2ff;
-    border-radius: 10px;
-}
+.delete{background:#dc2626}
+.edit{background:#15803d}
 
-#message {
-    color: red;
-    text-align: center;
-}
+#message{color:#dc2626;text-align:center}
+#status{margin:12px 0;font-weight:bold}
+
+label{font-weight:bold}
+
 </style>
 </head>
 
 <body>
+
+<!-- LOGIN -->
 
 <div class="container" id="loginBox">
 
@@ -77,17 +88,13 @@ button {
 
 <form id="loginForm">
 
-<input
-type="email"
-id="email"
-placeholder="Admin Email"
-required>
+<label>Email</label>
+<input type="email" id="email"
+placeholder="Admin Email" required>
 
-<input
-type="password"
-id="password"
-placeholder="Password"
-required>
+<label>Password</label>
+<input type="password" id="password"
+placeholder="Password" required>
 
 <button type="submit">Login</button>
 
@@ -98,42 +105,115 @@ required>
 </div>
 
 
+<!-- DASHBOARD -->
+
 <div class="container" id="dashboard">
 
-<h2>Admin Dashboard</h2>
+<h2>NextGen Academy Admin Dashboard</h2>
 
 <h3 id="welcome"></h3>
 
+<button id="logout">Logout</button>
+
 <div class="card">
+
 <h3>📚 Course Management</h3>
-<p>Manage Academy Courses</p>
+
+<form id="courseForm">
+
+<input type="hidden" id="courseId">
+
+<label>Course Name</label>
+<input id="courseName"
+placeholder="যেমন: SSC Mathematics"
+required>
+
+<label>Class</label>
+<select id="courseClass" required>
+<option value="">Select Class</option>
+<option>Class 1</option>
+<option>Class 2</option>
+<option>Class 3</option>
+<option>Class 4</option>
+<option>Class 5</option>
+<option>Class 6</option>
+<option>Class 7</option>
+<option>Class 8</option>
+<option>Class 9</option>
+<option>Class 10</option>
+<option>Class 11</option>
+<option>Class 12</option>
+</select>
+
+<label>Division / Group</label>
+<select id="division">
+<option>General</option>
+<option>Science</option>
+<option>Humanities</option>
+<option>Business Studies</option>
+</select>
+
+<label>Subject</label>
+<input id="subject"
+placeholder="যেমন: Mathematics"
+required>
+
+<label>Course Fee</label>
+<input type="number" id="fee"
+placeholder="Course Fee (TK)" min="0">
+
+<label>Course Description</label>
+<textarea id="description"
+placeholder="Course details"></textarea>
+
+<button type="submit" id="saveButton">
+Add Course
+</button>
+
+<button type="button" id="cancelEdit"
+style="display:none;background:#64748b">
+Cancel Edit
+</button>
+
+</form>
+
+<p id="status"></p>
+
 </div>
+
+
+<div class="card">
+
+<h3>📖 All Courses</h3>
+
+<div id="courseList">
+Loading courses...
+</div>
+
+</div>
+
 
 <div class="card">
 <h3>👨‍🎓 Student Management</h3>
-<p>Manage Students</p>
+<p>Coming Soon</p>
 </div>
 
 <div class="card">
 <h3>📢 Notice Management</h3>
-<p>Manage Notices</p>
+<p>Coming Soon</p>
 </div>
 
 <div class="card">
 <h3>📝 Admission Management</h3>
-<p>Manage Admissions</p>
+<p>Coming Soon</p>
 </div>
-
-<br>
-
-<button id="logout">Logout</button>
 
 </div>
 
 
 <script type="module">
 
-import { initializeApp }
+import {initializeApp}
 from "https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
 
 import {
@@ -143,6 +223,19 @@ onAuthStateChanged,
 signOut
 }
 from "https://www.gstatic.com/firebasejs/13.3.0/firebase-auth.js";
+
+import {
+getFirestore,
+collection,
+addDoc,
+getDocs,
+doc,
+getDoc,
+updateDoc,
+deleteDoc,
+serverTimestamp
+}
+from "https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
 
 
 const firebaseConfig = {
@@ -155,62 +248,295 @@ appId: "1:250055044170:web:a1781adf499d33570f4ab3",
 measurementId: "G-58XX0MKTPE"
 };
 
+
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app);
+
 
 const loginBox = document.getElementById("loginBox");
 const dashboard = document.getElementById("dashboard");
 const message = document.getElementById("message");
+const status = document.getElementById("status");
+
+
+// LOGIN
 
 document.getElementById("loginForm")
-.addEventListener("submit", async (e) => {
+.addEventListener("submit", async (e)=>{
 
 e.preventDefault();
 
-const email = document.getElementById("email").value;
-const password = document.getElementById("password").value;
+try{
 
-try {
+await signInWithEmailAndPassword(
+auth,
+document.getElementById("email").value,
+document.getElementById("password").value
+);
 
-await signInWithEmailAndPassword(auth, email, password);
+message.textContent="";
 
-message.textContent = "";
+}catch(error){
 
-} catch (error) {
+message.textContent="Login failed: "+error.message;
 
-message.textContent = "Login failed: " + error.message;
+}
+
+});
+
+
+// ADMIN VERIFICATION
+
+onAuthStateChanged(auth,async(user)=>{
+
+if(!user){
+
+loginBox.style.display="block";
+dashboard.style.display="none";
+return;
+
+}
+
+try{
+
+const adminRef=doc(db,"admins",user.uid);
+const adminSnap=await getDoc(adminRef);
+
+if(!adminSnap.exists()){
+
+alert("You are not an authorized Admin.");
+
+await signOut(auth);
+return;
+
+}
+
+loginBox.style.display="none";
+dashboard.style.display="block";
+
+document.getElementById("welcome").textContent=
+"Welcome, "+user.email;
+
+loadCourses();
+
+}catch(error){
+
+alert("Admin verification failed: "+error.message);
+await signOut(auth);
 
 }
 
 });
 
 
-onAuthStateChanged(auth, (user) => {
-
-if (user) {
-
-loginBox.style.display = "none";
-dashboard.style.display = "block";
-
-document.getElementById("welcome").textContent =
-"Welcome, " + user.email;
-
-} else {
-
-loginBox.style.display = "block";
-dashboard.style.display = "none";
-
-}
-
-});
-
+// LOGOUT
 
 document.getElementById("logout")
-.addEventListener("click", async () => {
+.addEventListener("click",async()=>{
 
 await signOut(auth);
 
 });
+
+
+// ADD / UPDATE COURSE
+
+document.getElementById("courseForm")
+.addEventListener("submit",async(e)=>{
+
+e.preventDefault();
+
+const id=document.getElementById("courseId").value;
+
+const courseData={
+
+name:document.getElementById("courseName").value.trim(),
+
+className:document.getElementById("courseClass").value,
+
+division:document.getElementById("division").value,
+
+subject:document.getElementById("subject").value.trim(),
+
+fee:Number(document.getElementById("fee").value||0),
+
+description:document.getElementById("description").value.trim(),
+
+updatedAt:serverTimestamp()
+
+};
+
+try{
+
+if(id){
+
+await updateDoc(doc(db,"courses",id),courseData);
+
+status.textContent="Course updated successfully!";
+
+}else{
+
+courseData.createdAt=serverTimestamp();
+
+await addDoc(collection(db,"courses"),courseData);
+
+status.textContent="Course added successfully!";
+
+}
+
+document.getElementById("courseForm").reset();
+
+document.getElementById("courseId").value="";
+
+document.getElementById("saveButton").textContent="Add Course";
+
+document.getElementById("cancelEdit").style.display="none";
+
+loadCourses();
+
+}catch(error){
+
+status.textContent="Error: "+error.message;
+
+}
+
+});
+
+
+// LOAD COURSES
+
+async function loadCourses(){
+
+const list=document.getElementById("courseList");
+
+list.textContent="Loading...";
+
+try{
+
+const snapshot=await getDocs(collection(db,"courses"));
+
+list.innerHTML="";
+
+if(snapshot.empty){
+
+list.textContent="No courses added yet.";
+
+return;
+
+}
+
+snapshot.forEach((item)=>{
+
+const c=item.data();
+
+const box=document.createElement("div");
+box.className="course";
+
+const title=document.createElement("h3");
+title.textContent=c.name||"Untitled Course";
+
+const details=document.createElement("p");
+details.textContent=
+"Class: "+(c.className||"")+
+" | Division: "+(c.division||"")+
+" | Subject: "+(c.subject||"")+
+" | Fee: ৳"+(c.fee||0);
+
+const description=document.createElement("p");
+description.textContent=c.description||"";
+
+const edit=document.createElement("button");
+edit.className="edit";
+edit.textContent="Edit";
+
+edit.addEventListener("click",()=>editCourse(item.id,c));
+
+const del=document.createElement("button");
+del.className="delete";
+del.textContent="Delete";
+
+del.addEventListener("click",()=>deleteCourse(item.id));
+
+box.append(title,details,description,edit,del);
+
+list.appendChild(box);
+
+});
+
+}catch(error){
+
+list.textContent="Error loading courses: "+error.message;
+
+}
+
+}
+
+
+// EDIT COURSE
+
+function editCourse(id,c){
+
+document.getElementById("courseId").value=id;
+
+document.getElementById("courseName").value=c.name||"";
+
+document.getElementById("courseClass").value=c.className||"";
+
+document.getElementById("division").value=c.division||"General";
+
+document.getElementById("subject").value=c.subject||"";
+
+document.getElementById("fee").value=c.fee||0;
+
+document.getElementById("description").value=c.description||"";
+
+document.getElementById("saveButton").textContent="Update Course";
+
+document.getElementById("cancelEdit").style.display="inline-block";
+
+window.scrollTo({top:0,behavior:"smooth"});
+
+}
+
+
+// CANCEL EDIT
+
+document.getElementById("cancelEdit")
+.addEventListener("click",()=>{
+
+document.getElementById("courseForm").reset();
+
+document.getElementById("courseId").value="";
+
+document.getElementById("saveButton").textContent="Add Course";
+
+document.getElementById("cancelEdit").style.display="none";
+
+});
+
+
+// DELETE COURSE
+
+async function deleteCourse(id){
+
+if(!confirm("Are you sure you want to delete this course?"))return;
+
+try{
+
+await deleteDoc(doc(db,"courses",id));
+
+status.textContent="Course deleted successfully!";
+
+loadCourses();
+
+}catch(error){
+
+status.textContent="Delete failed: "+error.message;
+
+}
+
+}
 
 </script>
 
