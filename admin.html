@@ -3,77 +3,71 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>NextGen Academy | Admin Panel</title>
+<title>NextGen Academy Admin</title>
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
 <style>
 :root{--blue:#3155e7;--dark:#101a38;--bg:#f2f5fc;--text:#1c2947}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text);font-family:'Hind Siliguri',sans-serif}
-button{cursor:pointer;border:0;border-radius:9px;padding:11px 16px;background:var(--blue);color:white;font-weight:700;font-family:inherit}
-input,select,textarea{width:100%;padding:12px;border:1px solid #d5ddec;border-radius:9px;margin:7px 0 15px;font:inherit}
+button{cursor:pointer;border:0;border-radius:8px;padding:10px 15px;background:var(--blue);color:white;font-weight:700;font-family:inherit}
+input,select,textarea{width:100%;padding:11px;border:1px solid #d5ddec;border-radius:8px;margin:6px 0 13px;font:inherit;background:white}
 label{font-weight:700}
-h2,h3{margin-top:0}
-.login{
- max-width:420px;margin:70px auto;background:white;padding:30px;
- border-radius:18px;box-shadow:0 10px 35px #0001
-}
+.login{max-width:420px;margin:65px auto;background:white;padding:30px;border-radius:17px;box-shadow:0 10px 35px #0001}
 .login h2{text-align:center;color:var(--blue)}
 #dashboard{display:none}
-.topbar{
- background:var(--dark);color:white;padding:17px 4%;
- display:flex;justify-content:space-between;align-items:center;gap:15px
-}
+.topbar{background:var(--dark);color:white;padding:16px 3%;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
 .topbar button{background:#e24c5b}
-.layout{display:grid;grid-template-columns:230px 1fr;min-height:calc(100vh - 65px)}
-.sidebar{background:white;padding:20px;border-right:1px solid #e4e9f3}
-.sidebar button{
- width:100%;text-align:left;margin-bottom:8px;
- background:#edf2ff;color:#1e3d9d
-}
+.layout{display:grid;grid-template-columns:220px 1fr;min-height:calc(100vh - 65px)}
+.sidebar{background:white;padding:15px;border-right:1px solid #e4e9f3}
+.sidebar button{width:100%;text-align:left;margin-bottom:7px;background:#edf2ff;color:#1e3d9d}
 .sidebar button.active{background:var(--blue);color:white}
-.main{padding:25px;min-width:0}
-.panel{
- background:white;padding:23px;border-radius:15px;
- margin-bottom:20px;box-shadow:0 5px 22px #00000008
-}
+.main{padding:22px;min-width:0}
 .tab{display:none}
 .tab.active{display:block}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}
-.course,.notice-item{
- padding:15px;border:1px solid #e1e7f1;border-radius:12px;margin:12px 0
-}
-.course button,.notice-item button{margin:5px 5px 0 0}
+.panel{background:white;padding:21px;border-radius:14px;margin-bottom:18px;box-shadow:0 5px 22px #00000008}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.stat{background:#edf2ff;padding:17px;border-radius:12px}
+.stat strong{font-size:25px;color:var(--blue)}
+.item{padding:14px;border:1px solid #e1e7f1;border-radius:11px;margin:10px 0;overflow-wrap:anywhere}
+.item h3{margin:0 0 7px;color:var(--blue)}
+.item p{margin:4px 0}
 .edit{background:#15803d}
 .delete{background:#dc2626}
 .secondary{background:#64748b}
 .success{color:#16803c;font-weight:700}
 .error{color:#dc2626;font-weight:700}
-.small{color:#71809d;font-size:13px}
-.coming{
- padding:25px;border:1px dashed #b8c6e2;border-radius:12px;
- background:#f8faff;text-align:center
-}
-@media(max-width:750px){
+.small{font-size:13px;color:#71809d}
+.table-wrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:550px}
+th,td{border:1px solid #e0e6f0;padding:9px;text-align:left}
+th{background:#edf2ff}
+.coming{text-align:center;padding:25px;border:1px dashed #b8c6e2;border-radius:12px;background:#f8faff}
+.actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+.actions button{padding:7px 11px}
+@media(max-width:850px){
  .layout{grid-template-columns:1fr}
- .sidebar{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}
+ .sidebar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
  .sidebar button{margin:0}
- .main{padding:13px}
- .grid{grid-template-columns:1fr}
- .topbar{flex-wrap:wrap}
+ .stats{grid-template-columns:repeat(2,1fr)}
+ .main{padding:12px}
 }
+@media(max-width:500px){.grid{grid-template-columns:1fr}.topbar{font-size:14px}}
 </style>
 </head>
+
 <body>
 
 <div class="login" id="loginBox">
- <h2>NextGen Academy</h2>
- <p style="text-align:center">Super Admin Login</p>
+ <h2>🎓 NextGen Academy</h2>
+ <p style="text-align:center">Admin Login</p>
  <form id="loginForm">
-  <label>Email Address</label>
-  <input type="email" id="email" required placeholder="Admin email">
+  <label>Email</label>
+  <input type="email" id="email" required>
   <label>Password</label>
-  <input type="password" id="password" required placeholder="Password">
-  <button style="width:100%">Login to Dashboard</button>
+  <input type="password" id="password" required>
+  <button style="width:100%">Login</button>
  </form>
  <p id="loginMessage" class="error"></p>
 </div>
@@ -86,185 +80,303 @@ h2,h3{margin-top:0}
  </div>
 
  <div class="layout">
-  <aside class="sidebar">
-   <button class="active" data-tab="overview">🏠 Overview</button>
-   <button data-tab="courses">📚 Course Management</button>
-   <button data-tab="notices">📢 Notice Management</button>
-   <button data-tab="settings">⚙️ Website Settings</button>
-   <button data-tab="social">🌐 Social Media</button>
-   <button data-tab="question">📖 Question Bank</button>
-   <button data-tab="future">🧩 Other Modules</button>
-  </aside>
 
-  <main class="main">
-   <section class="tab active" id="overview">
-    <div class="panel">
-     <h2>Welcome to NextGen Academy</h2>
-     <p>আপনার Academy Management Dashboard-এ স্বাগতম।</p>
-     <div class="grid">
-      <div class="course"><h3>📚 Courses</h3><strong id="courseCount">0</strong></div>
-      <div class="course"><h3>📢 Notices</h3><strong id="noticeCount">0</strong></div>
+ <aside class="sidebar">
+  <button class="active" data-tab="overview">🏠 Dashboard</button>
+  <button data-tab="courses">📚 Courses</button>
+  <button data-tab="students">👨‍🎓 Students</button>
+  <button data-tab="teachers">👨‍🏫 Teachers</button>
+  <button data-tab="batches">🏫 Batches</button>
+  <button data-tab="attendance">📅 Attendance</button>
+  <button data-tab="routine">🕒 Class Routine</button>
+  <button data-tab="notices">📢 Notices</button>
+  <button data-tab="settings">⚙️ Website Settings</button>
+  <button data-tab="social">🌐 Social Media</button>
+  <button data-tab="question">📖 Question Bank</button>
+ </aside>
+
+ <main class="main">
+
+ <!-- OVERVIEW -->
+ <section class="tab active" id="overview">
+  <div class="panel">
+   <h2>Welcome to NextGen Academy</h2>
+   <p>আপনার Academy Management Dashboard-এ স্বাগতম।</p>
+   <div class="stats">
+    <div class="stat">Students<br><strong id="studentCount">0</strong></div>
+    <div class="stat">Teachers<br><strong id="teacherCount">0</strong></div>
+    <div class="stat">Courses<br><strong id="courseCount">0</strong></div>
+    <div class="stat">Batches<br><strong id="batchCount">0</strong></div>
+   </div>
+  </div>
+  <div class="panel">
+   <h3>Quick Information</h3>
+   <p>শিক্ষার্থী, শিক্ষক, ব্যাচ, উপস্থিতি ও রুটিন এক জায়গা থেকে পরিচালনা করুন।</p>
+  </div>
+ </section>
+
+ <!-- COURSES -->
+ <section class="tab" id="courses">
+  <div class="panel">
+   <h2>📚 Course Management</h2>
+   <form id="courseForm">
+    <input type="hidden" id="courseId">
+    <label>Course Name</label>
+    <input id="courseName" required>
+    <div class="grid">
+     <div><label>Class</label>
+      <select id="courseClass" required>
+       <option value="">Select Class</option>
+       <option>Class 1</option><option>Class 2</option><option>Class 3</option>
+       <option>Class 4</option><option>Class 5</option><option>Class 6</option>
+       <option>Class 7</option><option>Class 8</option><option>Class 9</option>
+       <option>Class 10</option><option>Class 11</option><option>Class 12</option>
+      </select>
+     </div>
+     <div><label>Division</label>
+      <select id="division">
+       <option>General</option><option>Science</option>
+       <option>Humanities</option><option>Business Studies</option>
+      </select>
      </div>
     </div>
-    <div class="panel">
-     <h3>Quick Information</h3>
-     <p>এই সংস্করণে Course, Notice, Website Settings ও Social Media পরিচালনা করা যাবে।</p>
-    </div>
-   </section>
+    <label>Subject</label><input id="subject" required>
+    <label>Course Fee</label><input type="number" id="fee" min="0" value="0">
+    <label>Description</label><textarea id="description"></textarea>
+    <button>Add Course</button>
+    <button type="button" class="secondary" id="cancelCourse" hidden>Cancel</button>
+   </form>
+   <p id="courseStatus"></p>
+  </div>
+  <div class="panel"><h3>All Courses</h3><div id="courseList">Loading...</div></div>
+ </section>
 
-   <section class="tab" id="courses">
-    <div class="panel">
-     <h2>📚 Course Management</h2>
-     <form id="courseForm">
-      <input type="hidden" id="courseId">
-      <label>Course Name</label>
-      <input id="courseName" required placeholder="যেমন: SSC Mathematics">
-      <div class="grid">
-       <div>
-        <label>Class</label>
-        <select id="courseClass" required>
-         <option value="">Select Class</option>
-         <option>Class 1</option><option>Class 2</option>
-         <option>Class 3</option><option>Class 4</option>
-         <option>Class 5</option><option>Class 6</option>
-         <option>Class 7</option><option>Class 8</option>
-         <option>Class 9</option><option>Class 10</option>
-         <option>Class 11</option><option>Class 12</option>
-        </select>
-       </div>
-       <div>
-        <label>Division / Group</label>
-        <select id="division">
-         <option>General</option><option>Science</option>
-         <option>Humanities</option><option>Business Studies</option>
-        </select>
-       </div>
-      </div>
-      <label>Subject</label>
-      <input id="subject" required placeholder="Mathematics">
-      <label>Course Fee</label>
-      <input type="number" id="fee" min="0" value="0">
-      <label>Description</label>
-      <textarea id="description" rows="3"></textarea>
-      <button id="saveCourse">Add Course</button>
-      <button type="button" id="cancelCourse" class="secondary" style="display:none">Cancel Edit</button>
-     </form>
-     <p id="courseStatus"></p>
-    </div>
-    <div class="panel">
-     <h3>📖 All Courses</h3>
-     <div id="courseList">Loading...</div>
-    </div>
-   </section>
-
-   <section class="tab" id="notices">
-    <div class="panel">
-     <h2>📢 Notice Management</h2>
-     <form id="noticeForm">
-      <input type="hidden" id="noticeId">
-      <label>Notice Title</label>
-      <input id="noticeTitle" required placeholder="নোটিশের শিরোনাম">
-      <label>Notice Details</label>
-      <textarea id="noticeBody" rows="5" required placeholder="নোটিশ লিখুন"></textarea>
-      <button id="saveNotice">Publish Notice</button>
-      <button type="button" id="cancelNotice" class="secondary" style="display:none">Cancel</button>
-     </form>
-     <p id="noticeStatus"></p>
-    </div>
-    <div class="panel">
-     <h3>All Notices</h3>
-     <div id="noticeList">Loading...</div>
-    </div>
-   </section>
-
-   <section class="tab" id="settings">
-    <div class="panel">
-     <h2>⚙️ Website Settings</h2>
-     <p class="small">এখানকার পরিবর্তন Homepage-এ প্রদর্শিত হবে।</p>
-     <form id="settingsForm">
-      <label>Website Name</label>
-      <input id="sName" required>
-      <label>Logo Image URL</label>
-      <input id="sLogo" placeholder="https://example.com/logo.png">
-      <label>Homepage Heading / Tagline</label>
-      <input id="sTagline">
-      <label>Homepage Description</label>
-      <textarea id="sHero" rows="3"></textarea>
-      <label>About Us Text</label>
-      <textarea id="sAbout" rows="4"></textarea>
-      <label>Director Name</label>
-      <input id="sDirector">
-      <div class="grid">
-       <div><label>Phone Number 1</label><input id="sPhone1"></div>
-       <div><label>Phone Number 2</label><input id="sPhone2"></div>
-      </div>
-      <label>WhatsApp Number (Country Code সহ)</label>
-      <input id="sWhatsapp" placeholder="88017XXXXXXXX">
-      <div class="grid">
-       <label><input type="checkbox" id="sClock" style="width:auto"> Digital Clock দেখান</label>
-       <label><input type="checkbox" id="sCalculator" style="width:auto"> Calculator দেখান</label>
-      </div>
-      <button>Save Website Settings</button>
-     </form>
-     <p id="settingsStatus"></p>
-    </div>
-   </section>
-
-   <section class="tab" id="social">
-    <div class="panel">
-     <h2>🌐 Social Media Settings</h2>
-     <p class="small">সম্পূর্ণ URL দিন। ফাঁকা রাখলে ওয়েবসাইটে লিংক দেখাবে না।</p>
-     <form id="socialForm">
-      <label>Facebook Page URL</label><input id="facebook" type="url" placeholder="https://facebook.com/...">
-      <label>Instagram URL</label><input id="instagram" type="url" placeholder="https://instagram.com/...">
-      <label>YouTube Channel URL</label><input id="youtube" type="url" placeholder="https://youtube.com/...">
-      <label>TikTok URL</label><input id="tiktok" type="url" placeholder="https://tiktok.com/@...">
-      <label>LinkedIn URL</label><input id="linkedin" type="url" placeholder="https://linkedin.com/...">
-      <label>Telegram URL</label><input id="telegram" type="url" placeholder="https://t.me/...">
-      <label>X / Twitter URL</label><input id="x" type="url" placeholder="https://x.com/...">
-      <button>Save Social Media Links</button>
-     </form>
-     <p id="socialStatus"></p>
-    </div>
-   </section>
-
-   <section class="tab" id="question">
-    <div class="panel">
-     <h2>📖 Question Bank</h2>
-     <div class="coming">
-      <h3>Coming Soon</h3>
-      <p>প্রশ্ন ব্যাংক মডিউল ভবিষ্যতে তৈরি করা হবে।</p>
+ <!-- STUDENTS -->
+ <section class="tab" id="students">
+  <div class="panel">
+   <h2>👨‍🎓 Student Management</h2>
+   <form id="studentForm">
+    <input type="hidden" id="studentDocId">
+    <label>Student Name</label><input id="studentName" required>
+    <div class="grid">
+     <div><label>Father's Name</label><input id="fatherName"></div>
+     <div><label>Mother's Name</label><input id="motherName"></div>
+     <div><label>Student Mobile</label><input id="studentPhone" type="tel"></div>
+     <div><label>Guardian Mobile</label><input id="guardianPhone" type="tel" required></div>
+     <div><label>Date of Birth</label><input id="studentDob" type="date"></div>
+     <div><label>Admission Date</label><input id="admissionDate" type="date" required></div>
+     <div><label>Class</label>
+      <select id="studentClass" required>
+       <option value="">Select Class</option>
+       <option>Class 1</option><option>Class 2</option><option>Class 3</option>
+       <option>Class 4</option><option>Class 5</option><option>Class 6</option>
+       <option>Class 7</option><option>Class 8</option><option>Class 9</option>
+       <option>Class 10</option><option>Class 11</option><option>Class 12</option>
+      </select>
+     </div>
+     <div><label>Division</label>
+      <select id="studentDivision">
+       <option>General</option><option>Science</option>
+       <option>Humanities</option><option>Business Studies</option>
+      </select>
+     </div>
+     <div><label>Batch</label><select id="studentBatch"><option value="">Select Batch</option></select></div>
+     <div><label>Gender</label>
+      <select id="studentGender"><option value="">Select</option><option>Male</option><option>Female</option><option>Other</option></select>
      </div>
     </div>
-   </section>
+    <label>Address</label><textarea id="studentAddress"></textarea>
+    <button id="saveStudent">Add Student</button>
+    <button type="button" class="secondary" id="cancelStudent" hidden>Cancel</button>
+   </form>
+   <p id="studentStatus"></p>
+  </div>
+  <div class="panel">
+   <h3>Student List</h3>
+   <input id="studentSearch" placeholder="Search by name, ID, class or phone">
+   <button id="studentCSV" type="button">Download Student CSV</button>
+   <div id="studentList">Loading...</div>
+  </div>
+ </section>
 
-   <section class="tab" id="future">
-    <div class="panel">
-     <h2>🧩 Future Modules</h2>
-     <div class="coming">
-      <p>👨‍🎓 Student Management — Coming Soon</p>
-      <p>👨‍🏫 Teacher Management — Coming Soon</p>
-      <p>📝 Admission Management — Coming Soon</p>
-      <p>📅 Attendance Management — Coming Soon</p>
-      <p>💰 Fees & Accounts — Coming Soon</p>
-      <p>📊 Examination & Result — Coming Soon</p>
-      <p>📱 Bulk SMS — Coming Soon</p>
-      <p>📣 Social Media Publishing — Coming Soon</p>
-      <p>👥 User & Role Management — Coming Soon</p>
-     </div>
+ <!-- TEACHERS -->
+ <section class="tab" id="teachers">
+  <div class="panel">
+   <h2>👨‍🏫 Teacher Management</h2>
+   <form id="teacherForm">
+    <input type="hidden" id="teacherDocId">
+    <label>Teacher Name</label><input id="teacherName" required>
+    <div class="grid">
+     <div><label>Mobile Number</label><input id="teacherPhone" type="tel" required></div>
+     <div><label>Email</label><input id="teacherEmail" type="email"></div>
+     <div><label>Subject</label><input id="teacherSubject" required></div>
+     <div><label>Qualification</label><input id="teacherQualification"></div>
+     <div><label>Joining Date</label><input id="teacherJoining" type="date"></div>
+     <div><label>Monthly Salary</label><input id="teacherSalary" type="number" min="0"></div>
     </div>
-   </section>
-  </main>
+    <label>Address</label><textarea id="teacherAddress"></textarea>
+    <button id="saveTeacher">Add Teacher</button>
+    <button type="button" class="secondary" id="cancelTeacher" hidden>Cancel</button>
+   </form>
+   <p id="teacherStatus"></p>
+  </div>
+  <div class="panel">
+   <h3>Teacher List</h3>
+   <input id="teacherSearch" placeholder="Search teacher by name, subject or phone">
+   <button id="teacherCSV" type="button">Download Teacher CSV</button>
+   <div id="teacherList">Loading...</div>
+  </div>
+ </section>
+
+ <!-- BATCHES -->
+ <section class="tab" id="batches">
+  <div class="panel">
+   <h2>🏫 Batch Management</h2>
+   <form id="batchForm">
+    <input type="hidden" id="batchId">
+    <label>Batch Name</label><input id="batchName" required placeholder="Morning Batch">
+    <div class="grid">
+     <div><label>Class</label><select id="batchClass" required>
+      <option value="">Select Class</option>
+      <option>Class 1</option><option>Class 2</option><option>Class 3</option>
+      <option>Class 4</option><option>Class 5</option><option>Class 6</option>
+      <option>Class 7</option><option>Class 8</option><option>Class 9</option>
+      <option>Class 10</option><option>Class 11</option><option>Class 12</option>
+     </select></div>
+     <div><label>Division</label><select id="batchDivision">
+      <option>General</option><option>Science</option><option>Humanities</option><option>Business Studies</option>
+     </select></div>
+     <div><label>Start Time</label><input type="time" id="batchStart"></div>
+     <div><label>End Time</label><input type="time" id="batchEnd"></div>
+     <div><label>Teacher</label><select id="batchTeacher"><option value="">Select Teacher</option></select></div>
+    </div>
+    <button id="saveBatch">Add Batch</button>
+    <button type="button" class="secondary" id="cancelBatch" hidden>Cancel</button>
+   </form>
+   <p id="batchStatus"></p>
+  </div>
+  <div class="panel"><h3>All Batches</h3><div id="batchList">Loading...</div></div>
+ </section>
+
+ <!-- ATTENDANCE -->
+ <section class="tab" id="attendance">
+  <div class="panel">
+   <h2>📅 Student Attendance</h2>
+   <form id="attendanceForm">
+    <label>Attendance Date</label><input type="date" id="attendanceDate" required>
+    <label>Batch</label><select id="attendanceBatch" required><option value="">Select Batch</option></select>
+    <button>Load Students</button>
+   </form>
+   <p class="small">প্রতিটি শিক্ষার্থীর উপস্থিতি নির্বাচন করে Save Attendance চাপুন।</p>
+   <div id="attendanceStudents"></div>
+   <button id="saveAttendance" type="button" hidden>Save Attendance</button>
+   <p id="attendanceStatus"></p>
+  </div>
+  <div class="panel">
+   <h3>Attendance Report</h3>
+   <label>Date</label><input type="date" id="reportDate">
+   <button id="loadAttendanceReport">Show Report</button>
+   <div id="attendanceReport"></div>
+  </div>
+ </section>
+
+ <!-- ROUTINE -->
+ <section class="tab" id="routine">
+  <div class="panel">
+   <h2>🕒 Class Routine</h2>
+   <form id="routineForm">
+    <input type="hidden" id="routineId">
+    <label>Batch</label><select id="routineBatch" required><option value="">Select Batch</option></select>
+    <div class="grid">
+     <div><label>Day</label><select id="routineDay">
+      <option>Saturday</option><option>Sunday</option><option>Monday</option>
+      <option>Tuesday</option><option>Wednesday</option><option>Thursday</option><option>Friday</option>
+     </select></div>
+     <div><label>Subject</label><input id="routineSubject" required></div>
+     <div><label>Teacher</label><select id="routineTeacher"><option value="">Select Teacher</option></select></div>
+     <div><label>Start Time</label><input id="routineStart" type="time" required></div>
+     <div><label>End Time</label><input id="routineEnd" type="time" required></div>
+     <div><label>Room</label><input id="routineRoom"></div>
+    </div>
+    <button id="saveRoutine">Add Routine</button>
+    <button type="button" class="secondary" id="cancelRoutine" hidden>Cancel</button>
+   </form>
+   <p id="routineStatus"></p>
+  </div>
+  <div class="panel"><h3>Class Routine List</h3><div id="routineList">Loading...</div></div>
+ </section>
+
+ <!-- NOTICES -->
+ <section class="tab" id="notices">
+  <div class="panel">
+   <h2>📢 Notice Management</h2>
+   <form id="noticeForm">
+    <input type="hidden" id="noticeId">
+    <label>Title</label><input id="noticeTitle" required>
+    <label>Details</label><textarea id="noticeBody" rows="4" required></textarea>
+    <button>Publish Notice</button>
+    <button type="button" class="secondary" id="cancelNotice" hidden>Cancel</button>
+   </form>
+   <p id="noticeStatus"></p>
+  </div>
+  <div class="panel"><h3>All Notices</h3><div id="noticeList"></div></div>
+ </section>
+
+ <!-- SETTINGS -->
+ <section class="tab" id="settings">
+  <div class="panel">
+   <h2>⚙️ Website Settings</h2>
+   <form id="settingsForm">
+    <label>Website Name</label><input id="sName" required>
+    <label>Logo URL</label><input id="sLogo">
+    <label>Homepage Heading</label><input id="sTagline">
+    <label>Homepage Description</label><textarea id="sHero"></textarea>
+    <label>About Us</label><textarea id="sAbout"></textarea>
+    <label>Director Name</label><input id="sDirector">
+    <div class="grid">
+     <div><label>Phone 1</label><input id="sPhone1"></div>
+     <div><label>Phone 2</label><input id="sPhone2"></div>
+    </div>
+    <label>WhatsApp Number</label><input id="sWhatsapp">
+    <label><input type="checkbox" id="sClock" style="width:auto"> Show Digital Clock</label>
+    <label><input type="checkbox" id="sCalculator" style="width:auto"> Show Calculator</label>
+    <button>Save Settings</button>
+   </form>
+   <p id="settingsStatus"></p>
+  </div>
+ </section>
+
+ <!-- SOCIAL -->
+ <section class="tab" id="social">
+  <div class="panel">
+   <h2>🌐 Social Media Settings</h2>
+   <form id="socialForm">
+    <label>Facebook</label><input id="facebook" type="url">
+    <label>Instagram</label><input id="instagram" type="url">
+    <label>YouTube</label><input id="youtube" type="url">
+    <label>TikTok</label><input id="tiktok" type="url">
+    <label>LinkedIn</label><input id="linkedin" type="url">
+    <label>Telegram</label><input id="telegram" type="url">
+    <label>X / Twitter</label><input id="x" type="url">
+    <button>Save Social Links</button>
+   </form>
+   <p id="socialStatus"></p>
+  </div>
+ </section>
+
+ <section class="tab" id="question">
+  <div class="panel"><h2>📖 Question Bank</h2><div class="coming"><h3>Coming Soon</h3><p>ভবিষ্যতে চালু করা হবে।</p></div></div>
+ </section>
+
+ </main>
  </div>
 </div>
 
 <script type="module">
 import {initializeApp} from "https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
-import {getAuth,signInWithEmailAndPassword,onAuthStateChanged,signOut}
-from "https://www.gstatic.com/firebasejs/13.3.0/firebase-auth.js";
+import {getAuth,signInWithEmailAndPassword,onAuthStateChanged,signOut} from "https://www.gstatic.com/firebasejs/13.3.0/firebase-auth.js";
 import {
- getFirestore,collection,addDoc,getDocs,doc,getDoc,
- updateDoc,deleteDoc,setDoc,serverTimestamp
+ getFirestore,collection,addDoc,getDocs,doc,getDoc,updateDoc,deleteDoc,setDoc,serverTimestamp,query,where
 } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
 
 const firebaseConfig={
@@ -279,17 +391,47 @@ const firebaseConfig={
 const app=initializeApp(firebaseConfig);
 const auth=getAuth(app);
 const db=getFirestore(app);
-
 const $=id=>document.getElementById(id);
-let currentSettings={};
 
+let students=[],teachers=[],batches=[],courses=[];
+
+function msg(id,text,ok=true){
+ $(id).textContent=text;
+ $(id).className=ok?"success":"error";
+}
+function today(){
+ const d=new Date();
+ return [d.getFullYear(),String(d.getMonth()+1).padStart(2,"0"),String(d.getDate()).padStart(2,"0")].join("-");
+}
+function safe(value){return String(value??"")}
+function makeId(prefix){
+ return prefix+"-"+Date.now().toString().slice(-8);
+}
+function escapeCSV(value){
+ return '"'+String(value??"").replace(/"/g,'""')+'"';
+}
+function downloadCSV(filename,rows){
+ const csv="\uFEFF"+rows.map(r=>r.map(escapeCSV).join(",")).join("\r\n");
+ const blob=new Blob([csv],{type:"text/csv;charset=utf-8"});
+ const url=URL.createObjectURL(blob);
+ const a=document.createElement("a");
+ a.href=url;a.download=filename;a.click();
+ URL.revokeObjectURL(url);
+}
+function addText(parent,tag,value){
+ const el=document.createElement(tag);
+ el.textContent=safe(value);
+ parent.appendChild(el);
+ return el;
+}
+
+/* LOGIN */
 $("loginForm").addEventListener("submit",async e=>{
  e.preventDefault();
- $("loginMessage").textContent="Logging in...";
+ msg("loginMessage","Logging in...");
  try{
   await signInWithEmailAndPassword(auth,$("email").value.trim(),$("password").value);
-  $("loginMessage").textContent="";
- }catch(err){$("loginMessage").textContent="Login failed: "+err.message}
+ }catch(err){msg("loginMessage","Login failed: "+err.message,false)}
 });
 
 onAuthStateChanged(auth,async user=>{
@@ -301,32 +443,43 @@ onAuthStateChanged(auth,async user=>{
  try{
   const admin=await getDoc(doc(db,"admins",user.uid));
   if(!admin.exists()){
-   alert("আপনার Admin অনুমতি নেই।");
+   alert("Admin permission not found.");
    await signOut(auth);return;
   }
   $("loginBox").style.display="none";
   $("dashboard").style.display="block";
   $("welcome").textContent=user.email||"Admin";
-  await Promise.all([loadCourses(),loadNotices(),loadSettings()]);
+  await refreshAll();
  }catch(err){
   alert("Admin verification failed: "+err.message);
   await signOut(auth);
  }
 });
-
 $("logout").addEventListener("click",()=>signOut(auth));
 
-/* Tabs */
+/* TABS */
 document.querySelectorAll(".sidebar button").forEach(btn=>{
  btn.addEventListener("click",()=>{
-  document.querySelectorAll(".sidebar button").forEach(x=>x.classList.remove("active"));
-  document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+  document.querySelectorAll(".sidebar button").forEach(b=>b.classList.remove("active"));
+  document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
   btn.classList.add("active");
   $(btn.dataset.tab).classList.add("active");
  });
 });
 
-/* Courses */
+/* REFRESH */
+async function getCollection(name){
+ const snap=await getDocs(collection(db,name));
+ return snap.docs.map(d=>({id:d.id,...d.data()}));
+}
+async function refreshAll(){
+ await Promise.all([
+  loadCourses(),loadStudents(),loadTeachers(),loadBatches(),
+  loadRoutines(),loadNotices(),loadSettings()
+ ]);
+}
+
+/* COURSES */
 $("courseForm").addEventListener("submit",async e=>{
  e.preventDefault();
  const id=$("courseId").value;
@@ -342,54 +495,431 @@ $("courseForm").addEventListener("submit",async e=>{
  try{
   if(id)await updateDoc(doc(db,"courses",id),data);
   else{data.createdAt=serverTimestamp();await addDoc(collection(db,"courses"),data)}
-  $("courseStatus").textContent=id?"Course updated successfully!":"Course added successfully!";
-  $("courseStatus").className="success";
+  msg("courseStatus","Course saved successfully!");
   resetCourse();await loadCourses();
- }catch(err){$("courseStatus").textContent=err.message;$("courseStatus").className="error"}
+ }catch(err){msg("courseStatus",err.message,false)}
 });
-
 function resetCourse(){
  $("courseForm").reset();$("courseId").value="";
- $("saveCourse").textContent="Add Course";$("cancelCourse").style.display="none";
+ $("cancelCourse").hidden=true;
 }
 $("cancelCourse").addEventListener("click",resetCourse);
 
 async function loadCourses(){
  const list=$("courseList");list.textContent="Loading...";
  try{
-  const snap=await getDocs(collection(db,"courses"));
-  list.replaceChildren();$("courseCount").textContent=snap.size;
-  if(snap.empty){list.textContent="No courses added yet.";return}
-  snap.forEach(item=>{
-   const c=item.data();
-   const box=document.createElement("div");box.className="course";
-   const h=document.createElement("h3");h.textContent=c.name||"Untitled";
-   const p=document.createElement("p");
-   p.textContent=`${c.className||""} | ${c.division||""} | ${c.subject||""} | ৳${c.fee||0}`;
-   const d=document.createElement("p");d.textContent=c.description||"";
+  courses=await getCollection("courses");
+  $("courseCount").textContent=courses.length;
+  list.replaceChildren();
+  if(!courses.length){list.textContent="No courses added yet.";return}
+  courses.forEach(c=>{
+   const box=document.createElement("div");box.className="item";
+   addText(box,"h3",c.name);
+   addText(box,"p",`${c.className||""} | ${c.division||""} | ${c.subject||""} | ৳${c.fee||0}`);
+   addText(box,"p",c.description);
    const edit=document.createElement("button");edit.className="edit";edit.textContent="Edit";
-   edit.addEventListener("click",()=>{
-    $("courseId").value=item.id;$("courseName").value=c.name||"";
+   edit.onclick=()=>{
+    $("courseId").value=c.id;$("courseName").value=c.name||"";
     $("courseClass").value=c.className||"";$("division").value=c.division||"General";
     $("subject").value=c.subject||"";$("fee").value=c.fee||0;
     $("description").value=c.description||"";
-    $("saveCourse").textContent="Update Course";
-    $("cancelCourse").style.display="inline-block";
+    $("cancelCourse").hidden=false;
     document.querySelector('[data-tab="courses"]').click();
-    window.scrollTo({top:0,behavior:"smooth"});
-   });
+   };
    const del=document.createElement("button");del.className="delete";del.textContent="Delete";
-   del.addEventListener("click",async()=>{
-    if(!confirm("Delete this course?"))return;
-    try{await deleteDoc(doc(db,"courses",item.id));await loadCourses()}
-    catch(err){alert(err.message)}
-   });
-   box.append(h,p,d,edit,del);list.appendChild(box);
+   del.onclick=async()=>{
+    if(confirm("Delete this course?")){await deleteDoc(doc(db,"courses",c.id));loadCourses()}
+   };
+   box.append(edit,del);list.appendChild(box);
   });
- }catch(err){list.textContent="Error: "+err.message}
+ }catch(e){list.textContent=e.message}
 }
 
-/* Notices */
+/* STUDENTS */
+$("studentForm").addEventListener("submit",async e=>{
+ e.preventDefault();
+ const id=$("studentDocId").value;
+ const old=students.find(s=>s.id===id);
+ const data={
+  studentId:old?.studentId||makeId("NGA"),
+  name:$("studentName").value.trim(),
+  fatherName:$("fatherName").value.trim(),
+  motherName:$("motherName").value.trim(),
+  phone:$("studentPhone").value.trim(),
+  guardianPhone:$("guardianPhone").value.trim(),
+  dob:$("studentDob").value,
+  admissionDate:$("admissionDate").value,
+  className:$("studentClass").value,
+  division:$("studentDivision").value,
+  batchId:$("studentBatch").value,
+  gender:$("studentGender").value,
+  address:$("studentAddress").value.trim(),
+  updatedAt:serverTimestamp()
+ };
+ try{
+  if(id)await updateDoc(doc(db,"students",id),data);
+  else{data.createdAt=serverTimestamp();data.status="Active";await addDoc(collection(db,"students"),data)}
+  msg("studentStatus","Student saved successfully!");
+  resetStudent();await loadStudents();
+ }catch(err){msg("studentStatus",err.message,false)}
+});
+function resetStudent(){
+ $("studentForm").reset();$("studentDocId").value="";
+ $("cancelStudent").hidden=true;$("saveStudent").textContent="Add Student";
+}
+$("cancelStudent").addEventListener("click",resetStudent);
+
+async function loadStudents(){
+ const list=$("studentList");list.textContent="Loading...";
+ try{
+  students=await getCollection("students");
+  $("studentCount").textContent=students.length;
+  renderStudents();
+ }catch(e){list.textContent=e.message}
+}
+function renderStudents(){
+ const list=$("studentList");list.replaceChildren();
+ const term=$("studentSearch").value.toLowerCase();
+ const filtered=students.filter(s=>
+  [s.name,s.studentId,s.className,s.phone,s.guardianPhone].some(v=>safe(v).toLowerCase().includes(term))
+ );
+ if(!filtered.length){list.textContent="No students found.";return}
+ filtered.forEach(s=>{
+  const box=document.createElement("div");box.className="item";
+  addText(box,"h3",s.name);
+  addText(box,"p","Student ID: "+s.studentId);
+  addText(box,"p",`${s.className||""} | ${s.division||""} | ${s.phone||""}`);
+  addText(box,"p","Guardian: "+(s.guardianPhone||""));
+  addText(box,"p","Admission: "+(s.admissionDate||""));
+  const edit=document.createElement("button");edit.className="edit";edit.textContent="Edit";
+  edit.onclick=()=>{
+   $("studentDocId").value=s.id;
+   $("studentName").value=s.name||"";
+   $("fatherName").value=s.fatherName||"";
+   $("motherName").value=s.motherName||"";
+   $("studentPhone").value=s.phone||"";
+   $("guardianPhone").value=s.guardianPhone||"";
+   $("studentDob").value=s.dob||"";
+   $("admissionDate").value=s.admissionDate||"";
+   $("studentClass").value=s.className||"";
+   $("studentDivision").value=s.division||"General";
+   $("studentBatch").value=s.batchId||"";
+   $("studentGender").value=s.gender||"";
+   $("studentAddress").value=s.address||"";
+   $("saveStudent").textContent="Update Student";
+   $("cancelStudent").hidden=false;
+   document.querySelector('[data-tab="students"]').click();
+   window.scrollTo({top:0,behavior:"smooth"});
+  };
+  const del=document.createElement("button");del.className="delete";del.textContent="Delete";
+  del.onclick=async()=>{
+   if(confirm("Are you sure you want to delete this student?")){
+    try{await deleteDoc(doc(db,"students",s.id));await loadStudents()}
+    catch(e){alert(e.message)}
+   }
+  };
+  box.append(edit,del);list.appendChild(box);
+ });
+}
+$("studentSearch").addEventListener("input",renderStudents);
+$("studentCSV").addEventListener("click",()=>{
+ downloadCSV("nextgen-students.csv",[
+  ["Student ID","Name","Father","Mother","Phone","Guardian Phone","Class","Division","Batch ID","Admission Date"],
+  ...students.map(s=>[s.studentId,s.name,s.fatherName,s.motherName,s.phone,s.guardianPhone,s.className,s.division,s.batchId,s.admissionDate])
+ ]);
+});
+
+/* TEACHERS */
+$("teacherForm").addEventListener("submit",async e=>{
+ e.preventDefault();
+ const id=$("teacherDocId").value;
+ const old=teachers.find(t=>t.id===id);
+ const data={
+  teacherId:old?.teacherId||makeId("TCH"),
+  name:$("teacherName").value.trim(),
+  phone:$("teacherPhone").value.trim(),
+  email:$("teacherEmail").value.trim(),
+  subject:$("teacherSubject").value.trim(),
+  qualification:$("teacherQualification").value.trim(),
+  joiningDate:$("teacherJoining").value,
+  salary:Number($("teacherSalary").value||0),
+  address:$("teacherAddress").value.trim(),
+  updatedAt:serverTimestamp()
+ };
+ try{
+  if(id)await updateDoc(doc(db,"teachers",id),data);
+  else{data.createdAt=serverTimestamp();await addDoc(collection(db,"teachers"),data)}
+  msg("teacherStatus","Teacher saved successfully!");
+  resetTeacher();await loadTeachers();
+ }catch(err){msg("teacherStatus",err.message,false)}
+});
+function resetTeacher(){
+ $("teacherForm").reset();$("teacherDocId").value="";
+ $("saveTeacher").textContent="Add Teacher";$("cancelTeacher").hidden=true;
+}
+$("cancelTeacher").addEventListener("click",resetTeacher);
+
+async function loadTeachers(){
+ const list=$("teacherList");list.textContent="Loading...";
+ try{
+  teachers=await getCollection("teachers");
+  $("teacherCount").textContent=teachers.length;
+  renderTeachers();fillTeacherOptions();
+ }catch(e){list.textContent=e.message}
+}
+function renderTeachers(){
+ const list=$("teacherList");list.replaceChildren();
+ const term=$("teacherSearch").value.toLowerCase();
+ const filtered=teachers.filter(t=>
+  [t.name,t.subject,t.phone,t.email].some(v=>safe(v).toLowerCase().includes(term))
+ );
+ if(!filtered.length){list.textContent="No teachers found.";return}
+ filtered.forEach(t=>{
+  const box=document.createElement("div");box.className="item";
+  addText(box,"h3",t.name);
+  addText(box,"p","Teacher ID: "+t.teacherId);
+  addText(box,"p",`${t.subject||""} | ${t.phone||""}`);
+  addText(box,"p",t.email||"");
+  addText(box,"p","Qualification: "+(t.qualification||""));
+  const edit=document.createElement("button");edit.className="edit";edit.textContent="Edit";
+  edit.onclick=()=>{
+   $("teacherDocId").value=t.id;
+   $("teacherName").value=t.name||"";
+   $("teacherPhone").value=t.phone||"";
+   $("teacherEmail").value=t.email||"";
+   $("teacherSubject").value=t.subject||"";
+   $("teacherQualification").value=t.qualification||"";
+   $("teacherJoining").value=t.joiningDate||"";
+   $("teacherSalary").value=t.salary||0;
+   $("teacherAddress").value=t.address||"";
+   $("saveTeacher").textContent="Update Teacher";
+   $("cancelTeacher").hidden=false;
+   document.querySelector('[data-tab="teachers"]').click();
+  };
+  const del=document.createElement("button");del.className="delete";del.textContent="Delete";
+  del.onclick=async()=>{
+   if(confirm("Delete this teacher?")){
+    await deleteDoc(doc(db,"teachers",t.id));await loadTeachers();await loadBatches();
+   }
+  };
+  box.append(edit,del);list.appendChild(box);
+ });
+}
+$("teacherSearch").addEventListener("input",renderTeachers);
+$("teacherCSV").addEventListener("click",()=>{
+ downloadCSV("nextgen-teachers.csv",[
+  ["Teacher ID","Name","Phone","Email","Subject","Qualification","Joining Date","Salary"],
+  ...teachers.map(t=>[t.teacherId,t.name,t.phone,t.email,t.subject,t.qualification,t.joiningDate,t.salary])
+ ]);
+});
+function fillTeacherOptions(){
+ ["batchTeacher","routineTeacher"].forEach(id=>{
+  const select=$(id);const old=select.value;
+  select.replaceChildren(new Option("Select Teacher",""));
+  teachers.forEach(t=>select.add(new Option(t.name+" — "+t.subject,t.id)));
+  select.value=old;
+ });
+}
+
+/* BATCHES */
+$("batchForm").addEventListener("submit",async e=>{
+ e.preventDefault();
+ const id=$("batchId").value;
+ const teacher=teachers.find(t=>t.id===$("batchTeacher").value);
+ const data={
+  name:$("batchName").value.trim(),
+  className:$("batchClass").value,
+  division:$("batchDivision").value,
+  startTime:$("batchStart").value,
+  endTime:$("batchEnd").value,
+  teacherId:teacher?.id||"",
+  teacherName:teacher?.name||"",
+  updatedAt:serverTimestamp()
+ };
+ try{
+  if(id)await updateDoc(doc(db,"batches",id),data);
+  else{data.createdAt=serverTimestamp();await addDoc(collection(db,"batches"),data)}
+  msg("batchStatus","Batch saved successfully!");
+  resetBatch();await loadBatches();await fillBatchOptions();
+ }catch(err){msg("batchStatus",err.message,false)}
+});
+function resetBatch(){
+ $("batchForm").reset();$("batchId").value="";
+ $("saveBatch").textContent="Add Batch";$("cancelBatch").hidden=true;
+}
+$("cancelBatch").addEventListener("click",resetBatch);
+
+async function loadBatches(){
+ const list=$("batchList");list.textContent="Loading...";
+ try{
+  batches=await getCollection("batches");
+  $("batchCount").textContent=batches.length;
+  list.replaceChildren();
+  if(!batches.length)list.textContent="No batches added yet.";
+  batches.forEach(b=>{
+   const box=document.createElement("div");box.className="item";
+   addText(box,"h3",b.name);
+   addText(box,"p",`${b.className} | ${b.division} | ${b.startTime||""} - ${b.endTime||""}`);
+   addText(box,"p","Teacher: "+(b.teacherName||"Not assigned"));
+   const edit=document.createElement("button");edit.className="edit";edit.textContent="Edit";
+   edit.onclick=()=>{
+    $("batchId").value=b.id;$("batchName").value=b.name||"";
+    $("batchClass").value=b.className||"";$("batchDivision").value=b.division||"General";
+    $("batchStart").value=b.startTime||"";$("batchEnd").value=b.endTime||"";
+    $("batchTeacher").value=b.teacherId||"";
+    $("saveBatch").textContent="Update Batch";$("cancelBatch").hidden=false;
+    document.querySelector('[data-tab="batches"]').click();
+   };
+   const del=document.createElement("button");del.className="delete";del.textContent="Delete";
+   del.onclick=async()=>{
+    if(confirm("Delete this batch?")){await deleteDoc(doc(db,"batches",b.id));await loadBatches();await fillBatchOptions()}
+   };
+   box.append(edit,del);list.appendChild(box);
+  });
+  fillBatchOptions();
+ }catch(e){list.textContent=e.message}
+}
+async function fillBatchOptions(){
+ const selects=["studentBatch","attendanceBatch","routineBatch"];
+ selects.forEach(id=>{
+  const el=$(id),old=el.value;
+  el.replaceChildren(new Option("Select Batch",""));
+  batches.forEach(b=>el.add(new Option(b.name+" — "+b.className,b.id)));
+  el.value=old;
+ });
+}
+
+/* ATTENDANCE */
+$("attendanceDate").value=today();
+$("reportDate").value=today();
+let attendanceRows=[];
+
+$("attendanceForm").addEventListener("submit",async e=>{
+ e.preventDefault();
+ const batchId=$("attendanceBatch").value;
+ const batch=batches.find(b=>b.id===batchId);
+ if(!batch)return;
+ try{
+  const list=students.filter(s=>s.batchId===batchId);
+  if(!list.length){$("attendanceStudents").textContent="এই ব্যাচে শিক্ষার্থী পাওয়া যায়নি।";$("saveAttendance").hidden=true;return}
+  const date=$("attendanceDate").value;
+  const oldSnap=await getDocs(query(collection(db,"attendance"),where("date","==",date),where("batchId","==",batchId)));
+  const oldMap=new Map(oldSnap.docs.map(d=>[d.data().studentId,d.data()]));
+  attendanceRows=list.map(s=>({
+   studentId:s.id,studentCode:s.studentId,name:s.name,
+   status:oldMap.get(s.id)?.status||"Present"
+  }));
+  renderAttendance();
+  $("saveAttendance").hidden=false;
+ }catch(err){msg("attendanceStatus",err.message,false)}
+});
+
+function renderAttendance(){
+ const root=$("attendanceStudents");root.replaceChildren();
+ attendanceRows.forEach((r,i)=>{
+  const box=document.createElement("div");box.className="item";
+  addText(box,"strong",r.name+" — "+r.studentCode);
+  const select=document.createElement("select");
+  ["Present","Absent","Late"].forEach(v=>select.add(new Option(v,v)));
+  select.value=r.status;
+  select.addEventListener("change",()=>attendanceRows[i].status=select.value);
+  box.appendChild(select);root.appendChild(box);
+ });
+}
+$("saveAttendance").addEventListener("click",async()=>{
+ try{
+  const date=$("attendanceDate").value;
+  const batchId=$("attendanceBatch").value;
+  for(const row of attendanceRows){
+   const id=date+"_"+batchId+"_"+row.studentId;
+   await setDoc(doc(db,"attendance",id),{
+    date,batchId,studentId:row.studentId,
+    studentCode:row.studentCode,name:row.name,
+    status:row.status,updatedAt:serverTimestamp()
+   });
+  }
+  msg("attendanceStatus","Attendance saved successfully!");
+ }catch(err){msg("attendanceStatus",err.message,false)}
+});
+
+$("loadAttendanceReport").addEventListener("click",async()=>{
+ const date=$("reportDate").value;
+ const root=$("attendanceReport");root.textContent="Loading...";
+ try{
+  const snap=await getDocs(query(collection(db,"attendance"),where("date","==",date)));
+  root.replaceChildren();
+  if(snap.empty){root.textContent="No attendance record.";return}
+  const counts={Present:0,Absent:0,Late:0};
+  snap.forEach(d=>{const s=d.data();counts[s.status]=(counts[s.status]||0)+1});
+  addText(root,"p",`Present: ${counts.Present} | Absent: ${counts.Absent} | Late: ${counts.Late}`);
+  snap.forEach(d=>{
+   const r=d.data();
+   addText(root,"p",`${r.name} — ${r.status} — ${r.studentCode}`);
+  });
+ }catch(err){root.textContent=err.message}
+});
+
+/* ROUTINE */
+$("routineForm").addEventListener("submit",async e=>{
+ e.preventDefault();
+ const id=$("routineId").value;
+ const batch=batches.find(b=>b.id===$("routineBatch").value);
+ const teacher=teachers.find(t=>t.id===$("routineTeacher").value);
+ const data={
+  batchId:batch?.id||"",batchName:batch?.name||"",
+  day:$("routineDay").value,
+  subject:$("routineSubject").value.trim(),
+  teacherId:teacher?.id||"",teacherName:teacher?.name||"",
+  startTime:$("routineStart").value,
+  endTime:$("routineEnd").value,
+  room:$("routineRoom").value.trim(),
+  updatedAt:serverTimestamp()
+ };
+ try{
+  if(id)await updateDoc(doc(db,"routines",id),data);
+  else{data.createdAt=serverTimestamp();await addDoc(collection(db,"routines"),data)}
+  msg("routineStatus","Routine saved successfully!");
+  resetRoutine();await loadRoutines();
+ }catch(err){msg("routineStatus",err.message,false)}
+});
+function resetRoutine(){
+ $("routineForm").reset();$("routineId").value="";
+ $("saveRoutine").textContent="Add Routine";$("cancelRoutine").hidden=true;
+}
+$("cancelRoutine").addEventListener("click",resetRoutine);
+
+async function loadRoutines(){
+ const root=$("routineList");root.textContent="Loading...";
+ try{
+  const rows=await getCollection("routines");root.replaceChildren();
+  if(!rows.length){root.textContent="No routine added.";return}
+  rows.forEach(r=>{
+   const box=document.createElement("div");box.className="item";
+   addText(box,"h3",r.batchName+" — "+r.day);
+   addText(box,"p",`${r.subject} | ${r.startTime} - ${r.endTime}`);
+   addText(box,"p",`Teacher: ${r.teacherName||"Not assigned"} | Room: ${r.room||"-"}`);
+   const edit=document.createElement("button");edit.className="edit";edit.textContent="Edit";
+   edit.onclick=()=>{
+    $("routineId").value=r.id;$("routineBatch").value=r.batchId||"";
+    $("routineDay").value=r.day||"Saturday";
+    $("routineSubject").value=r.subject||"";
+    $("routineTeacher").value=r.teacherId||"";
+    $("routineStart").value=r.startTime||"";
+    $("routineEnd").value=r.endTime||"";
+    $("routineRoom").value=r.room||"";
+    $("saveRoutine").textContent="Update Routine";$("cancelRoutine").hidden=false;
+    document.querySelector('[data-tab="routine"]').click();
+   };
+   const del=document.createElement("button");del.className="delete";del.textContent="Delete";
+   del.onclick=async()=>{
+    if(confirm("Delete this routine?")){await deleteDoc(doc(db,"routines",r.id));await loadRoutines()}
+   };
+   box.append(edit,del);root.appendChild(box);
+  });
+ }catch(e){root.textContent=e.message}
+}
+
+/* NOTICES */
 $("noticeForm").addEventListener("submit",async e=>{
  e.preventDefault();
  const id=$("noticeId").value;
@@ -397,101 +927,84 @@ $("noticeForm").addEventListener("submit",async e=>{
  try{
   if(id)await updateDoc(doc(db,"notices",id),data);
   else{data.createdAt=serverTimestamp();await addDoc(collection(db,"notices"),data)}
-  $("noticeStatus").textContent="Notice saved successfully!";
-  $("noticeStatus").className="success";
+  msg("noticeStatus","Notice saved!");
   resetNotice();await loadNotices();
- }catch(err){$("noticeStatus").textContent=err.message;$("noticeStatus").className="error"}
+ }catch(err){msg("noticeStatus",err.message,false)}
 });
 function resetNotice(){
  $("noticeForm").reset();$("noticeId").value="";
- $("saveNotice").textContent="Publish Notice";$("cancelNotice").style.display="none";
+ $("cancelNotice").hidden=true;
 }
 $("cancelNotice").addEventListener("click",resetNotice);
 
 async function loadNotices(){
- const list=$("noticeList");list.textContent="Loading...";
+ const root=$("noticeList");root.textContent="Loading...";
  try{
-  const snap=await getDocs(collection(db,"notices"));
-  list.replaceChildren();$("noticeCount").textContent=snap.size;
-  if(snap.empty){list.textContent="No notices yet.";return}
-  snap.forEach(item=>{
-   const n=item.data();
-   const box=document.createElement("div");box.className="notice-item";
-   const h=document.createElement("h3");h.textContent=n.title||"Notice";
-   const p=document.createElement("p");p.textContent=n.body||"";
+  const rows=await getCollection("notices");root.replaceChildren();
+  if(!rows.length){root.textContent="No notices yet.";return}
+  rows.forEach(n=>{
+   const box=document.createElement("div");box.className="item";
+   addText(box,"h3",n.title);addText(box,"p",n.body);
    const edit=document.createElement("button");edit.className="edit";edit.textContent="Edit";
-   edit.addEventListener("click",()=>{
-    $("noticeId").value=item.id;$("noticeTitle").value=n.title||"";
+   edit.onclick=()=>{
+    $("noticeId").value=n.id;$("noticeTitle").value=n.title||"";
     $("noticeBody").value=n.body||"";
-    $("saveNotice").textContent="Update Notice";
-    $("cancelNotice").style.display="inline-block";
+    $("cancelNotice").hidden=false;
     document.querySelector('[data-tab="notices"]').click();
-   });
+   };
    const del=document.createElement("button");del.className="delete";del.textContent="Delete";
-   del.addEventListener("click",async()=>{
-    if(!confirm("Delete this notice?"))return;
-    try{await deleteDoc(doc(db,"notices",item.id));await loadNotices()}
-    catch(err){alert(err.message)}
-   });
-   box.append(h,p,edit,del);list.appendChild(box);
+   del.onclick=async()=>{if(confirm("Delete notice?")){await deleteDoc(doc(db,"notices",n.id));loadNotices()}};
+   box.append(edit,del);root.appendChild(box);
   });
- }catch(err){list.textContent="Error: "+err.message}
+ }catch(e){root.textContent=e.message}
 }
 
-/* Settings */
+/* WEBSITE SETTINGS */
 async function loadSettings(){
  try{
   const snap=await getDoc(doc(db,"site","main"));
-  currentSettings=snap.exists()?snap.data():{};
-  $("sName").value=currentSettings.name||"NextGen Academy";
-  $("sLogo").value=currentSettings.logo||"";
-  $("sTagline").value=currentSettings.tagline||"শিক্ষার নতুন দিগন্তে স্বাগতম NextGen Academy-তে";
-  $("sHero").value=currentSettings.heroText||"";
-  $("sAbout").value=currentSettings.about||"";
-  $("sDirector").value=currentSettings.director||"মো আলমগীর হোসেন (সাগর)";
-  $("sPhone1").value=currentSettings.phone1||"01792818006";
-  $("sPhone2").value=currentSettings.phone2||"01581299984";
-  $("sWhatsapp").value=currentSettings.whatsapp||"8801792818006";
-  $("sClock").checked=currentSettings.showClock!==false;
-  $("sCalculator").checked=currentSettings.showCalculator!==false;
-  const s=currentSettings.socials||{};
-  ["facebook","instagram","youtube","tiktok","linkedin","telegram","x"].forEach(k=>$(k).value=s[k]||"");
- }catch(err){$("settingsStatus").textContent="Settings load error: "+err.message}
+  const s=snap.exists()?snap.data():{};
+  $("sName").value=s.name||"NextGen Academy";
+  $("sLogo").value=s.logo||"";
+  $("sTagline").value=s.tagline||"";
+  $("sHero").value=s.heroText||"";
+  $("sAbout").value=s.about||"";
+  $("sDirector").value=s.director||"মো আলমগীর হোসেন (সাগর)";
+  $("sPhone1").value=s.phone1||"01792818006";
+  $("sPhone2").value=s.phone2||"01581299984";
+  $("sWhatsapp").value=s.whatsapp||"8801792818006";
+  $("sClock").checked=s.showClock!==false;
+  $("sCalculator").checked=s.showCalculator!==false;
+  const social=s.socials||{};
+  ["facebook","instagram","youtube","tiktok","linkedin","telegram","x"].forEach(k=>$(k).value=social[k]||"");
+ }catch(e){msg("settingsStatus",e.message,false)}
 }
-
 $("settingsForm").addEventListener("submit",async e=>{
  e.preventDefault();
- const data={
-  name:$("sName").value.trim(),
-  logo:$("sLogo").value.trim(),
-  tagline:$("sTagline").value.trim(),
-  heroText:$("sHero").value.trim(),
-  about:$("sAbout").value.trim(),
-  director:$("sDirector").value.trim(),
-  phone1:$("sPhone1").value.trim(),
-  phone2:$("sPhone2").value.trim(),
-  whatsapp:$("sWhatsapp").value.replace(/\D/g,""),
-  showClock:$("sClock").checked,
-  showCalculator:$("sCalculator").checked,
-  updatedAt:serverTimestamp()
- };
  try{
-  await setDoc(doc(db,"site","main"),data,{merge:true});
-  $("settingsStatus").textContent="Website settings saved successfully!";
-  $("settingsStatus").className="success";
- }catch(err){$("settingsStatus").textContent=err.message;$("settingsStatus").className="error"}
+  await setDoc(doc(db,"site","main"),{
+   name:$("sName").value.trim(),logo:$("sLogo").value.trim(),
+   tagline:$("sTagline").value.trim(),heroText:$("sHero").value.trim(),
+   about:$("sAbout").value.trim(),director:$("sDirector").value.trim(),
+   phone1:$("sPhone1").value.trim(),phone2:$("sPhone2").value.trim(),
+   whatsapp:$("sWhatsapp").value.replace(/\D/g,""),
+   showClock:$("sClock").checked,showCalculator:$("sCalculator").checked,
+   updatedAt:serverTimestamp()
+  },{merge:true});
+  msg("settingsStatus","Settings saved!");
+ }catch(err){msg("settingsStatus",err.message,false)}
 });
-
 $("socialForm").addEventListener("submit",async e=>{
  e.preventDefault();
  const socials={};
  ["facebook","instagram","youtube","tiktok","linkedin","telegram","x"].forEach(k=>socials[k]=$(k).value.trim());
  try{
   await setDoc(doc(db,"site","main"),{socials,updatedAt:serverTimestamp()},{merge:true});
-  $("socialStatus").textContent="Social media links saved!";
-  $("socialStatus").className="success";
- }catch(err){$("socialStatus").textContent=err.message;$("socialStatus").className="error"}
+  msg("socialStatus","Social links saved!");
+ }catch(err){msg("socialStatus",err.message,false)}
 });
+
+/* INITIAL */
 </script>
 </body>
 </html>
