@@ -3,348 +3,184 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101a38">
+<title>NextGen Academy</title>
+<meta name="description" content="NextGen Academy - Learn, Grow, Lead">
 
-<title>NextGen Academy | Premium Education</title>
-
-<meta name="description" content="NextGen Academy - Modern Online and Offline Coaching Center.">
-
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
-
 :root{
---primary:#244be8;
---dark:#101a38;
---cyan:#28c4d4;
---light:#f4f7ff;
+ --primary:#3155e7;
+ --dark:#101a38;
+ --cyan:#35cbd8;
+ --light:#f4f7ff;
+ --text:#182342;
+ --muted:#71809d;
+ --white:#fff;
 }
-
+*{box-sizing:border-box;margin:0;padding:0}
 body{
-font-family:'Hind Siliguri',sans-serif;
-background:var(--light);
-color:var(--dark);
+ font-family:'Hind Siliguri',sans-serif;
+ background:var(--light);
+ color:var(--text);
 }
-
-.container{
-width:92%;
-max-width:1200px;
-margin:auto;
-}
-
+button{cursor:pointer;font-family:inherit;border:0}
+a{text-decoration:none;color:inherit}
+.container{width:92%;max-width:1200px;margin:auto}
 header{
-background:white;
-position:sticky;
-top:0;
-z-index:100;
-box-shadow:0 3px 20px #0000000a;
+ background:#fff;
+ position:sticky;top:0;z-index:50;
+ box-shadow:0 4px 25px #0000000a;
 }
-
 nav{
-min-height:75px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-gap:12px;
+ min-height:75px;display:flex;align-items:center;
+ justify-content:space-between;gap:15px;
 }
-
-.logo{
-font-size:23px;
-font-weight:800;
-color:var(--primary);
+.logo{font-size:23px;font-weight:800;color:var(--primary)}
+.logo span{color:var(--dark)}
+.logo img{max-height:48px;max-width:150px;object-fit:contain}
+.menu{display:flex;align-items:center;gap:22px}
+.menu a{font-weight:600}
+.menu a:hover{color:var(--primary)}
+.lang,.outline{
+ padding:10px 16px;border-radius:10px;
+ background:#eaf0ff;color:var(--primary);font-weight:700;
 }
-
-.logo span{
-color:var(--dark);
-}
-
-.menu{
-display:flex;
-gap:22px;
-align-items:center;
-}
-
-.menu a{
-text-decoration:none;
-color:var(--dark);
-font-weight:600;
-}
-
-.menu a:hover{
-color:var(--primary);
-}
-
-button{
-cursor:pointer;
-border:none;
-}
-
-.lang{
-padding:10px 15px;
-border-radius:10px;
-background:#e9efff;
-color:var(--primary);
-font-weight:bold;
-}
-
 .hero{
-background:linear-gradient(125deg,#101a38,#244be8);
-color:white;
-padding:95px 0;
-overflow:hidden;
+ background:linear-gradient(125deg,#101a38,#244be8);
+ color:white;padding:95px 0;
 }
-
-.hero-content{
-max-width:750px;
-}
-
+.hero-content{max-width:780px}
 .badge{
-display:inline-block;
-background:#ffffff20;
-border:1px solid #ffffff35;
-padding:9px 17px;
-border-radius:30px;
-margin-bottom:22px;
+ display:inline-block;background:#ffffff20;
+ border:1px solid #ffffff40;padding:9px 16px;
+ border-radius:30px;margin-bottom:22px;
 }
-
-.hero h1{
-font-size:clamp(38px,6vw,65px);
-line-height:1.25;
-margin-bottom:20px;
-}
-
-.hero h1 span{
-color:#42d5e2;
-}
-
-.hero p{
-font-size:18px;
-line-height:1.9;
-color:#e0e7ff;
-max-width:650px;
-}
-
+.hero h1{font-size:clamp(38px,6vw,65px);line-height:1.25}
+.hero h1 span{color:#42d5e2}
+.hero p{font-size:18px;line-height:1.9;color:#e0e7ff;margin-top:18px}
 .btn{
-display:inline-block;
-padding:14px 25px;
-border-radius:12px;
-background:var(--cyan);
-color:#102044;
-text-decoration:none;
-font-weight:800;
-margin-top:25px;
+ display:inline-block;padding:13px 23px;border-radius:12px;
+ background:var(--cyan);color:#102044;font-weight:800;
+ margin-top:24px;
 }
-
-.btn:hover{
-transform:translateY(-3px);
-}
-
-section{
-padding:75px 0;
-}
-
-.section-title{
-text-align:center;
-margin-bottom:40px;
-}
-
-.section-title small{
-color:var(--primary);
-font-weight:800;
-letter-spacing:2px;
-}
-
-.section-title h2{
-font-size:35px;
-margin:10px 0;
-}
-
-.section-title p{
-color:#68738c;
-}
-
-.grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:22px;
-}
-
+section{padding:72px 0}
+.section-title{text-align:center;margin-bottom:38px}
+.section-title small{color:var(--primary);font-weight:800;letter-spacing:2px}
+.section-title h2{font-size:34px;margin:8px 0}
+.section-title p{color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
 .card{
-background:white;
-padding:27px;
-border-radius:20px;
-box-shadow:0 8px 30px #14254d0b;
-border:1px solid #e8edfa;
-transition:.3s;
+ background:white;padding:26px;border-radius:19px;
+ border:1px solid #e8edfa;box-shadow:0 8px 28px #14254d0b;
 }
-
-.card:hover{
-transform:translateY(-7px);
-box-shadow:0 15px 35px #244be81c;
-}
-
-.icon{
-font-size:35px;
-margin-bottom:15px;
-}
-
-.card h3{
-font-size:21px;
-margin-bottom:10px;
-color:var(--primary);
-}
-
-.card p{
-color:#68738c;
-line-height:1.8;
-}
-
-.programs{
-background:white;
-}
-
-.program-card{
-border-top:4px solid var(--primary);
-}
-
-.program-card h3{
-font-size:20px;
-}
-
-.subjects{
-margin-top:15px;
-line-height:2;
-color:#59647c;
-font-size:14px;
-}
-
+.card h3{font-size:21px;color:var(--primary);margin-bottom:10px}
+.card p{color:var(--muted);line-height:1.8}
+.icon{font-size:34px;margin-bottom:12px}
+.programs{background:white}
+.program-card{border-top:4px solid var(--primary)}
+.subjects{margin-top:12px;line-height:2}
 .subjects span{
-display:inline-block;
-background:#edf2ff;
-padding:5px 10px;
-border-radius:7px;
-margin:3px;
+ display:inline-block;background:#edf2ff;
+ padding:5px 10px;border-radius:7px;margin:3px;
+ font-size:14px;
 }
-
 .notice{
-background:#fff;
-padding:20px;
-margin-bottom:14px;
-border-radius:12px;
-border-left:4px solid var(--primary);
+ background:white;padding:20px;margin-bottom:14px;
+ border-radius:13px;border-left:4px solid var(--primary);
 }
-
-.notice h3{
-color:var(--primary);
-}
-
-.notice p{
-color:#68738c;
-margin-top:7px;
-}
-
-.about{
-background:var(--dark);
-color:white;
-text-align:center;
-}
-
-.about p{
-max-width:750px;
-margin:20px auto;
-color:#c8d3f0;
-line-height:2;
-font-size:17px;
-}
-
-.director{
-font-size:24px;
-font-weight:800;
-color:#43d4df;
-margin-top:25px;
-}
-
-.contact{
-background:#eef3ff;
-}
-
+.notice h3{color:var(--primary)}
+.notice p{color:var(--muted);margin-top:7px}
+.about{background:var(--dark);color:white;text-align:center}
+.about p{max-width:750px;margin:20px auto;color:#c8d3f0;line-height:2;font-size:17px}
+.director{font-size:23px;font-weight:800;color:#43d4df;margin-top:20px}
+.contact{background:#eef3ff}
 .contact-box{
-background:white;
-max-width:700px;
-margin:auto;
-padding:35px;
-border-radius:20px;
-text-align:center;
-box-shadow:0 10px 30px #00000008;
+ background:white;max-width:700px;margin:auto;padding:30px;
+ border-radius:20px;text-align:center;
 }
-
-.phone{
-font-size:22px;
-font-weight:800;
-color:var(--primary);
-margin:15px 0;
+.phone{font-size:22px;font-weight:800;color:var(--primary);margin:12px}
+footer{background:#0a122a;color:white;text-align:center;padding:35px 15px}
+footer p{color:#aebbd8;margin-top:9px}
+.tools-grid{
+ display:grid;grid-template-columns:repeat(2,1fr);
+ gap:22px;max-width:900px;margin:auto;
 }
-
-footer{
-background:#0a122a;
-color:white;
-text-align:center;
-padding:35px 15px;
+.tool-card{
+ background:white;border-radius:20px;padding:25px;
+ text-align:center;border:1px solid #e6ebfa;
 }
-
-footer p{
-color:#aebbd8;
-margin-top:10px;
+.clock{
+ background:linear-gradient(135deg,#101a38,#263f91);
+ color:white;border-radius:18px;padding:22px;
 }
-
+.clock-time{
+ font-family:Inter,sans-serif;font-size:clamp(32px,6vw,48px);
+ font-weight:800;letter-spacing:3px;
+}
+.clock-date{color:#cbd5ff;margin-top:8px}
+.socials{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+.socials a{
+ display:inline-block;padding:10px 15px;border-radius:10px;
+ background:#edf2ff;color:#244be8;font-weight:700;
+}
+.float-tools{
+ position:fixed;right:15px;bottom:85px;z-index:60;
+ display:flex;flex-direction:column;gap:10px;
+}
+.float-tools button,.whatsapp{
+ padding:13px 17px;border-radius:40px;color:white;
+ background:#3155e7;font-weight:700;box-shadow:0 5px 20px #0003;
+}
 .whatsapp{
-position:fixed;
-bottom:20px;
-right:20px;
-background:#20c76a;
-color:white;
-padding:15px 19px;
-border-radius:50px;
-text-decoration:none;
-font-weight:bold;
-box-shadow:0 5px 20px #0003;
-z-index:200;
+ position:fixed;right:15px;bottom:18px;
+ background:#16b866;z-index:60;
 }
-
+.modal{
+ display:none;position:fixed;inset:0;z-index:100;
+ background:#071126b8;align-items:center;justify-content:center;
+ padding:15px;
+}
+.modal.show{display:flex}
+.calc{
+ width:100%;max-width:430px;background:#e9edf4;
+ border-radius:22px;padding:18px;box-shadow:0 20px 60px #0005;
+}
+.calc-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.calc-head button{font-size:22px;background:none}
+.calc-display{
+ background:#d8e4dc;border-radius:12px;padding:15px;
+ min-height:85px;margin-bottom:12px;text-align:right;
+ overflow-wrap:anywhere;
+}
+#calcExpression{font-size:15px;color:#53675d;min-height:22px}
+#calcResult{font:700 28px Inter,sans-serif;color:#14251b}
+.calc-mode{display:flex;gap:8px;margin-bottom:10px}
+.calc-mode button{flex:1;padding:8px;border-radius:8px;background:#d4dce8}
+.calc-mode button.active{background:#3155e7;color:white}
+.calc-buttons{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}
+.calc-buttons button{
+ min-height:45px;border-radius:9px;background:#fff;
+ font-weight:700;font-size:15px;box-shadow:0 2px 3px #0001;
+}
+.calc-buttons button.fn{background:#dbe4f5;color:#17356d}
+.calc-buttons button.op{background:#cbd8f4;color:#17356d}
+.calc-buttons button.equal{background:#3155e7;color:white}
+.calc-buttons button.danger{background:#f8d9dc;color:#a71929}
+.calc-help{font-size:12px;color:#596579;margin-top:10px}
 @media(max-width:800px){
-
-.menu{
-display:none;
+ .menu{display:none}
+ .grid{grid-template-columns:repeat(2,1fr)}
+ .hero{padding:65px 0}
 }
-
-.grid{
-grid-template-columns:repeat(2,1fr);
-}
-
-.hero{
-padding:65px 0;
-}
-
-}
-
 @media(max-width:550px){
-
-.grid{
-grid-template-columns:1fr;
-}
-
-.section-title h2{
-font-size:27px;
-}
-
-.hero h1{
-font-size:39px;
-}
-
+ .grid,.tools-grid{grid-template-columns:1fr}
+ .section-title h2{font-size:27px}
+ .hero h1{font-size:39px}
+ .calc-buttons{gap:5px}
+ .calc-buttons button{font-size:13px;min-height:42px}
 }
 </style>
 </head>
@@ -352,377 +188,458 @@ font-size:39px;
 <body>
 
 <header>
-<div class="container">
-<nav>
-
-<div class="logo">
-NextGen <span>Academy</span>
-</div>
-
-<div class="menu">
-<a href="#home">হোম</a>
-<a href="#courses">কোর্স</a>
-<a href="#notices">নোটিশ</a>
-<a href="#about">আমাদের সম্পর্কে</a>
-<a href="#contact">যোগাযোগ</a>
-</div>
-
-<button class="lang" onclick="changeLanguage()">
-English
-</button>
-
-</nav>
-</div>
+ <div class="container">
+  <nav>
+   <div class="logo" id="siteLogo">NextGen <span>Academy</span></div>
+   <div class="menu">
+    <a href="#home">হোম</a>
+    <a href="#courses">কোর্স</a>
+    <a href="#tools">শিক্ষার্থী টুলস</a>
+    <a href="#notices">নোটিশ</a>
+    <a href="#about">আমাদের সম্পর্কে</a>
+    <a href="#contact">যোগাযোগ</a>
+   </div>
+   <button class="lang" id="languageButton">English</button>
+  </nav>
+ </div>
 </header>
 
-<!-- HERO SECTION -->
-
 <section class="hero" id="home">
-<div class="container">
-
-<div class="hero-content">
-
-<div class="badge">
-✦ PREMIUM EDUCATION PLATFORM
-</div>
-
-<h1>
-শিক্ষার নতুন দিগন্তে<br>
-<span>স্বাগতম NextGen Academy-তে</span>
-</h1>
-
-<p>
-আধুনিক শিক্ষা, অভিজ্ঞ শিক্ষকের নির্দেশনা,
-পরিকল্পিত পাঠদান এবং অনলাইন ও অফলাইন
-কোচিংয়ের মাধ্যমে আপনার উজ্জ্বল ভবিষ্যৎ গড়ার
-বিশ্বস্ত সহযোগী।
-</p>
-
-<a href="#courses" class="btn">
-আমাদের কোর্স দেখুন →
-</a>
-
-</div>
-</div>
+ <div class="container">
+  <div class="hero-content">
+   <div class="badge">✦ PREMIUM EDUCATION PLATFORM</div>
+   <h1 id="heroTitle">শিক্ষার নতুন দিগন্তে<br><span>স্বাগতম NextGen Academy-তে</span></h1>
+   <p id="heroText">আধুনিক শিক্ষা, অভিজ্ঞ শিক্ষকের নির্দেশনা, পরিকল্পিত পাঠদান এবং অনলাইন ও অফলাইন কোচিংয়ের মাধ্যমে আপনার উজ্জ্বল ভবিষ্যৎ গড়ার বিশ্বস্ত সহযোগী।</p>
+   <a href="#courses" class="btn" id="heroButton">আমাদের কোর্স দেখুন →</a>
+  </div>
+ </div>
 </section>
-
-<!-- FEATURES -->
 
 <section>
-<div class="container">
-
-<div class="section-title">
-<small>WHY CHOOSE US</small>
-<h2>কেন NextGen Academy?</h2>
-<p>সফলতার পথে আপনার বিশ্বস্ত শিক্ষা প্রতিষ্ঠান</p>
-</div>
-
-<div class="grid">
-
-<div class="card">
-<div class="icon">🎓</div>
-<h3>অভিজ্ঞ শিক্ষক</h3>
-<p>পরিকল্পিত পাঠদান ও বিষয়ভিত্তিক দিকনির্দেশনা।</p>
-</div>
-
-<div class="card">
-<div class="icon">🌐</div>
-<h3>অনলাইন ও অফলাইন</h3>
-<p>ঘরে বসে অথবা সরাসরি ক্লাস করার সুবিধা।</p>
-</div>
-
-<div class="card">
-<div class="icon">📊</div>
-<h3>নিয়মিত পরীক্ষা</h3>
-<p>শিক্ষার্থীদের অগ্রগতি যাচাইয়ের জন্য নিয়মিত মূল্যায়ন।</p>
-</div>
-
-<div class="card">
-<div class="icon">📚</div>
-<h3>সকল শ্রেণির কোর্স</h3>
-<p>প্রাথমিক থেকে উচ্চমাধ্যমিক পর্যন্ত পাঠদানের ব্যবস্থা।</p>
-</div>
-
-<div class="card">
-<div class="icon">💻</div>
-<h3>ডিজিটাল লার্নিং</h3>
-<p>আধুনিক প্রযুক্তিনির্ভর শিক্ষা ও শেখার পরিবেশ।</p>
-</div>
-
-<div class="card">
-<div class="icon">🏆</div>
-<h3>সাফল্যের লক্ষ্য</h3>
-<p>শিক্ষার্থীদের দক্ষতা ও আত্মবিশ্বাস বৃদ্ধিতে সহযোগিতা।</p>
-</div>
-
-</div>
-</div>
+ <div class="container">
+  <div class="section-title">
+   <small>WHY CHOOSE US</small>
+   <h2>কেন NextGen Academy?</h2>
+   <p>সফলতার পথে আপনার বিশ্বস্ত শিক্ষা প্রতিষ্ঠান</p>
+  </div>
+  <div class="grid">
+   <div class="card"><div class="icon">🎓</div><h3>অভিজ্ঞ শিক্ষক</h3><p>পরিকল্পিত পাঠদান ও বিষয়ভিত্তিক দিকনির্দেশনা।</p></div>
+   <div class="card"><div class="icon">🌐</div><h3>অনলাইন ও অফলাইন</h3><p>ঘরে বসে অথবা সরাসরি ক্লাস করার সুবিধা।</p></div>
+   <div class="card"><div class="icon">📊</div><h3>নিয়মিত পরীক্ষা</h3><p>শিক্ষার্থীদের অগ্রগতি যাচাইয়ের জন্য নিয়মিত মূল্যায়ন।</p></div>
+   <div class="card"><div class="icon">📚</div><h3>সকল শ্রেণির কোর্স</h3><p>প্রাথমিক থেকে উচ্চমাধ্যমিক পর্যন্ত পাঠদানের ব্যবস্থা।</p></div>
+   <div class="card"><div class="icon">💻</div><h3>ডিজিটাল লার্নিং</h3><p>আধুনিক প্রযুক্তিনির্ভর শিক্ষা ও শেখার পরিবেশ।</p></div>
+   <div class="card"><div class="icon">🏆</div><h3>সাফল্যের লক্ষ্য</h3><p>শিক্ষার্থীদের দক্ষতা ও আত্মবিশ্বাস বৃদ্ধিতে সহযোগিতা।</p></div>
+  </div>
+ </div>
 </section>
-
-<!-- COURSES -->
 
 <section class="programs" id="courses">
-<div class="container">
-
-<div class="section-title">
-<small>ACADEMIC PROGRAMS</small>
-<h2>আমাদের কোর্সসমূহ</h2>
-<p>সকল শ্রেণি এবং সকল বিভাগ</p>
-</div>
-
-<div class="grid" id="courseList"></div>
-
-</div>
+ <div class="container">
+  <div class="section-title">
+   <small>ACADEMIC PROGRAMS</small>
+   <h2>আমাদের কোর্সসমূহ</h2>
+   <p>সকল শ্রেণি এবং সকল বিভাগ</p>
+  </div>
+  <div class="grid" id="courseList"><p>কোর্স লোড হচ্ছে...</p></div>
+ </div>
 </section>
 
-<!-- NOTICE -->
+<section id="tools">
+ <div class="container">
+  <div class="section-title">
+   <small>STUDENT TOOLS</small>
+   <h2>শিক্ষার্থীদের জন্য বিশেষ সুবিধা</h2>
+   <p>সময় ও গণনার জন্য প্রয়োজনীয় ডিজিটাল টুলস</p>
+  </div>
+  <div class="tools-grid">
+   <div class="tool-card" id="clockCard">
+    <h3>🕒 NextGen Digital Clock</h3>
+    <div class="clock">
+     <div class="clock-time" id="clockTime">00:00:00</div>
+     <div class="clock-date" id="clockDate">লোড হচ্ছে...</div>
+     <div id="clockDay"></div>
+    </div>
+   </div>
+   <div class="tool-card" id="calculatorCard">
+    <h3>🧮 Scientific Calculator</h3>
+    <p>শিক্ষার্থীদের জন্য উন্নত বৈজ্ঞানিক ক্যালকুলেটর।</p>
+    <button class="btn" id="openCalculator">Open Calculator</button>
+   </div>
+  </div>
+ </div>
+</section>
 
 <section id="notices">
-<div class="container">
-
-<div class="section-title">
-<small>ANNOUNCEMENTS</small>
-<h2>নোটিশ বোর্ড</h2>
-<p>সর্বশেষ তথ্য ও গুরুত্বপূর্ণ ঘোষণা</p>
-</div>
-
-<div class="notice">
-<h3>📢 ভর্তি সংক্রান্ত তথ্য</h3>
-<p>ভর্তি ও কোর্স সম্পর্কে জানতে আমাদের সঙ্গে যোগাযোগ করুন।</p>
-</div>
-
-<div class="notice">
-<h3>📢 অনলাইন ও অফলাইন ক্লাস</h3>
-<p>ক্লাসের সময়সূচি ও বিস্তারিত জানতে ফোন করুন।</p>
-</div>
-
-</div>
+ <div class="container">
+  <div class="section-title">
+   <small>ANNOUNCEMENTS</small>
+   <h2>নোটিশ বোর্ড</h2>
+   <p>সর্বশেষ তথ্য ও গুরুত্বপূর্ণ ঘোষণা</p>
+  </div>
+  <div id="noticeList">
+   <div class="notice"><h3>📢 ভর্তি সংক্রান্ত তথ্য</h3><p>ভর্তি ও কোর্স সম্পর্কে জানতে আমাদের সঙ্গে যোগাযোগ করুন।</p></div>
+  </div>
+ </div>
 </section>
-
-<!-- ABOUT -->
 
 <section class="about" id="about">
-<div class="container">
-
-<div class="section-title">
-<small style="color:#43d4df">ABOUT US</small>
-<h2>আমাদের সম্পর্কে</h2>
-</div>
-
-<p>
-NextGen Academy একটি আধুনিক শিক্ষা প্রতিষ্ঠান।
-আমাদের লক্ষ্য শিক্ষার্থীদের মানসম্মত শিক্ষা,
-সঠিক দিকনির্দেশনা এবং দক্ষতা অর্জনে সহযোগিতা করা।
-</p>
-
-<div class="director">
-মো আলমগীর হোসেন (সাগর)
-</div>
-
-<p>পরিচালক — NextGen Academy</p>
-
-</div>
+ <div class="container">
+  <div class="section-title">
+   <small style="color:#43d4df">ABOUT US</small>
+   <h2>আমাদের সম্পর্কে</h2>
+  </div>
+  <p id="aboutText">NextGen Academy একটি আধুনিক শিক্ষা প্রতিষ্ঠান। আমাদের লক্ষ্য শিক্ষার্থীদের মানসম্মত শিক্ষা, সঠিক দিকনির্দেশনা এবং দক্ষতা অর্জনে সহযোগিতা করা।</p>
+  <div class="director" id="directorName">মো আলমগীর হোসেন (সাগর)</div>
+  <p>পরিচালক — NextGen Academy</p>
+ </div>
 </section>
 
-<!-- CONTACT -->
-
 <section class="contact" id="contact">
-<div class="container">
-
-<div class="section-title">
-<small>GET IN TOUCH</small>
-<h2>যোগাযোগ করুন</h2>
-<p>আপনার শিক্ষার যাত্রা শুরু হোক আজই</p>
-</div>
-
-<div class="contact-box">
-
-<h3>NextGen Academy</h3>
-
-<div class="phone">
-📞 01792818006
-</div>
-
-<div class="phone">
-📞 01581299984
-</div>
-
-<a href="tel:01792818006" class="btn">
-এখনই কল করুন
-</a>
-
-<a href="https://wa.me/8801792818006" class="btn">
-WhatsApp
-</a>
-
-</div>
-</div>
+ <div class="container">
+  <div class="section-title">
+   <small>GET IN TOUCH</small>
+   <h2>যোগাযোগ করুন</h2>
+   <p>আপনার শিক্ষার যাত্রা শুরু হোক আজই</p>
+  </div>
+  <div class="contact-box">
+   <h3 id="contactAcademyName">NextGen Academy</h3>
+   <div class="phone" id="phoneOne">📞 01792818006</div>
+   <div class="phone" id="phoneTwo">📞 01581299984</div>
+   <a href="tel:01792818006" class="btn" id="callButton">এখনই কল করুন</a>
+   <div class="socials" id="socialLinks"></div>
+  </div>
+ </div>
 </section>
 
 <footer>
-<h2>NextGen Academy</h2>
-<p>Learn • Grow • Lead</p>
-<p>© <span id="year"></span> NextGen Academy. All Rights Reserved.</p>
+ <h2 id="footerName">NextGen Academy</h2>
+ <p>Learn • Grow • Lead</p>
+ <p>© <span id="year"></span> NextGen Academy. All Rights Reserved.</p>
 </footer>
 
-<a class="whatsapp"
-href="https://wa.me/8801792818006"
-target="_blank">
-WhatsApp
-</a>
+<div class="float-tools">
+ <button id="floatingCalc">🧮 Calculator</button>
+</div>
+<a class="whatsapp" id="whatsappButton" href="https://wa.me/8801792818006" target="_blank" rel="noopener">WhatsApp</a>
 
-<script>
+<!-- CALCULATOR POPUP -->
+<div class="modal" id="calculatorModal" role="dialog" aria-modal="true" aria-label="Scientific Calculator">
+ <div class="calc">
+  <div class="calc-head">
+   <strong>NextGen Scientific Calculator</strong>
+   <button id="closeCalculator" aria-label="Close">✕</button>
+  </div>
+  <div class="calc-display">
+   <div id="calcExpression" aria-live="polite"></div>
+   <div id="calcResult">0</div>
+  </div>
+  <div class="calc-mode">
+   <button id="degreeMode" class="active">DEG</button>
+   <button id="radianMode">RAD</button>
+  </div>
+  <div class="calc-buttons" id="calcButtons">
+   <button class="fn" data-v="sin(">sin</button>
+   <button class="fn" data-v="cos(">cos</button>
+   <button class="fn" data-v="tan(">tan</button>
+   <button class="fn" data-v="log(">log</button>
+   <button class="fn" data-v="ln(">ln</button>
 
-// সকল শ্রেণি ও বিভাগের কোর্স
+   <button class="fn" data-v="asin(">sin⁻¹</button>
+   <button class="fn" data-v="acos(">cos⁻¹</button>
+   <button class="fn" data-v="atan(">tan⁻¹</button>
+   <button class="fn" data-v="sqrt(">√</button>
+   <button class="fn" data-v="^2">x²</button>
 
-const courses = [
+   <button class="fn" data-v="π">π</button>
+   <button class="fn" data-v="e">e</button>
+   <button class="fn" data-v="^">xʸ</button>
+   <button class="fn" data-v="!">n!</button>
+   <button class="danger" data-action="clear">AC</button>
 
-{
-name:"প্রাথমিক শ্রেণি (১ম–৫ম)",
-subjects:[
-"বাংলা","English","গণিত",
-"প্রাথমিক বিজ্ঞান",
-"বাংলাদেশ ও বিশ্বপরিচয়",
-"ধর্ম ও নৈতিক শিক্ষা"
-]
-},
+   <button data-v="7">7</button>
+   <button data-v="8">8</button>
+   <button data-v="9">9</button>
+   <button class="op" data-v="/">÷</button>
+   <button class="danger" data-action="back">⌫</button>
 
-{
-name:"মাধ্যমিক (৬ষ্ঠ–৮ম)",
-subjects:[
-"বাংলা","English","গণিত",
-"বিজ্ঞান","ICT",
-"বাংলাদেশ ও বিশ্বপরিচয়",
-"ধর্ম ও নৈতিক শিক্ষা"
-]
-},
+   <button data-v="4">4</button>
+   <button data-v="5">5</button>
+   <button data-v="6">6</button>
+   <button class="op" data-v="*">×</button>
+   <button class="op" data-v="(">(</button>
 
-{
-name:"৯ম–১০ম বিজ্ঞান বিভাগ",
-subjects:[
-"বাংলা","English","গণিত",
-"পদার্থবিজ্ঞান","রসায়ন",
-"জীববিজ্ঞান","উচ্চতর গণিত","ICT"
-]
-},
+   <button data-v="1">1</button>
+   <button data-v="2">2</button>
+   <button data-v="3">3</button>
+   <button class="op" data-v="-">−</button>
+   <button class="op" data-v=")">)</button>
 
-{
-name:"৯ম–১০ম মানবিক বিভাগ",
-subjects:[
-"বাংলা","English","সাধারণ গণিত",
-"ইতিহাস","ভূগোল",
-"পৌরনীতি","অর্থনীতি","ICT"
-]
-},
+   <button data-v="0">0</button>
+   <button data-v=".">.</button>
+   <button data-v=",">,</button>
+   <button class="op" data-v="+">+</button>
+   <button class="equal" data-action="equals">=</button>
+  </div>
+  <p class="calc-help">Scientific calculation • DEG/RAD • Factorial • Trigonometry</p>
+ </div>
+</div>
 
-{
-name:"৯ম–১০ম ব্যবসায় শিক্ষা",
-subjects:[
-"বাংলা","English","সাধারণ গণিত",
-"হিসাববিজ্ঞান",
-"ফিন্যান্স ও ব্যাংকিং",
-"ব্যবসায় উদ্যোগ","ICT"
-]
-},
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
+import {getFirestore,collection,getDocs,doc,getDoc}
+from "https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
 
-{
-name:"একাদশ–দ্বাদশ বিজ্ঞান বিভাগ",
-subjects:[
-"বাংলা","English","ICT",
-"পদার্থবিজ্ঞান","রসায়ন",
-"জীববিজ্ঞান","উচ্চতর গণিত"
-]
-},
+const firebaseConfig={
+ apiKey:"AIzaSyCiuVDN52fNvW53wZ7qXUf6lVxXNOPPsLM",
+ authDomain:"nextgen-academy-ba9ed.firebaseapp.com",
+ projectId:"nextgen-academy-ba9ed",
+ storageBucket:"nextgen-academy-ba9ed.firebasestorage.app",
+ messagingSenderId:"250055044170",
+ appId:"1:250055044170:web:a1781adf499d33570f4ab3"
+};
 
-{
-name:"একাদশ–দ্বাদশ মানবিক বিভাগ",
-subjects:[
-"বাংলা","English","ICT",
-"পৌরনীতি","অর্থনীতি",
-"ইতিহাস","ভূগোল","সমাজবিজ্ঞান"
-]
-},
+const app=initializeApp(firebaseConfig);
+const db=getFirestore(app);
 
-{
-name:"একাদশ–দ্বাদশ ব্যবসায় শিক্ষা",
-subjects:[
-"বাংলা","English","ICT",
-"হিসাববিজ্ঞান",
-"ব্যবসায় সংগঠন ও ব্যবস্থাপনা",
-"ফিন্যান্স ও ব্যাংকিং",
-"উৎপাদন ব্যবস্থাপনা"
-]
+const defaults={
+ name:"NextGen Academy",
+ logo:"",
+ tagline:"শিক্ষার নতুন দিগন্তে স্বাগতম NextGen Academy-তে",
+ heroText:"আধুনিক শিক্ষা, অভিজ্ঞ শিক্ষকের নির্দেশনা, পরিকল্পিত পাঠদান এবং অনলাইন ও অফলাইন কোচিংয়ের মাধ্যমে আপনার উজ্জ্বল ভবিষ্যৎ গড়ার বিশ্বস্ত সহযোগী।",
+ about:"NextGen Academy একটি আধুনিক শিক্ষা প্রতিষ্ঠান। আমাদের লক্ষ্য শিক্ষার্থীদের মানসম্মত শিক্ষা, সঠিক দিকনির্দেশনা এবং দক্ষতা অর্জনে সহযোগিতা করা।",
+ director:"মো আলমগীর হোসেন (সাগর)",
+ phone1:"01792818006",
+ phone2:"01581299984",
+ whatsapp:"8801792818006",
+ showClock:true,
+ showCalculator:true,
+ socials:{
+  facebook:"",instagram:"",youtube:"",tiktok:"",
+  linkedin:"",telegram:"",x:""
+ }
+};
+
+function text(id,value){
+ const el=document.getElementById(id);
+ if(el && value!==undefined && value!==null)el.textContent=value;
 }
 
-];
+function validURL(value){
+ try{
+  const u=new URL(value);
+  return ["https:","http:"].includes(u.protocol)?u.href:"";
+ }catch{return "";}
+}
 
-const courseList=document.getElementById("courseList");
+async function loadWebsite(){
+ let settings={...defaults};
+ try{
+  const snap=await getDoc(doc(db,"site","main"));
+  if(snap.exists())settings={...defaults,...snap.data(),socials:{...defaults.socials,...(snap.data().socials||{})}};
+ }catch(e){console.warn("Settings unavailable",e.message)}
 
-courses.forEach(course=>{
+ document.title=settings.name||defaults.name;
+ text("siteLogo",settings.name||defaults.name);
+ if(settings.logo){
+  const img=document.createElement("img");
+  img.src=validURL(settings.logo);
+  img.alt=settings.name;
+  if(img.src)document.getElementById("siteLogo").replaceChildren(img);
+ }
+ text("heroTitle",settings.tagline||defaults.tagline);
+ text("heroText",settings.heroText||defaults.heroText);
+ text("aboutText",settings.about||defaults.about);
+ text("directorName",settings.director||defaults.director);
+ text("contactAcademyName",settings.name||defaults.name);
+ text("footerName",settings.name||defaults.name);
+ text("phoneOne","📞 "+(settings.phone1||defaults.phone1));
+ text("phoneTwo","📞 "+(settings.phone2||defaults.phone2));
+ document.getElementById("callButton").href="tel:"+(settings.phone1||defaults.phone1);
+ document.getElementById("whatsappButton").href="https://wa.me/"+(settings.whatsapp||defaults.whatsapp);
 
-const card=document.createElement("div");
-card.className="card program-card";
+ document.getElementById("clockCard").style.display=settings.showClock===false?"none":"block";
+ document.getElementById("calculatorCard").style.display=settings.showCalculator===false?"none":"block";
+ document.getElementById("floatingCalc").style.display=settings.showCalculator===false?"none":"block";
 
-const title=document.createElement("h3");
-title.textContent=course.name;
+ const socialNames={
+  facebook:"Facebook",instagram:"Instagram",youtube:"YouTube",
+  tiktok:"TikTok",linkedin:"LinkedIn",telegram:"Telegram",x:"X"
+ };
+ const socialBox=document.getElementById("socialLinks");
+ socialBox.replaceChildren();
+ Object.entries(socialNames).forEach(([key,label])=>{
+  const url=validURL(settings.socials?.[key]||"");
+  if(url){
+   const a=document.createElement("a");
+   a.href=url;a.target="_blank";a.rel="noopener";
+   a.textContent=label;
+   socialBox.appendChild(a);
+  }
+ });
+}
 
-const subjectBox=document.createElement("div");
-subjectBox.className="subjects";
+async function loadCourses(){
+ const list=document.getElementById("courseList");
+ try{
+  const snap=await getDocs(collection(db,"courses"));
+  list.replaceChildren();
+  if(snap.empty){list.textContent="এখনো কোনো কোর্স যুক্ত করা হয়নি।";return;}
+  snap.forEach(item=>{
+   const c=item.data();
+   const card=document.createElement("article");
+   card.className="card program-card";
+   const title=document.createElement("h3");
+   title.textContent=c.name||"Course";
+   const detail=document.createElement("p");
+   detail.textContent=(c.className||"")+" • "+(c.division||"");
+   const subject=document.createElement("p");
+   subject.textContent="বিষয়: "+(c.subject||"");
+   const fee=document.createElement("p");
+   fee.textContent="কোর্স ফি: ৳"+(c.fee||0);
+   const desc=document.createElement("p");
+   desc.textContent=c.description||"";
+   card.append(title,detail,subject,fee,desc);
+   list.appendChild(card);
+  });
+ }catch(e){list.textContent="কোর্স লোড করা যায়নি। পরে আবার চেষ্টা করুন।";}
+}
 
-course.subjects.forEach(subject=>{
+async function loadNotices(){
+ const list=document.getElementById("noticeList");
+ try{
+  const snap=await getDocs(collection(db,"notices"));
+  list.replaceChildren();
+  if(snap.empty){list.textContent="নতুন কোনো নোটিশ নেই।";return;}
+  snap.forEach(item=>{
+   const n=item.data();
+   const box=document.createElement("article");
+   box.className="notice";
+   const h=document.createElement("h3");
+   h.textContent="📢 "+(n.title||"Notice");
+   const p=document.createElement("p");
+   p.textContent=n.body||"";
+   box.append(h,p);list.appendChild(box);
+  });
+ }catch(e){list.textContent="নোটিশ এখন লোড করা যাচ্ছে না।";}
+}
 
-const tag=document.createElement("span");
-tag.textContent=subject;
-subjectBox.appendChild(tag);
+document.getElementById("year").textContent=new Date().getFullYear();
+await loadWebsite();
+await loadCourses();
+await loadNotices();
 
-});
+/* Bangladesh Digital Clock */
+function updateClock(){
+ const now=new Date();
+ const time=new Intl.DateTimeFormat("en-GB",{
+  timeZone:"Asia/Dhaka",hour:"2-digit",minute:"2-digit",
+  second:"2-digit",hour12:false
+ }).format(now);
+ const date=new Intl.DateTimeFormat("bn-BD",{
+  timeZone:"Asia/Dhaka",day:"numeric",month:"long",year:"numeric"
+ }).format(now);
+ const day=new Intl.DateTimeFormat("bn-BD",{
+  timeZone:"Asia/Dhaka",weekday:"long"
+ }).format(now);
+ text("clockTime",time);
+ text("clockDate",date);
+ text("clockDay",day+" • বাংলাদেশ সময়");
+}
+updateClock();
+setInterval(updateClock,1000);
 
-card.appendChild(title);
-card.appendChild(subjectBox);
-
-courseList.appendChild(card);
-
-});
-
-document.getElementById("year").textContent=
-new Date().getFullYear();
-
-// বাংলা ও ইংরেজি ভাষা পরিবর্তন
-
+/* Language Toggle */
 let english=false;
-
-function changeLanguage(){
-
-english=!english;
-
-document.documentElement.lang=
-english?"en":"bn";
-
-document.querySelector(".lang").textContent=
-english?"বাংলা":"English";
-
-document.querySelector(".hero h1").innerHTML=
-english
-?"Welcome to<br><span>NextGen Academy</span>"
-:"শিক্ষার নতুন দিগন্তে<br><span>স্বাগতম NextGen Academy-তে</span>";
-
-document.querySelector(".hero p").textContent=
-english
-?"Modern education, expert guidance and flexible online and offline coaching for your brighter future."
-:"আধুনিক শিক্ষা, অভিজ্ঞ শিক্ষকের নির্দেশনা, পরিকল্পিত পাঠদান এবং অনলাইন ও অফলাইন কোচিংয়ের মাধ্যমে আপনার উজ্জ্বল ভবিষ্যৎ গড়ার বিশ্বস্ত সহযোগী।";
-
-document.querySelectorAll(".menu a").forEach((a,i)=>{
-
-const en=["Home","Courses","Notices","About Us","Contact"];
-const bn=["হোম","কোর্স","নোটিশ","আমাদের সম্পর্কে","যোগাযোগ"];
-
-a.textContent=english?en[i]:bn[i];
-
+document.getElementById("languageButton").addEventListener("click",()=>{
+ english=!english;
+ document.documentElement.lang=english?"en":"bn";
+ document.getElementById("languageButton").textContent=english?"বাংলা":"English";
+ text("heroTitle",english?"Welcome to NextGen Academy": "শিক্ষার নতুন দিগন্তে স্বাগতম NextGen Academy-তে");
+ text("heroText",english?
+ "Modern education, expert guidance and flexible online and offline coaching for your brighter future.":
+ (defaults.heroText));
 });
 
+/* Calculator */
+const modal=document.getElementById("calculatorModal");
+const expression=document.getElementById("calcExpression");
+const result=document.getElementById("calcResult");
+let input="";
+let degree=true;
+
+function showCalc(){
+ expression.textContent=input;
+ result.textContent=input||"0";
+}
+function openCalc(){modal.classList.add("show")}
+function closeCalc(){modal.classList.remove("show")}
+document.getElementById("openCalculator").addEventListener("click",openCalc);
+document.getElementById("floatingCalc").addEventListener("click",openCalc);
+document.getElementById("closeCalculator").addEventListener("click",closeCalc);
+modal.addEventListener("click",e=>{if(e.target===modal)closeCalc()});
+
+document.getElementById("degreeMode").addEventListener("click",()=>{
+ degree=true;
+ document.getElementById("degreeMode").classList.add("active");
+ document.getElementById("radianMode").classList.remove("active");
+});
+document.getElementById("radianMode").addEventListener("click",()=>{
+ degree=false;
+ document.getElementById("radianMode").classList.add("active");
+ document.getElementById("degreeMode").classList.remove("active");
+});
+
+function factorial(n){
+ if(!Number.isInteger(n)||n<0||n>170)throw Error("Factorial range: 0–170");
+ let r=1;for(let i=2;i<=n;i++)r*=i;return r;
 }
 
-</script>
+function calculate(raw){
+ let s=raw.replace(/π/g,"PI");
+ s=s.replace(/\^/g,"**");
+ s=s.replace(/\bPI\b/g,"Math.PI");
+ s=s.replace(/\be\b/g,"Math.E");
+ s=s.replace(/sqrt\(/g,"Math.sqrt(");
+ s=s.replace(/log\(/g,"Math.log10(");
+ s=s.replace(/ln\(/g,"Math.log(");
+ const angle=x=>degree?`((${x})*Math.PI/180)`:`(${x})`;
+ s=s.replace(/sin\(/g,"SIN(").replace(/cos\(/g,"COS(").replace(/tan\(/g,"TAN(");
+ s=s.replace(/asin\(/g,"ASIN(").replace(/acos\(/g,"ACOS(").replace(/atan\(/g,"ATAN(");
+ s=s.replace(/SIN\(/g,`Math.sin(${degree?"(Math.PI/180)*":""}`);
+ s=s.replace(/COS\(/g,`Math.cos(${degree?"(Math.PI/180)*":""}`);
+ s=s.replace(/TAN\(/g,`Math.tan(${degree?"(Math.PI/180)*":""}`);
+ s=s.replace(/ASIN\(/g,"(Math.asin(").replace(/ACOS\(/g,"(Math.acos(").replace(/ATAN\(/g,"(Math.atan(");
+ if(/!/.test(s)){
+  s=s.replace(/(\d+(?:\.\d+)?)!/g,(_,n)=>String(factorial(Number(n))));
+ }
+ if(!/^[0-9+\-*/().,\sA-Za-z_]*$/.test(s))throw Error("Invalid expression");
+ if(/\b(?:constructor|prototype|window|document|globalThis|Function|eval|alert)\b/.test(s))throw Error("Invalid input");
+ const allowed=/^(?:(?:Math\.(?:PI|E|sqrt|log10|log|sin|cos|tan|asin|acos|atan))|[0-9+\-*/().,\s])*$/;
+ if(!allowed.test(s))throw Error("Invalid function");
+ const value=Function('"use strict";return ('+s+')')();
+ if(typeof value!=="number"||!Number.isFinite(value))throw Error("Math error");
+ return Number(value.toPrecision(12)).toString();
+}
 
+document.getElementById("calcButtons").addEventListener("click",e=>{
+ const b=e.target.closest("button");if(!b)return;
+ const action=b.dataset.action;
+ if(action==="clear"){input="";showCalc();return}
+ if(action==="back"){input=input.slice(0,-1);showCalc();return}
+ if(action==="equals"){
+  try{result.textContent=calculate(input);expression.textContent=input;input=result.textContent}
+  catch(err){result.textContent="Error";expression.textContent=err.message}
+  return;
+ }
+ if(b.dataset.v){input+=b.dataset.v;showCalc()}
+});
+document.addEventListener("keydown",e=>{
+ if(!modal.classList.contains("show"))return;
+ if(/^[0-9.+\-*/()]$/.test(e.key)){input+=e.key;showCalc()}
+ if(e.key==="Enter"){try{result.textContent=calculate(input);input=result.textContent}catch{result.textContent="Error"}}
+ if(e.key==="Backspace"){input=input.slice(0,-1);showCalc()}
+ if(e.key==="Escape")closeCalc();
+});
+</script>
 </body>
 </html>
