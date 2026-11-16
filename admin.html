@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NextGen Academy | Admin Panel</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+font-family:'Hind Siliguri',sans-serif;
+background:#f2f5fc;
+color:#17213d;
+}
+
+.login{
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:20px;
+}
+
+.login-box{
+background:white;
+padding:35px;
+border-radius:20px;
+width:100%;
+max-width:400px;
+box-shadow:0 10px 40px #0001;
+text-align:center;
+}
+
+.login-box h2{color:#244be8;margin-bottom:10px}
+
+input,select,textarea{
+width:100%;
+padding:13px;
+margin:10px 0;
+border:1px solid #dce2f0;
+border-radius:10px;
+font-family:inherit;
+font-size:15px;
+}
+
+button{
+border:none;
+padding:12px 18px;
+border-radius:9px;
+background:#244be8;
+color:white;
+font-family:inherit;
+font-size:15px;
+font-weight:bold;
+cursor:pointer;
+}
+
+button:hover{opacity:.85}
+
+.dashboard{display:none}
+
+.sidebar{
+background:#101a38;
+color:white;
+padding:25px;
+}
+
+.sidebar h2{color:#42d5e2;margin-bottom:25px}
+
+.sidebar button{
+display:block;
+width:100%;
+text-align:left;
+margin:10px 0;
+background:#ffffff15;
+}
+
+.main{padding:25px}
+
+.top{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:10px;
+margin-bottom:25px;
+flex-wrap:wrap;
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:15px;
+margin-bottom:25px;
+}
+
+.stat{
+background:white;
+padding:22px;
+border-radius:15px;
+box-shadow:0 5px 20px #00000008;
+}
+
+.stat h2{color:#244be8;font-size:30px}
+
+.panel{
+background:white;
+padding:22px;
+border-radius:15px;
+margin-bottom:20px;
+box-shadow:0 5px 20px #00000008;
+}
+
+.panel h3{margin-bottom:15px}
+
+.item{
+padding:12px;
+border-bottom:1px solid #eee;
+display:flex;
+justify-content:space-between;
+gap:10px;
+align-items:center;
+}
+
+.delete{background:#e63946;padding:8px 12px}
+
+.section{display:none}
+.section.active{display:block}
+
+@media(min-width:750px){
+.dashboard{display:none}
+.dashboard.open{
+display:grid;
+grid-template-columns:250px 1fr;
+min-height:100vh;
+}
+}
+
+@media(max-width:749px){
+.dashboard.open{display:block}
+.sidebar{padding:15px}
+.sidebar button{display:inline-block;width:auto}
+.main{padding:15px}
+.stats{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN -->
+
+<div class="login" id="login">
+
+<div class="login-box">
+
+<h2>🎓 NextGen Academy</h2>
+<p>Administrator Login</p>
+
+<input type="password" id="password"
+placeholder="Enter Admin Password">
+
+<button onclick="loginAdmin()">Login</button>
+
+<p id="error" style="color:red;margin-top:12px"></p>
+
+</div>
+</div>
+
+<!-- DASHBOARD -->
+
+<div class="dashboard" id="dashboard">
+
+<aside class="sidebar">
+
+<h2>NextGen Academy</h2>
+
+<button onclick="show('home')">📊 Dashboard</button>
+<button onclick="show('courses')">📚 Manage Courses</button>
+<button onclick="show('notices')">📢 Manage Notices</button>
+<button onclick="show('settings')">⚙️ Settings</button>
+<button onclick="logout()">🚪 Logout</button>
+
+</aside>
+
+<main class="main">
+
+<div class="top">
+<h2>Admin Dashboard</h2>
+<span>Welcome, Administrator</span>
+</div>
+
+<!-- HOME -->
+
+<div class="section active" id="home">
+
+<div class="stats">
+
+<div class="stat">
+<p>Total Courses</p>
+<h2 id="totalCourses">0</h2>
+</div>
+
+<div class="stat">
+<p>Total Notices</p>
+<h2 id="totalNotices">0</h2>
+</div>
+
+<div class="stat">
+<p>Academy</p>
+<h2>NG</h2>
+</div>
+
+</div>
+
+<div class="panel">
+<h3>Welcome to Admin Panel</h3>
+<p>এখান থেকে আপনার একাডেমির কোর্স ও নোটিশ পরিচালনা করতে পারবেন।</p>
+</div>
+
+</div>
+
+<!-- COURSES -->
+
+<div class="section" id="courses">
+
+<div class="panel">
+
+<h3>➕ Add New Course / Subject</h3>
+
+<input id="courseName" placeholder="শ্রেণি / কোর্সের নাম">
+
+<select id="category">
+<option>প্রাথমিক</option>
+<option>মাধ্যমিক</option>
+<option>বিজ্ঞান বিভাগ</option>
+<option>মানবিক বিভাগ</option>
+<option>ব্যবসায় শিক্ষা</option>
+<option>অন্যান্য</option>
+</select>
+
+<input id="subjectName"
+placeholder="বিষয়ের নাম">
+
+<button onclick="addCourse()">Add Course</button>
+
+</div>
+
+<div class="panel">
+<h3>📚 Course List</h3>
+<div id="courseList"></div>
+</div>
+
+</div>
+
+<!-- NOTICES -->
+
+<div class="section" id="notices">
+
+<div class="panel">
+
+<h3>📢 Publish New Notice</h3>
+
+<input id="noticeTitle"
+placeholder="নোটিশের শিরোনাম">
+
+<textarea id="noticeText"
+placeholder="নোটিশের বিস্তারিত লিখুন"
+rows="4"></textarea>
+
+<button onclick="addNotice()">Publish Notice</button>
+
+</div>
+
+<div class="panel">
+<h3>Published Notices</h3>
+<div id="noticeList"></div>
+</div>
+
+</div>
+
+<!-- SETTINGS -->
+
+<div class="section" id="settings">
+
+<div class="panel">
+
+<h3>Academy Information</h3>
+
+<p><b>Name:</b> NextGen Academy</p>
+<p><b>Director:</b> মো আলমগীর হোসেন (সাগর)</p>
+<p><b>Phone:</b> 01792818006</p>
+<p><b>Phone:</b> 01581299984</p>
+
+</div>
+
+</div>
+
+</main>
+</div>
+
+<script>
+
+// DEMO LOGIN
+// এটি নিরাপদ সার্ভারভিত্তিক Login নয়।
+
+function loginAdmin(){
+
+let pass=document.getElementById("password").value;
+
+if(pass==="123456"){
+
+document.getElementById("login").style.display="none";
+
+document.getElementById("dashboard").classList.add("open");
+
+update();
+
+}else{
+
+document.getElementById("error").textContent=
+"Incorrect Password!";
+
+}
+
+}
+
+function logout(){
+location.reload();
+}
+
+// NAVIGATION
+
+function show(id){
+
+document.querySelectorAll(".section").forEach(s=>{
+s.classList.remove("active");
+});
+
+document.getElementById(id).classList.add("active");
+
+}
+
+// DATA STORAGE
+
+let courses=JSON.parse(localStorage.getItem("ngCourses")||"[]");
+
+let notices=JSON.parse(localStorage.getItem("ngNotices")||"[]");
+
+// ADD COURSE
+
+function addCourse(){
+
+let name=document.getElementById("courseName").value.trim();
+
+let category=document.getElementById("category").value;
+
+let subject=document.getElementById("subjectName").value.trim();
+
+if(!name||!subject){
+alert("সব তথ্য পূরণ করুন");
+return;
+}
+
+courses.push({name,category,subject});
+
+save();
+
+document.getElementById("courseName").value="";
+document.getElementById("subjectName").value="";
+
+}
+
+// ADD NOTICE
+
+function addNotice(){
+
+let title=document.getElementById("noticeTitle").value.trim();
+
+let textValue=document.getElementById("noticeText").value.trim();
+
+if(!title||!textValue){
+alert("নোটিশের সব তথ্য লিখুন");
+return;
+}
+
+notices.push({title,text:textValue});
+
+save();
+
+document.getElementById("noticeTitle").value="";
+document.getElementById("noticeText").value="";
+
+}
+
+// DELETE
+
+function deleteCourse(i){
+
+if(confirm("এই কোর্সটি মুছে ফেলবেন?")){
+courses.splice(i,1);
+save();
+}
+
+}
+
+function deleteNotice(i){
+
+if(confirm("এই নোটিশটি মুছে ফেলবেন?")){
+notices.splice(i,1);
+save();
+}
+
+}
+
+// SAVE DATA
+
+function save(){
+
+localStorage.setItem("ngCourses",JSON.stringify(courses));
+
+localStorage.setItem("ngNotices",JSON.stringify(notices));
+
+update();
+
+}
+
+// UPDATE DASHBOARD
+
+function update(){
+
+document.getElementById("totalCourses").textContent=courses.length;
+
+document.getElementById("totalNotices").textContent=notices.length;
+
+document.getElementById("courseList").innerHTML="";
+
+courses.forEach((c,i)=>{
+
+let div=document.createElement("div");
+div.className="item";
+
+let info=document.createElement("span");
+info.textContent=c.name+" | "+c.category+" | "+c.subject;
+
+let btn=document.createElement("button");
+btn.className="delete";
+btn.textContent="Delete";
+btn.onclick=()=>deleteCourse(i);
+
+div.appendChild(info);
+div.appendChild(btn);
+
+document.getElementById("courseList").appendChild(div);
+
+});
+
+document.getElementById("noticeList").innerHTML="";
+
+notices.forEach((n,i)=>{
+
+let div=document.createElement("div");
+div.className="item";
+
+let info=document.createElement("span");
+info.textContent=n.title+" — "+n.text;
+
+let btn=document.createElement("button");
+btn.className="delete";
+btn.textContent="Delete";
+btn.onclick=()=>deleteNotice(i);
+
+div.appendChild(info);
+div.appendChild(btn);
+
+document.getElementById("noticeList").appendChild(div);
+
+});
+
+}
+
+</script>
+
+</body>
+</html>
