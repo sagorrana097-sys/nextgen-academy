@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NextGen Academy | Learn Beyond Limits</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+font-family:'Hind Siliguri',sans-serif;
+background:#f5f7ff;
+color:#17213c;
+}
+
+header{
+background:#101b3d;
+color:white;
+padding:18px 7%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+flex-wrap:wrap;
+}
+
+.logo{font-size:25px;font-weight:700}
+.logo span{color:#55c8ff}
+
+nav a{
+color:white;
+text-decoration:none;
+margin:8px;
+}
+
+button,.btn{
+border:0;
+padding:12px 20px;
+border-radius:10px;
+background:#3157e8;
+color:white;
+cursor:pointer;
+font-weight:bold;
+text-decoration:none;
+}
+
+.hero{
+padding:90px 8%;
+background:linear-gradient(130deg,#101b3d,#3157e8);
+color:white;
+text-align:center;
+}
+
+.hero h1{font-size:48px;margin-bottom:20px}
+.hero p{font-size:18px;line-height:1.9}
+.hero .btn{display:inline-block;margin-top:25px;background:#35c6d4;color:#101b3d}
+
+section{padding:65px 8%}
+
+.title{
+text-align:center;
+font-size:34px;
+color:#17213c;
+margin-bottom:35px;
+}
+
+.features{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:18px;
+box-shadow:0 8px 30px #17213c12;
+}
+
+.card h3{color:#3157e8;margin-bottom:12px}
+.card p{line-height:1.8;color:#68738c}
+
+.courses{background:#fff}
+
+.filters{
+text-align:center;
+margin-bottom:25px;
+}
+
+.filters button{margin:5px}
+
+.course{
+background:white;
+padding:22px;
+border-radius:15px;
+box-shadow:0 5px 20px #00000010;
+border:1px solid #e7ebf3;
+}
+
+.course h3{color:#3157e8;margin-bottom:10px}
+.course p{line-height:1.9;color:#555}
+
+#courseList{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:18px;
+}
+
+input,select{
+width:100%;
+padding:13px;
+margin:8px 0;
+border:1px solid #ddd;
+border-radius:8px;
+font:inherit;
+}
+
+#about{
+background:#101b3d;
+color:white;
+text-align:center;
+}
+
+#about p{
+max-width:750px;
+margin:auto;
+line-height:2;
+font-size:17px;
+}
+
+.contact{
+text-align:center;
+background:#eef2fb;
+}
+
+.contact p{line-height:2;font-size:17px}
+
+footer{
+background:#101b3d;
+color:white;
+text-align:center;
+padding:25px;
+}
+
+.modal{
+display:none;
+position:fixed;
+inset:0;
+background:#0009;
+justify-content:center;
+align-items:center;
+padding:15px;
+}
+
+.modal-box{
+background:white;
+padding:25px;
+border-radius:15px;
+width:100%;
+max-width:400px;
+}
+
+@media(max-width:600px){
+.hero h1{font-size:34px}
+header{gap:15px}
+nav{line-height:2}
+.title{font-size:28px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo">NextGen <span>Academy</span></div>
+
+<nav>
+<a href="#home">Home</a>
+<a href="#courses">Courses</a>
+<a href="#about">About</a>
+<a href="#contact">Contact</a>
+<button onclick="changeLanguage()">বাংলা / EN</button>
+</nav>
+</header>
+
+<section class="hero" id="home">
+
+<h1 id="heroTitle">শিক্ষার নতুন দিগন্তে স্বাগতম</h1>
+
+<p id="heroText">
+NextGen Academy — আধুনিক শিক্ষা,
+অভিজ্ঞ গাইডলাইন এবং অনলাইন ও অফলাইন
+কোচিংয়ের একটি নতুন অভিজ্ঞতা।
+</p>
+
+<a href="#courses" class="btn">আমাদের কোর্স দেখুন</a>
+
+</section>
+
+<section>
+<h2 class="title">Why NextGen Academy?</h2>
+
+<div class="features">
+
+<div class="card">
+<h3>🎓 Expert Guidance</h3>
+<p>অভিজ্ঞ শিক্ষকদের পরিকল্পিত পাঠদান ও প্রয়োজনীয় দিকনির্দেশনা।</p>
+</div>
+
+<div class="card">
+<h3>🌐 Online & Offline</h3>
+<p>অনলাইন ও সরাসরি ক্লাসের মাধ্যমে শেখার সুযোগ।</p>
+</div>
+
+<div class="card">
+<h3>📚 All Subjects</h3>
+<p>সকল শ্রেণি ও বিভাগের বিষয়ভিত্তিক পাঠদান।</p>
+</div>
+
+<div class="card">
+<h3>🏆 Exam Preparation</h3>
+<p>নিয়মিত অনুশীলন ও পরীক্ষার প্রস্তুতি।</p>
+</div>
+
+</div>
+</section>
+
+<section class="courses" id="courses">
+
+<h2 class="title">Our Academic Programs</h2>
+
+<div class="filters">
+<button onclick="filterCourses('all')">সব</button>
+<button onclick="filterCourses('primary')">প্রাথমিক</button>
+<button onclick="filterCourses('secondary')">মাধ্যমিক</button>
+<button onclick="filterCourses('higher')">উচ্চমাধ্যমিক</button>
+</div>
+
+<div id="courseList"></div>
+
+<br><br>
+
+<div style="text-align:center">
+<button onclick="openModal()">＋ নতুন বিষয় যুক্ত করুন</button>
+</div>
+
+</section>
+
+<section id="about">
+
+<h2 class="title" style="color:white">About NextGen Academy</h2>
+
+<p>
+NextGen Academy একটি আধুনিক শিক্ষাপ্রতিষ্ঠান।
+আমাদের লক্ষ্য প্রতিটি শিক্ষার্থীর মেধা,
+দক্ষতা ও আত্মবিশ্বাস বিকাশে সহায়তা করা।
+অনলাইন ও অফলাইন উভয় মাধ্যমেই
+শিক্ষার্থীদের জন্য রয়েছে শেখার সুযোগ।
+</p>
+
+<br>
+
+<h3>পরিচালক</h3>
+<h2>মো আলমগীর হোসেন (সাগর)</h2>
+
+</section>
+
+<section class="contact" id="contact">
+
+<h2 class="title">যোগাযোগ করুন</h2>
+
+<p>
+📞 01792818006
+<br>
+📞 01581299984
+<br><br>
+NextGen Academy
+</p>
+
+<br>
+
+<a class="btn" href="tel:01792818006">Call Now</a>
+
+<a class="btn" href="https://wa.me/8801792818006">
+WhatsApp
+</a>
+
+</section>
+
+<footer>
+<h3>NextGen Academy</h3>
+<p>Learn • Grow • Lead</p>
+<p>© 2026 NextGen Academy. All Rights Reserved.</p>
+</footer>
+
+<div class="modal" id="modal">
+<div class="modal-box">
+
+<h2>নতুন বিষয় যুক্ত করুন</h2>
+
+<select id="grade">
+<option value="primary">প্রাথমিক</option>
+<option value="secondary">মাধ্যমিক</option>
+<option value="higher">উচ্চমাধ্যমিক</option>
+</select>
+
+<input id="subject" placeholder="বিষয়ের নাম লিখুন">
+
+<button onclick="addSubject()">সংরক্ষণ করুন</button>
+<button onclick="closeModal()" style="background:#777">বন্ধ করুন</button>
+
+</div>
+</div>
+
+<script>
+
+let courses=[
+{
+level:"primary",
+name:"প্রাথমিক (১ম–৫ম শ্রেণি)",
+subjects:["বাংলা","English","গণিত","প্রাথমিক বিজ্ঞান","বাংলাদেশ ও বিশ্বপরিচয়","ধর্ম শিক্ষা","ICT"]
+},
+{
+level:"secondary",
+name:"৬ষ্ঠ–৮ম শ্রেণি",
+subjects:["বাংলা","English","গণিত","বিজ্ঞান","ICT","বাংলাদেশ ও বিশ্বপরিচয়"]
+},
+{
+level:"secondary",
+name:"৯ম–১০ম বিজ্ঞান বিভাগ",
+subjects:["বাংলা","English","গণিত","পদার্থবিজ্ঞান","রসায়ন","জীববিজ্ঞান","উচ্চতর গণিত","ICT"]
+},
+{
+level:"secondary",
+name:"৯ম–১০ম মানবিক বিভাগ",
+subjects:["বাংলা","English","সাধারণ গণিত","ইতিহাস","ভূগোল","পৌরনীতি","অর্থনীতি","ICT"]
+},
+{
+level:"secondary",
+name:"৯ম–১০ম ব্যবসায় শিক্ষা",
+subjects:["বাংলা","English","সাধারণ গণিত","হিসাববিজ্ঞান","ফিন্যান্স ও ব্যাংকিং","ব্যবসায় উদ্যোগ","ICT"]
+},
+{
+level:"higher",
+name:"একাদশ–দ্বাদশ বিজ্ঞান বিভাগ",
+subjects:["বাংলা","English","ICT","পদার্থবিজ্ঞান","রসায়ন","জীববিজ্ঞান","উচ্চতর গণিত"]
+},
+{
+level:"higher",
+name:"একাদশ–দ্বাদশ মানবিক বিভাগ",
+subjects:["বাংলা","English","ICT","পৌরনীতি","অর্থনীতি","ইতিহাস","ভূগোল","সমাজবিজ্ঞান"]
+},
+{
+level:"higher",
+name:"একাদশ–দ্বাদশ ব্যবসায় শিক্ষা",
+subjects:["বাংলা","English","ICT","হিসাববিজ্ঞান","ব্যবসায় সংগঠন ও ব্যবস্থাপনা","ফিন্যান্স ও ব্যাংকিং","উৎপাদন ব্যবস্থাপনা"]
+}
+];
+
+let currentFilter="all";
+
+function renderCourses(){
+
+let box=document.getElementById("courseList");
+box.innerHTML="";
+
+courses.forEach((c,index)=>{
+
+if(currentFilter!=="all" && c.level!==currentFilter)return;
+
+box.innerHTML+=`
+<div class="course">
+<h3>${c.name}</h3>
+<p><b>বিষয়সমূহ:</b></p>
+<p>${c.subjects.join(" • ")}</p>
+</div>`;
+
+});
+
+}
+
+function filterCourses(level){
+currentFilter=level;
+renderCourses();
+}
+
+function openModal(){
+document.getElementById("modal").style.display="flex";
+}
+
+function closeModal(){
+document.getElementById("modal").style.display="none";
+}
+
+function addSubject(){
+
+let name=document.getElementById("subject").value.trim();
+let grade=document.getElementById("grade").value;
+
+if(!name){
+alert("বিষয়ের নাম লিখুন");
+return;
+}
+
+let course=courses.find(c=>c.level===grade);
+
+if(course.subjects.includes(name)){
+alert("বিষয়টি আগে থেকেই আছে");
+return;
+}
+
+course.subjects.push(name);
+
+localStorage.setItem("nextgenCourses",JSON.stringify(courses));
+
+document.getElementById("subject").value="";
+closeModal();
+renderCourses();
+
+}
+
+function changeLanguage(){
+
+let title=document.getElementById("heroTitle");
+let text=document.getElementById("heroText");
+
+if(title.innerText==="শিক্ষার নতুন দিগন্তে স্বাগতম"){
+title.innerText="Welcome to NextGen Academy";
+text.innerText="A new era of modern education, expert guidance and flexible online and offline learning.";
+}else{
+title.innerText="শিক্ষার নতুন দিগন্তে স্বাগতম";
+text.innerText="NextGen Academy — আধুনিক শিক্ষা, অভিজ্ঞ গাইডলাইন এবং অনলাইন ও অফলাইন কোচিংয়ের একটি নতুন অভিজ্ঞতা।";
+}
+
+}
+
+let saved=localStorage.getItem("nextgenCourses");
+if(saved){
+courses=JSON.parse(saved);
+}
+
+renderCourses();
+
+</script>
+
+</body>
+</html>
