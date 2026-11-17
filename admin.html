@@ -1111,7 +1111,7 @@ $("salaryForm").onsubmit=async e=>{
 e.preventDefault();
 
 let t=C.teachers.find(x=>x.id===v("salaryTeacher"));
-let a=n("salaryBase"),b=n("salaryBonus),d=n("salaryDeduction");
+let a=n("salaryBase"),b=n("salaryBonus"),d=n("salaryDeduction");
 let p=n("salaryPaid"),due=a+b-d-p;
 
 if(!t||p>a+b-d){
