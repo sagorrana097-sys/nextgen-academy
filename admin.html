@@ -1,90 +1,1735 @@
-<!doctype html>
-<html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NextGen Academy Admin</title>
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NextGen Academy Admin</title>
 <style>
-*{box-sizing:border-box}body{margin:0;font:15px Arial;background:#f3f6fc;color:#18233d}button{border:0;border-radius:7px;padding:10px 13px;margin:3px;background:#3156d9;color:white;font-weight:bold}button.red{background:#dc3545}button.gray{background:#64748b}input,select,textarea{width:100%;padding:10px;margin:5px 0 12px;border:1px solid #cbd5e1;border-radius:7px}label{font-weight:bold;font-size:13px}.login,.card{background:white;padding:18px;border-radius:12px;margin:14px;box-shadow:0 2px 10px #0001}.login{max-width:420px;margin:8vh auto}#app{display:none}.top{background:#14234b;color:white;padding:15px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}.layout{display:grid;grid-template-columns:220px 1fr}aside{background:white;padding:10px}nav button{display:block;width:100%;text-align:left;background:white;color:#24324b}nav button.active{background:#eaf0ff;color:#2447c5}main{padding:12px;min-width:0}.tab{display:none}.tab.active{display:block}.grid,.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}.stat{font-size:28px;color:#3156d9;font-weight:bold}.listitem{background:white;border:1px solid #e2e8f0;border-radius:8px;padding:12px;margin:8px 0}.actions{display:flex;flex-wrap:wrap}.msg{white-space:pre-wrap;background:#eff6ff;padding:10px;border-radius:7px;margin:8px 0}.tablewrap{overflow:auto}table{border-collapse:collapse;width:100%;background:white}td,th{padding:8px;border-bottom:1px solid #ddd;text-align:left;font-size:13px}th{background:#eef2ff}.photo{width:75px;height:75px;object-fit:cover;border-radius:8px}.idcard{width:340px;margin:20px auto;text-align:center;border:2px solid #3156d9;border-radius:12px;padding:15px;background:white}@media(max-width:750px){.layout{grid-template-columns:1fr}nav{display:grid;grid-template-columns:repeat(2,1fr)}nav button{font-size:12px}main{padding:5px}}@media print{body *{visibility:hidden}.printarea,.printarea *{visibility:visible}.printarea{position:absolute;top:0;left:0;width:100%}.no-print{display:none!important}}
-</style></head><body>
-<section class="login" id="loginBox"><h2>🎓 NextGen Academy</h2><h3>Admin Login</h3><form id="loginForm"><label>Email</label><input id="email" type="email" required><label>Password</label><input id="password" type="password" required><button>Login</button></form><div id="loginMsg" class="msg"></div></section>
-<div id="app"><header class="top"><b>🎓 NextGen Academy Admin</b><span id="who"></span><button id="logout" class="gray">Logout</button></header><div class="layout"><aside><nav id="nav">
-<button class="active" data-tab="dashboard">🏠 Dashboard</button><button data-tab="courses">📚 Courses</button><button data-tab="students">👨‍🎓 Students</button><button data-tab="teachers">👨‍🏫 Teachers</button><button data-tab="batches">🏫 Batches</button><button data-tab="attendance">📅 Attendance</button><button data-tab="routine">🕒 Routine</button><button data-tab="notices">📢 Notices</button><button data-tab="fees">💳 Fees</button><button data-tab="salary">💼 Salary</button><button data-tab="exams">📝 Exam & Result</button><button data-tab="idcard">🪪 ID Card</button><button data-tab="reports">📊 Reports</button><button data-tab="settings">⚙️ Settings</button><button data-tab="social">🌐 Social</button><button data-tab="drive">☁️ Drive Backup</button><button data-tab="question">📖 Question Bank</button>
-</nav></aside><main>
-<section class="tab active" id="dashboard"><h2>Welcome to NextGen Academy</h2><div class="grid"><div class="card">Students<div class="stat" id="countStudents">0</div></div><div class="card">Teachers<div class="stat" id="countTeachers">0</div></div><div class="card">Courses<div class="stat" id="countCourses">0</div></div><div class="card">Batches<div class="stat" id="countBatches">0</div></div><div class="card">Fee Due<div class="stat" id="countDue">৳0</div></div><div class="card">Salary Paid<div class="stat" id="countSalary">৳0</div></div></div></section>
-<section class="tab" id="courses"><h2>📚 Courses</h2><div class="card"><form id="courseForm"><input type="hidden" id="courseId"><div class="row"><div><label>Name</label><input id="courseName" required></div><div><label>Class</label><select id="courseClass"></select></div><div><label>Division</label><select id="division"><option>General</option><option>Science</option><option>Humanities</option><option>Business Studies</option></select></div><div><label>Subject</label><input id="subject" required></div><div><label>Fee</label><input id="fee" type="number"></div></div><label>Description</label><textarea id="description"></textarea><button>Save Course</button></form><div id="courseMsg" class="msg"></div></div><div class="card" id="courseList"></div></section>
-<section class="tab" id="students"><h2>👨‍🎓 Students</h2><div class="card"><form id="studentForm"><input type="hidden" id="studentId"><div class="row"><div><label>Name</label><input id="stName" required></div><div><label>Student ID (blank = auto)</label><input id="stCode" placeholder="NGA-0001"></div><div><label>Class</label><select id="stClass"></select></div><div><label>Division</label><select id="stDivision"><option>General</option><option>Science</option><option>Humanities</option><option>Business Studies</option></select></div><div><label>Batch</label><select id="stBatch"></select></div><div><label>Guardian Name</label><input id="stGuardian"></div><div><label>Guardian Phone</label><input id="stPhone"></div><div><label>Admission Date</label><input id="stDate" type="date"></div><div><label>Monthly Fee</label><input id="stMonthlyFee" type="number"></div><div><label>Student Photo (max 5MB)</label><input id="stPhoto" type="file" accept="image/*"><img id="stPhotoPreview" class="photo" hidden></div></div><button>Save Student</button><button type="button" class="gray" onclick="clearForm('studentForm')">Clear</button></form><div id="studentMsg" class="msg"></div></div><div class="card"><input id="studentSearch" placeholder="Search..." oninput="renderStudents()"><div id="studentList"></div></div></section>
-<section class="tab" id="teachers"><h2>👨‍🏫 Teachers</h2><div class="card"><form id="teacherForm"><input type="hidden" id="teacherId"><div class="row"><div><label>Name</label><input id="tName" required></div><div><label>Phone</label><input id="tPhone"></div><div><label>Email</label><input id="tEmail" type="email"></div><div><label>Subject</label><input id="tSubject"></div><div><label>Monthly Salary</label><input id="tSalary" type="number"></div></div><button>Save Teacher</button></form><div id="teacherMsg" class="msg"></div></div><div class="card"><input id="teacherSearch" placeholder="Search..." oninput="renderTeachers()"><div id="teacherList"></div></div></section>
-<section class="tab" id="batches"><h2>🏫 Batches</h2><div class="card"><form id="batchForm"><input type="hidden" id="batchId"><div class="row"><div><label>Name</label><input id="bName" required></div><div><label>Class</label><input id="bClass"></div><div><label>Division</label><input id="bDivision"></div><div><label>Teacher</label><select id="bTeacher"></select></div><div><label>Schedule</label><input id="bSchedule"></div></div><button>Save Batch</button></form><div id="batchMsg" class="msg"></div></div><div class="card" id="batchList"></div></section>
-<section class="tab" id="attendance"><h2>📅 Attendance</h2><div class="card"><div class="row"><div><label>Batch</label><select id="attBatch"></select></div><div><label>Date</label><input id="attDate" type="date"></div></div><button onclick="loadAttendanceForm()">Load Students</button><button onclick="saveAttendance()">Save Attendance</button><div id="attendanceList"></div><div id="attendanceMsg" class="msg"></div></div></section>
-<section class="tab" id="routine"><h2>🕒 Routine</h2><div class="card"><form id="routineForm"><div class="row"><div><label>Batch</label><select id="rBatch"></select></div><div><label>Day</label><select id="rDay"><option>Saturday</option><option>Sunday</option><option>Monday</option><option>Tuesday</option><option>Wednesday</option><option>Thursday</option><option>Friday</option></select></div><div><label>Subject</label><input id="rSubject" required></div><div><label>Time</label><input id="rTime"></div><div><label>Room</label><input id="rRoom"></div></div><button>Save Routine</button></form><div id="routineMsg" class="msg"></div></div><div class="card" id="routineList"></div></section>
-<section class="tab" id="notices"><h2>📢 Notices</h2><div class="card"><form id="noticeForm"><input type="hidden" id="noticeId"><label>Title</label><input id="nTitle" required><label>Notice</label><textarea id="nBody" required></textarea><button>Publish Notice</button></form><div id="noticeMsg" class="msg"></div></div><div class="card" id="noticeList"></div></section>
-<section class="tab" id="fees"><h2>💳 Fees & Accounts</h2><div class="card"><form id="feeForm"><div class="row"><div><label>Student</label><select id="feeStudent" required></select></div><div><label>Type</label><select id="feeType"><option>Monthly Fee</option><option>Admission Fee</option><option>Exam Fee</option><option>Other</option></select></div><div><label>Month</label><input id="feeMonth"></div><div><label>Total</label><input id="feeTotal" type="number" required></div><div><label>Discount</label><input id="feeDiscount" type="number" value="0"></div><div><label>Paid</label><input id="feePaid" type="number" value="0" required></div><div><label>Date</label><input id="feeDate" type="date" required></div><div><label>Note</label><input id="feeNote"></div></div><p id="feeCalc"></p><button>Save Fee</button></form><div id="feeMsg" class="msg"></div></div><div class="card" id="feeList"></div></section>
-<section class="tab" id="salary"><h2>💼 Teacher Salary</h2><div class="card"><form id="salaryForm"><div class="row"><div><label>Teacher</label><select id="salaryTeacher" required></select></div><div><label>Month</label><input id="salaryMonth" required></div><div><label>Basic</label><input id="salaryBase" type="number" required></div><div><label>Bonus</label><input id="salaryBonus" type="number" value="0"></div><div><label>Deduction</label><input id="salaryDeduction" type="number" value="0"></div><div><label>Paid</label><input id="salaryPaid" type="number" required></div><div><label>Date</label><input id="salaryDate" type="date" required></div><div><label>Note</label><input id="salaryNote"></div></div><p id="salaryCalc"></p><button>Save Salary</button></form><div id="salaryMsg" class="msg"></div></div><div class="card" id="salaryList"></div></section>
-<section class="tab" id="exams"><h2>📝 Exam & Result</h2><div class="card"><h3>Create Exam</h3><form id="examForm"><div class="row"><div><label>Name</label><input id="examName" required></div><div><label>Class</label><input id="examClass"></div><div><label>Division</label><input id="examDivision"></div><div><label>Date</label><input id="examDate" type="date"></div></div><button>Save Exam</button></form><div id="examMsg" class="msg"></div><div id="examList"></div></div><div class="card"><h3>Subject Result</h3><form id="resultForm"><div class="row"><div><label>Exam</label><select id="resultExam" required></select></div><div><label>Student</label><select id="resultStudent" required></select></div><div><label>Subject</label><input id="resultSubject" required></div><div><label>Full Marks</label><input id="resultFull" type="number" value="100" required></div><div><label>Obtained</label><input id="resultObtained" type="number" required></div></div><button>Save Result</button></form><div id="resultMsg" class="msg"></div></div><div class="card" id="resultList"></div></section>
-<section class="tab" id="idcard"><h2>🪪 Student ID Card</h2><div class="card no-print"><label>Student</label><select id="idStudent"></select><button onclick="makeIdCard()">Generate</button><button class="gray" onclick="window.print()">Print / PDF</button></div><div id="idCardPreview" class="printarea"></div></section>
-<section class="tab" id="reports"><h2>📊 Reports</h2><div class="card"><div class="actions"><button onclick="exportCollection('students')">Student CSV</button><button onclick="exportCollection('teachers')">Teacher CSV</button><button onclick="exportCollection('feeRecords')">Fee CSV</button><button onclick="exportCollection('salaryPayments')">Salary CSV</button><button onclick="exportCollection('attendance')">Attendance CSV</button><button onclick="exportCollection('results')">Result CSV</button></div><div id="reportSummary"></div></div></section>
-<section class="tab" id="settings"><h2>⚙️ Website Settings</h2><div class="card"><form id="settingsForm"><div class="row"><div><label>Academy Name</label><input id="sName"></div><div><label>Tagline</label><input id="sTagline"></div><div><label>Logo URL</label><input id="sLogo"></div><div><label>Phone 1</label><input id="sPhone1"></div><div><label>Phone 2</label><input id="sPhone2"></div><div><label>WhatsApp</label><input id="sWhatsapp"></div></div><label>Hero Text</label><textarea id="sHero"></textarea><label>About</label><textarea id="sAbout"></textarea><label>Show Clock</label><select id="sClock"><option value="true">Yes</option><option value="false">No</option></select><label>Show Calculator</label><select id="sCalc"><option value="true">Yes</option><option value="false">No</option></select><button>Save Settings</button></form><div id="settingsMsg" class="msg"></div></div></section>
-<section class="tab" id="social"><h2>🌐 Social Media</h2><div class="card"><form id="socialForm"><div class="row" id="socialFields"></div><button>Save Links</button></form><div id="socialMsg" class="msg"></div></div></section>
-<section class="tab" id="drive"><h2>☁️ Google Drive Backup</h2><div class="card"><button onclick="testDrive()">Test API</button><button onclick="createBackup()">Create Backup Now</button><button class="gray" onclick="listBackups()">Refresh Backups</button><div id="driveMsg" class="msg"></div><div id="backupList"></div><p>Restore ডেটা merge করে; backup-এ না থাকা document delete করবে না।</p></div></section>
-<section class="tab" id="question"><h2>📖 Question Bank</h2><div class="card">Coming Soon</div></section>
-</main></div></div>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f3f6fc;color:#18233d}
+button{border:0;border-radius:8px;padding:10px 14px;background:#3156d9;color:white;cursor:pointer;font-weight:600;margin:3px}
+button.secondary{background:#64748b}
+button.danger{background:#dc3545}
+button.green{background:#16834a}
+input,select,textarea{width:100%;padding:11px;border:1px solid #cbd5e1;border-radius:8px;margin:6px 0 13px;font:inherit;background:white}
+label{font-weight:600;font-size:13px}
+.login{max-width:420px;margin:8vh auto;background:white;padding:28px;border-radius:16px;box-shadow:0 10px 35px #15254a18}
+#app{display:none}
+.top{background:#14234b;color:white;padding:15px 22px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.layout{display:grid;grid-template-columns:225px 1fr;min-height:calc(100vh - 60px)}
+aside{background:white;padding:14px;border-right:1px solid #e2e8f0}
+nav button{display:block;width:100%;text-align:left;margin:4px 0;background:white;color:#263653}
+nav button.active,nav button:hover{background:#eaf0ff;color:#2447c5}
+main{padding:22px;min-width:0}
+.tab{display:none}
+.tab.active{display:block}
+.grid,.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.card{background:white;border:1px solid #e2e8f0;border-radius:13px;padding:18px;margin-bottom:16px;box-shadow:0 3px 12px #1c2b4b08}
+.stat{font-size:28px;font-weight:700;color:#3156d9;margin-top:8px}
+.listitem{padding:12px;border:1px solid #e2e8f0;border-radius:9px;margin:9px 0;background:white}
+.actions{display:flex;gap:7px;flex-wrap:wrap}
+.msg{padding:10px;border-radius:8px;background:#eff6ff;margin:10px 0;white-space:pre-wrap}
+.tablewrap{overflow:auto}
+table{width:100%;border-collapse:collapse;background:white}
+th,td{padding:9px;border-bottom:1px solid #e2e8f0;text-align:left;font-size:13px}
+th{background:#eef2ff}
+.photo{width:75px;height:75px;object-fit:cover;border-radius:8px}
+.idcard{width:340px;min-height:210px;border:2px solid #2347b7;border-radius:14px;padding:18px;margin:20px auto;text-align:center;background:white;color:#172554}
+.muted{color:#64748b}
+@media(max-width:760px){
+.layout{grid-template-columns:1fr}
+aside{border-right:0;border-bottom:1px solid #e2e8f0}
+nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+nav button{font-size:12px;padding:9px}
+main{padding:12px}
+}
+@media print{
+body *{visibility:hidden}
+.printarea,.printarea *{visibility:visible}
+.printarea{position:absolute;left:0;top:0;width:100%}
+.no-print{display:none!important}
+}
+</style>
+</head>
+<body>
+
+<section class="login" id="loginBox">
+<h2>🎓 NextGen Academy</h2>
+<h3>Admin Login</h3>
+<form id="loginForm">
+<label>Email</label>
+<input id="email" type="email" required>
+<label>Password</label>
+<input id="password" type="password" required>
+<button type="submit">Login</button>
+</form>
+<div id="loginMsg" class="msg"></div>
+</section>
+
+<div id="app">
+<header class="top">
+<strong>🎓 NextGen Academy Admin</strong>
+<span id="who"></span>
+<button id="logout" class="secondary">Logout</button>
+</header>
+
+<div class="layout">
+<aside>
+<nav id="nav">
+<button class="active" data-tab="dashboard">🏠 Dashboard</button>
+<button data-tab="courses">📚 Courses</button>
+<button data-tab="students">👨‍🎓 Students</button>
+<button data-tab="teachers">👨‍🏫 Teachers</button>
+<button data-tab="batches">🏫 Batches</button>
+<button data-tab="attendance">📅 Attendance</button>
+<button data-tab="routine">🕒 Class Routine</button>
+<button data-tab="notices">📢 Notices</button>
+<button data-tab="fees">💳 Fees & Accounts</button>
+<button data-tab="salary">💼 Teacher Salary</button>
+<button data-tab="exams">📝 Exam & Result</button>
+<button data-tab="idcard">🪪 Student ID Card</button>
+<button data-tab="reports">📊 Reports</button>
+<button data-tab="settings">⚙️ Website Settings</button>
+<button data-tab="social">🌐 Social Media</button>
+<button data-tab="drive">☁️ Google Drive Backup</button>
+<button data-tab="question">📖 Question Bank</button>
+</nav>
+</aside>
+
+<main>
+
+<section class="tab active" id="dashboard">
+<h2>Welcome to NextGen Academy</h2>
+<p class="muted">Academy Management Dashboard</p>
+<div class="grid">
+<div class="card">Students<div class="stat" id="countStudents">0</div></div>
+<div class="card">Teachers<div class="stat" id="countTeachers">0</div></div>
+<div class="card">Courses<div class="stat" id="countCourses">0</div></div>
+<div class="card">Batches<div class="stat" id="countBatches">0</div></div>
+<div class="card">Fee Due<div class="stat" id="countDue">৳0</div></div>
+<div class="card">Salary Paid<div class="stat" id="countSalary">৳0</div></div>
+</div>
+</section>
+
+<section class="tab" id="courses">
+<h2>📚 Course Management</h2>
+<div class="card">
+<form id="courseForm">
+<input type="hidden" id="courseId">
+<div class="row">
+<div><label>Course Name</label><input id="courseName" required></div>
+<div><label>Class</label><select id="courseClass"></select></div>
+<div><label>Division</label>
+<select id="division">
+<option>General</option><option>Science</option>
+<option>Humanities</option><option>Business Studies</option>
+</select></div>
+<div><label>Subject</label><input id="subject" required></div>
+<div><label>Fee (৳)</label><input id="fee" type="number" min="0"></div>
+</div>
+<label>Description</label>
+<textarea id="description"></textarea>
+<button>Save Course</button>
+</form>
+<div id="courseMsg" class="msg"></div>
+</div>
+<div class="card"><h3>All Courses</h3><div id="courseList"></div></div>
+</section>
+
+<section class="tab" id="students">
+<h2>👨‍🎓 Student Management</h2>
+<div class="card">
+<form id="studentForm">
+<input type="hidden" id="studentId">
+<div class="row">
+<div><label>Student Name</label><input id="stName" required></div>
+<div><label>Student Code / ID</label><input id="stCode" placeholder="Blank রাখলে auto ID"></div>
+<div><label>Class</label><select id="stClass"></select></div>
+<div><label>Division</label>
+<select id="stDivision">
+<option>General</option><option>Science</option>
+<option>Humanities</option><option>Business Studies</option>
+</select></div>
+<div><label>Batch</label><select id="stBatch"></select></div>
+<div><label>Guardian Name</label><input id="stGuardian"></div>
+<div><label>Guardian Phone</label><input id="stPhone"></div>
+<div><label>Admission Date</label><input id="stDate" type="date"></div>
+<div><label>Monthly Fee (৳)</label><input id="stMonthlyFee" type="number" min="0"></div>
+<div><label>Student Photo (Max 5MB)</label><input id="stPhoto" type="file" accept="image/*"><img id="stPhotoPreview" class="photo" hidden></div>
+</div>
+<button>Save Student</button>
+<button type="button" class="secondary" onclick="clearStudentForm()">Clear</button>
+</form>
+<div id="studentMsg" class="msg"></div>
+</div>
+<div class="card">
+<input id="studentSearch" placeholder="Search student..." oninput="renderStudents()">
+<div id="studentList"></div>
+</div>
+</section>
+
+<section class="tab" id="teachers">
+<h2>👨‍🏫 Teacher Management</h2>
+<div class="card">
+<form id="teacherForm">
+<input type="hidden" id="teacherId">
+<div class="row">
+<div><label>Name</label><input id="tName" required></div>
+<div><label>Phone</label><input id="tPhone"></div>
+<div><label>Email</label><input id="tEmail" type="email"></div>
+<div><label>Subject</label><input id="tSubject"></div>
+<div><label>Monthly Salary (৳)</label><input id="tSalary" type="number" min="0"></div>
+</div>
+<button>Save Teacher</button>
+</form>
+<div id="teacherMsg" class="msg"></div>
+</div>
+<div class="card"><input id="teacherSearch" placeholder="Search teacher..." oninput="renderTeachers()"><div id="teacherList"></div></div>
+</section>
+
+<section class="tab" id="batches">
+<h2>🏫 Batch Management</h2>
+<div class="card">
+<form id="batchForm">
+<input type="hidden" id="batchId">
+<div class="row">
+<div><label>Batch Name</label><input id="bName" required></div>
+<div><label>Class</label><input id="bClass"></div>
+<div><label>Division</label><input id="bDivision"></div>
+<div><label>Teacher</label><select id="bTeacher"></select></div>
+<div><label>Schedule</label><input id="bSchedule"></div>
+</div>
+<button>Save Batch</button>
+</form>
+<div id="batchMsg" class="msg"></div>
+</div>
+<div class="card"><div id="batchList"></div></div>
+</section>
+
+<section class="tab" id="attendance">
+<h2>📅 Attendance</h2>
+<div class="card">
+<div class="row">
+<div><label>Batch</label><select id="attBatch"></select></div>
+<div><label>Date</label><input type="date" id="attDate"></div>
+</div>
+<button onclick="loadAttendanceForm()">Load Students</button>
+<button class="green" onclick="saveAttendance()">Save Attendance</button>
+<div id="attendanceList"></div>
+<div id="attendanceMsg" class="msg"></div>
+</div>
+</section>
+
+<section class="tab" id="routine">
+<h2>🕒 Class Routine</h2>
+<div class="card">
+<form id="routineForm">
+<div class="row">
+<div><label>Batch</label><select id="rBatch"></select></div>
+<div><label>Day</label>
+<select id="rDay">
+<option>Saturday</option><option>Sunday</option>
+<option>Monday</option><option>Tuesday</option>
+<option>Wednesday</option><option>Thursday</option><option>Friday</option>
+</select></div>
+<div><label>Subject</label><input id="rSubject" required></div>
+<div><label>Time</label><input id="rTime"></div>
+<div><label>Room</label><input id="rRoom"></div>
+</div>
+<button>Save Routine</button>
+</form>
+<div id="routineMsg" class="msg"></div>
+</div>
+<div class="card"><div id="routineList"></div></div>
+</section>
+
+<section class="tab" id="notices">
+<h2>📢 Notice Management</h2>
+<div class="card">
+<form id="noticeForm">
+<input type="hidden" id="noticeId">
+<label>Title</label><input id="nTitle" required>
+<label>Notice</label><textarea id="nBody" required></textarea>
+<button>Publish Notice</button>
+</form>
+<div id="noticeMsg" class="msg"></div>
+</div>
+<div class="card"><div id="noticeList"></div></div>
+</section>
+
+<section class="tab" id="fees">
+<h2>💳 Fees & Accounts</h2>
+<div class="card">
+<form id="feeForm">
+<div class="row">
+<div><label>Student</label><select id="feeStudent" required></select></div>
+<div><label>Fee Type</label><select id="feeType"><option>Monthly Fee</option><option>Admission Fee</option><option>Exam Fee</option><option>Other</option></select></div>
+<div><label>Month / Reference</label><input id="feeMonth"></div>
+<div><label>Total Amount (৳)</label><input id="feeTotal" type="number" min="0" required></div>
+<div><label>Discount (৳)</label><input id="feeDiscount" type="number" min="0" value="0"></div>
+<div><label>Paid Now (৳)</label><input id="feePaid" type="number" min="0" value="0" required></div>
+<div><label>Payment Date</label><input id="feeDate" type="date" required></div>
+<div><label>Note</label><input id="feeNote"></div>
+</div>
+<p id="feeCalc" class="pill">Due: ৳0</p>
+<button>Save Fee Record</button>
+</form>
+<div id="feeMsg" class="msg"></div>
+</div>
+<div class="card"><h3>Fee Records</h3><div class="tablewrap" id="feeList"></div></div>
+</section>
+
+<section class="tab" id="salary">
+<h2>💼 Teacher Salary</h2>
+<div class="card">
+<form id="salaryForm">
+<div class="row">
+<div><label>Teacher</label><select id="salaryTeacher" required></select></div>
+<div><label>Month</label><input id="salaryMonth" required></div>
+<div><label>Basic Salary</label><input id="salaryBase" type="number" min="0" required></div>
+<div><label>Bonus</label><input id="salaryBonus" type="number" min="0" value="0"></div>
+<div><label>Deduction</label><input id="salaryDeduction" type="number" min="0" value="0"></div>
+<div><label>Paid</label><input id="salaryPaid" type="number" min="0" required></div>
+<div><label>Date</label><input id="salaryDate" type="date" required></div>
+<div><label>Note</label><input id="salaryNote"></div>
+</div>
+<p id="salaryCalc"></p>
+<button>Save Salary Payment</button>
+</form>
+<div id="salaryMsg" class="msg"></div>
+</div>
+<div class="card"><div class="tablewrap" id="salaryList"></div></div>
+</section>
+
+<section class="tab" id="exams">
+<h2>📝 Exam & Result</h2>
+<div class="card">
+<h3>Create Exam</h3>
+<form id="examForm">
+<div class="row">
+<div><label>Exam Name</label><input id="examName" required></div>
+<div><label>Class</label><input id="examClass"></div>
+<div><label>Division</label><input id="examDivision"></div>
+<div><label>Exam Date</label><input id="examDate" type="date"></div>
+</div>
+<button>Save Exam</button>
+</form>
+<div id="examMsg" class="msg"></div><div id="examList"></div>
+</div>
+<div class="card">
+<h3>Enter Subject Result</h3>
+<form id="resultForm">
+<div class="row">
+<div><label>Exam</label><select id="resultExam" required></select></div>
+<div><label>Student</label><select id="resultStudent" required></select></div>
+<div><label>Subject</label><input id="resultSubject" required></div>
+<div><label>Full Marks</label><input id="resultFull" type="number" min="1" value="100" required></div>
+<div><label>Obtained Marks</label><input id="resultObtained" type="number" min="0" required></div>
+</div>
+<button>Save Result</button>
+</form>
+<div id="resultMsg" class="msg"></div>
+</div>
+<div class="card"><h3>Saved Results</h3><div class="tablewrap" id="resultList"></div></div>
+</section>
+
+<section class="tab" id="idcard">
+<h2>🪪 Student ID Card</h2>
+<div class="card no-print">
+<label>Select Student</label><select id="idStudent"></select>
+<button onclick="makeIdCard()">Generate ID Card</button>
+<button class="secondary" onclick="window.print()">Print / Save PDF</button>
+</div>
+<div id="idCardPreview" class="printarea"></div>
+</section>
+
+<section class="tab" id="reports">
+<h2>📊 Reports</h2>
+<div class="card">
+<p>রিপোর্ট CSV হিসেবে ডাউনলোড করতে পারবেন।</p>
+<div class="actions">
+<button onclick="exportCollection('students')">Student CSV</button>
+<button onclick="exportCollection('teachers')">Teacher CSV</button>
+<button onclick="exportCollection('feeRecords')">Fee CSV</button>
+<button onclick="exportCollection('salaryPayments')">Salary CSV</button>
+<button onclick="exportCollection('attendance')">Attendance CSV</button>
+<button onclick="exportCollection('results')">Result CSV</button>
+</div>
+<div id="reportSummary"></div>
+</div>
+</section>
+
+<section class="tab" id="settings">
+<h2>⚙️ Website Settings</h2>
+<div class="card">
+<form id="settingsForm">
+<div class="row">
+<div><label>Academy Name</label><input id="sName"></div>
+<div><label>Tagline</label><input id="sTagline"></div>
+<div><label>Logo URL</label><input id="sLogo"></div>
+<div><label>Phone 1</label><input id="sPhone1"></div>
+<div><label>Phone 2</label><input id="sPhone2"></div>
+<div><label>WhatsApp</label><input id="sWhatsapp"></div>
+</div>
+<label>Hero Text</label><textarea id="sHero"></textarea>
+<label>About</label><textarea id="sAbout"></textarea>
+<label>Show Clock</label><select id="sClock"><option value="true">Yes</option><option value="false">No</option></select>
+<label>Show Calculator</label><select id="sCalc"><option value="true">Yes</option><option value="false">No</option></select>
+<button>Save Website Settings</button>
+</form>
+<div id="settingsMsg" class="msg"></div>
+</div>
+</section>
+
+<section class="tab" id="social">
+<h2>🌐 Social Media Links</h2>
+<div class="card">
+<form id="socialForm"><div class="row" id="socialFields"></div><button>Save Social Links</button></form>
+<div id="socialMsg" class="msg"></div>
+</div>
+</section>
+
+<section class="tab" id="drive">
+<h2>☁️ Google Drive Backup</h2>
+<div class="card">
+<button onclick="testDrive()">Test API</button>
+<button onclick="createBackup()">Create Backup Now</button>
+<button class="secondary" onclick="listBackups()">Refresh Backups</button>
+<div id="driveMsg" class="msg"></div>
+<div id="backupList"></div>
+<p class="muted">Restore ডেটা merge করবে; backup-এ না থাকা পুরোনো ডেটা delete করবে না।</p>
+</div>
+</section>
+
+<section class="tab" id="question">
+<h2>📖 Question Bank</h2>
+<div class="card"><h3>Coming Soon</h3><p>এই মডিউলটি পরে তৈরি করা হবে।</p></div>
+</section>
+
+</main>
+</div>
+</div>
 <script type="module">
-import{initializeApp}from"https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
-import{getAuth,signInWithEmailAndPassword,onAuthStateChanged,signOut}from"https://www.gstatic.com/firebasejs/13.3.0/firebase-auth.js";
-import{getFirestore,collection,addDoc,getDocs,doc,getDoc,updateDoc,deleteDoc,setDoc,serverTimestamp,runTransaction}from"https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
-const cfg={apiKey:"AIzaSyCiuVDN52fNvW53wZ7qXUf6lVxXNOPPsLM",authDomain:"nextgen-academy-ba9ed.firebaseapp.com",projectId:"nextgen-academy-ba9ed",storageBucket:"nextgen-academy-ba9ed.firebasestorage.app",messagingSenderId:"250055044170",appId:"1:250055044170:web:a1781adf499d33570f4ab3",measurementId:"G-58XX0MKTPE"};
-const DRIVE="https://script.google.com/macros/s/AKfycbxMe63aC_tUc6DAh3mbLAAsoYqzhvz0XCD24QuuxxU89zomGc0q8nkjqHX0WiLLZ52R/exec",app=initializeApp(cfg),auth=getAuth(app),db=getFirestore(app),$=id=>document.getElementById(id),today=new Date().toISOString().slice(0,10),cols=["students","teachers","courses","batches","examinations","feeRecords","salaryPayments","results","attendance","routines","notices"],social=["facebook","instagram","youtube","tiktok","linkedin","telegram","x","whatsapp"];let C=Object.fromEntries(cols.map(n=>[n,[]])),attendanceRows=[];
-const v=id=>$(id)?.value?.trim()||"",n=id=>Math.max(0,Number($(id)?.value||0)),say=(id,t)=>$(id).textContent=t,safe=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-window.clearForm=id=>{$(id).reset();const h=$(id).querySelector('input[type=hidden]');if(h)h.value=""};
-async function all(c){let s=await getDocs(collection(db,c));return s.docs.map(d=>({id:d.id,...d.data()}))}
-async function refresh(){for(const c of cols){try{C[c]=await all(c)}catch(e){console.warn(c,e);C[c]=[]}}render()}
-async function save(c,id,data){data.updatedAt=serverTimestamp();if(id)await updateDoc(doc(db,c,id),data);else{data.createdAt=serverTimestamp();await addDoc(collection(db,c),data)}}
-async function del(c,id){if(confirm("নিশ্চিতভাবে মুছবেন?")){await deleteDoc(doc(db,c,id));refresh()}}
-function opts(id,arr,label){let e=$(id),old=e.value;e.replaceChildren(new Option("Select",""));arr.forEach(x=>e.add(new Option(label(x),x.id)));if(arr.some(x=>x.id===old))e.value=old}
-function item(p,title,desc,buttons=[]){let d=document.createElement("div");d.className="listitem";let b=document.createElement("b");b.textContent=title;let q=document.createElement("p");q.textContent=desc||"";d.append(b,q);let a=document.createElement("div");a.className="actions";buttons.forEach(([t,fn,cl])=>{let z=document.createElement("button");z.textContent=t;if(cl)z.className=cl;z.onclick=fn;a.append(z)});d.append(a);p.append(d)}
-function list(id,arr,title,desc,edit,coll){let p=$(id);p.replaceChildren();arr.forEach(x=>item(p,title(x),desc(x),[...(edit?[["Edit",()=>edit(x)]]:[]),["Delete",()=>del(coll,x.id),"red"]]))}
-function formEdit(id,map,x){$(id).reset();map.forEach(([field,key])=>$(field).value=x[key]??"");let h=$(id).querySelector('input[type=hidden]');if(h)h.value=x.id}
-async function serial(){let ref=doc(db,"counters","studentSerial");return runTransaction(db,async tx=>{let s=await tx.get(ref),cur=s.exists()?Number(s.data().value||0):Math.max(0,...C.students.map(x=>Number((x.studentCode||"").match(/^NGA-(\\d+)$/)?.[1]||0)));let k=cur+1;tx.set(ref,{value:k,updatedAt:serverTimestamp()},{merge:true});return "NGA-"+String(k).padStart(4,"0")})}
-async function drive(action,extra={}){let u=auth.currentUser;if(!u)throw Error("Admin login প্রয়োজন");let idToken=await u.getIdToken(true),r=await fetch(DRIVE,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action,idToken,...extra})}),j=await r.json();if(!j.success)throw Error(j.message||"Drive API error");return j}
-const b64=f=>new Promise((ok,no)=>{let r=new FileReader();r.onload=()=>ok(String(r.result).split(",")[1]);r.onerror=no;r.readAsDataURL(f)});
-async function uploadPhoto(f,code,studentId){let j=await drive("uploadPhoto",{studentId,fileName:code+"_"+Date.now()+"_"+f.name.replace(/[^\\w.-]/g,"_"),mimeType:f.type,base64Data:await b64(f)});return j.fileId||j.id||j.photoId||""}
-async function photo(id){try{let j=await drive("getPhoto",{fileId:id}),d=j.data||j.base64||j.fileData;return d?`data:${j.mimeType||"image/jpeg"};base64,${d}`:""}catch(e){console.warn(e);return ""}}
-$("loginForm").onsubmit=async e=>{e.preventDefault();try{await signInWithEmailAndPassword(auth,v("email"),$("password").value);say("loginMsg","")}catch(x){say("loginMsg",x.message)}};
-$("logout").onclick=()=>signOut(auth);
-onAuthStateChanged(auth,async u=>{if(!u){$("loginBox").style.display="block";$("app").style.display="none";return}try{let a=await getDoc(doc(db,"admins",u.uid));if(!a.exists())throw Error("Not an authorized admin");$("loginBox").style.display="none";$("app").style.display="block";$("who").textContent=u.email;["attDate","feeDate","salaryDate"].forEach(id=>$(id).value=today);await refresh()}catch(e){alert(e.message);signOut(auth)}});
-$("nav").onclick=e=>{let b=e.target.closest("[data-tab]");if(!b)return;document.querySelectorAll("nav button").forEach(x=>x.classList.toggle("active",x===b));document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("active",x.id===b.dataset.tab))};
-for(let i=1;i<=12;i++)["courseClass","stClass"].forEach(id=>$(id).add(new Option("Class "+i,"Class "+i)));
-function render(){list("courseList",C.courses,x=>x.name,x=>`${x.className||""} • ${x.division||""} • ${x.subject||""} • ৳${x.fee||0}`,x=>formEdit("courseForm",[["courseId","id"],["courseName","name"],["courseClass","className"],["division","division"],["subject","subject"],["fee","fee"],["description","description"]],x),"courses");
-renderStudents();renderTeachers();list("batchList",C.batches,x=>x.name,x=>`${x.className||""} • ${x.division||""} • ${x.teacherName||""} • ${x.schedule||""}`,x=>formEdit("batchForm",[["batchId","id"],["bName","name"],["bClass","className"],["bDivision","division"],["bTeacher","teacherId"],["bSchedule","schedule"]],x),"batches");
-list("routineList",C.routines,x=>x.day+" • "+x.time,x=>`${x.batchName||""} • ${x.subject||""} • ${x.room||""}`,null,"routines");list("noticeList",C.notices,x=>x.title,x=>x.body,x=>formEdit("noticeForm",[["noticeId","id"],["nTitle","title"],["nBody","body"]],x),"notices");
-opts("stBatch",C.batches,x=>x.name);opts("bTeacher",C.teachers,x=>x.name);opts("attBatch",C.batches,x=>x.name);opts("rBatch",C.batches,x=>x.name);opts("feeStudent",C.students,x=>x.name+" ("+(x.studentCode||x.id)+")");opts("salaryTeacher",C.teachers,x=>x.name);opts("resultExam",C.examinations,x=>x.name);opts("resultStudent",C.students,x=>x.name);opts("idStudent",C.students,x=>x.name);
-renderFees();renderSalary();list("examList",C.examinations,x=>x.name,x=>`${x.className||""} • ${x.division||""} • ${x.examDate||""}`,null,"examinations");renderResults();
-$("countStudents").textContent=C.students.length;$("countTeachers").textContent=C.teachers.length;$("countCourses").textContent=C.courses.length;$("countBatches").textContent=C.batches.length;$("countDue").textContent="৳"+C.feeRecords.reduce((a,x)=>a+Number(x.dueAmount||0),0);$("countSalary").textContent="৳"+C.salaryPayments.reduce((a,x)=>a+Number(x.paidAmount||0),0);$("reportSummary").textContent=`Students ${C.students.length} | Teachers ${C.teachers.length} | Results ${C.results.length}`;loadSettings()}
-window.renderStudents=()=>{let p=$("studentList"),q=v("studentSearch").toLowerCase();p.replaceChildren();C.students.filter(s=>(s.name+" "+s.studentCode+" "+s.className).toLowerCase().includes(q)).forEach(s=>{let box=document.createElement("div");box.className="listitem";if(s.photoId){let im=document.createElement("img");im.className="photo";box.append(im);photo(s.photoId).then(u=>{if(u)im.src=u})}item(box,s.name,`${s.studentCode||s.id} • ${s.className||""} • ${s.division||""} • ${s.guardianPhone||""}`,[["Edit",()=>{formEdit("studentForm",[["studentId","id"],["stName","name"],["stCode","studentCode"],["stClass","className"],["stDivision","division"],["stBatch","batchId"],["stGuardian","guardianName"],["stPhone","guardianPhone"],["stDate","admissionDate"],["stMonthlyFee","monthlyFee"]],s)}],["ID Card",()=>{$("idStudent").value=s.id;makeIdCard();$("nav").querySelector('[data-tab=idcard]').click()}],["Delete",()=>del("students",s.id),"red"]]);p.append(box)})};
-window.renderTeachers=()=>{let p=$("teacherList"),q=v("teacherSearch").toLowerCase();p.replaceChildren();C.teachers.filter(t=>(t.name+" "+t.phone+" "+t.subject).toLowerCase().includes(q)).forEach(t=>item(p,t.name,`${t.phone||""} • ${t.subject||""} • Salary ৳${t.monthlySalary||0}`,[["Edit",()=>formEdit("teacherForm",[["teacherId","id"],["tName","name"],["tPhone","phone"],["tEmail","email"],["tSubject","subject"],["tSalary","monthlySalary"]],t)],["Delete",()=>del("teachers",t.id),"red"]]))};
-$("courseForm").onsubmit=async e=>{e.preventDefault();try{await save("courses",v("courseId"),{name:v("courseName"),className:v("courseClass"),division:v("division"),subject:v("subject"),fee:n("fee"),description:v("description")});clearForm("courseForm");await refresh();say("courseMsg","Course saved")}catch(x){say("courseMsg",x.message)}};
-$("stPhoto").onchange=()=>{let f=$("stPhoto").files[0];if(!f)return;if(f.size>5*1024*1024){alert("ছবি ৫ MB-এর কম হতে হবে");$("stPhoto").value="";return}let im=$("stPhotoPreview");im.src=URL.createObjectURL(f);im.hidden=false};
-$("studentForm").onsubmit=async e=>{e.preventDefault();try{let id=v("studentId"),code=v("stCode")||(id?C.students.find(s=>s.id===id)?.studentCode:await serial())||await serial();if(C.students.some(s=>s.studentCode===code&&s.id!==id))throw Error("Student ID already exists");let old=C.students.find(s=>s.id===id),f=$("stPhoto").files[0],photoId=old?.photoId||"";if(f)photoId=await uploadPhoto(f,code,id||code);await save("students",id,{name:v("stName"),studentCode:code,className:v("stClass"),division:v("stDivision"),batchId:v("stBatch"),guardianName:v("stGuardian"),guardianPhone:v("stPhone"),admissionDate:v("stDate"),monthlyFee:n("stMonthlyFee"),photoId});clearForm("studentForm");$("stPhotoPreview").hidden=true;await refresh();say("studentMsg","Saved. ID: "+code)}catch(x){say("studentMsg","Save failed: "+x.message)}};
-$("teacherForm").onsubmit=async e=>{e.preventDefault();try{await save("teachers",v("teacherId"),{name:v("tName"),phone:v("tPhone"),email:v("tEmail"),subject:v("tSubject"),monthlySalary:n("tSalary")});clearForm("teacherForm");refresh();say("teacherMsg","Teacher saved")}catch(x){say("teacherMsg",x.message)}};
-$("batchForm").onsubmit=async e=>{e.preventDefault();try{let t=C.teachers.find(x=>x.id===v("bTeacher"));await save("batches",v("batchId"),{name:v("bName"),className:v("bClass"),division:v("bDivision"),teacherId:v("bTeacher"),teacherName:t?.name||"",schedule:v("bSchedule")});clearForm("batchForm");refresh();say("batchMsg","Batch saved")}catch(x){say("batchMsg",x.message)}};
-window.loadAttendanceForm=()=>{let b=v("attBatch"),d=v("attDate"),old=C.attendance.filter(x=>x.batchId===b&&x.date===d);attendanceRows=C.students.filter(s=>s.batchId===b).map(s=>({studentId:s.id,name:s.name,studentCode:s.studentCode||"",status:old.find(x=>x.studentId===s.id)?.status||"Present"}));let p=$("attendanceList");p.replaceChildren();attendanceRows.forEach(r=>{let box=document.createElement("div");box.className="listitem";let z=document.createElement("select");["Present","Absent","Late","Leave"].forEach(s=>z.add(new Option(s,s)));z.value=r.status;z.onchange=()=>r.status=z.value;box.append(r.name,z);p.append(box)})};
-window.saveAttendance=async()=>{try{let b=v("attBatch"),d=v("attDate");for(let r of attendanceRows)await setDoc(doc(db,"attendance",`${d}_${b}_${r.studentId}`),{...r,batchId:b,date:d,updatedAt:serverTimestamp()},{merge:true});say("attendanceMsg","Attendance saved")}catch(x){say("attendanceMsg",x.message)}};
-$("routineForm").onsubmit=async e=>{e.preventDefault();let b=C.batches.find(x=>x.id===v("rBatch"));try{await addDoc(collection(db,"routines"),{batchId:v("rBatch"),batchName:b?.name||"",day:v("rDay"),subject:v("rSubject"),time:v("rTime"),room:v("rRoom"),createdAt:serverTimestamp()});clearForm("routineForm");refresh();say("routineMsg","Routine saved")}catch(x){say("routineMsg",x.message)}};
-$("noticeForm").onsubmit=async e=>{e.preventDefault();try{await save("notices",v("noticeId"),{title:v("nTitle"),body:v("nBody")});clearForm("noticeForm");refresh();say("noticeMsg","Notice published")}catch(x){say("noticeMsg",x.message)}};
-function feeCalc(){$("feeCalc").textContent="Due ৳"+Math.max(0,n("feeTotal")-n("feeDiscount")-n("feePaid"))}["feeTotal","feeDiscount","feePaid"].forEach(id=>$(id).oninput=feeCalc);
-$("feeForm").onsubmit=async e=>{e.preventDefault();let s=C.students.find(x=>x.id===v("feeStudent")),a=n("feeTotal"),d=n("feeDiscount"),p=n("feePaid");if(!s||d+p>a){say("feeMsg","সঠিক Student/Amount দিন");return}try{await addDoc(collection(db,"feeRecords"),{studentId:s.id,studentName:s.name,studentCode:s.studentCode||"",feeType:v("feeType"),month:v("feeMonth"),totalAmount:a,discountAmount:d,paidAmount:p,dueAmount:a-d-p,paymentDate:v("feeDate"),note:v("feeNote"),createdAt:serverTimestamp()});clearForm("feeForm");$("feeDate").value=today;refresh();say("feeMsg","Fee saved")}catch(x){say("feeMsg",x.message)}};
-function renderFees(){table("feeList",["Student","Type/Month","Total","Discount","Paid","Due","Date"],C.feeRecords.map(x=>[x.studentName,x.feeType+" / "+x.month,x.totalAmount,x.discountAmount,x.paidAmount,x.dueAmount,x.paymentDate]))}
-$("salaryForm").onsubmit=async e=>{e.preventDefault();let t=C.teachers.find(x=>x.id===v("salaryTeacher")),a=n("salaryBase"),b=n("salaryBonus"),d=n("salaryDeduction"),p=n("salaryPaid"),due=a+b-d-p;if(!t||p>a+b-d){say("salaryMsg","সঠিক তথ্য দিন");return}try{await addDoc(collection(db,"salaryPayments"),{teacherId:t.id,teacherName:t.name,month:v("salaryMonth"),baseSalary:a,bonus:b,deduction:d,paidAmount:p,dueAmount:due,paymentDate:v("salaryDate"),note:v("salaryNote"),createdAt:serverTimestamp()});clearForm("salaryForm");$("salaryDate").value=today;refresh();say("salaryMsg","Salary saved")}catch(x){say("salaryMsg",x.message)}};
-function renderSalary(){table("salaryList",["Teacher","Month","Payable","Paid","Due","Date"],C.salaryPayments.map(x=>[x.teacherName,x.month,x.baseSalary+x.bonus-x.deduction,x.paidAmount,x.dueAmount,x.paymentDate]))}
-$("examForm").onsubmit=async e=>{e.preventDefault();try{await addDoc(collection(db,"examinations"),{name:v("examName"),className:v("examClass"),division:v("examDivision"),examDate:v("examDate"),createdAt:serverTimestamp()});clearForm("examForm");refresh();say("examMsg","Exam saved")}catch(x){say("examMsg",x.message)}};
-function renderResults(){table("resultList",["Exam","Student","Subject","Marks","Grade","GPA"],C.results.map(x=>[x.examName,x.studentName,x.subject,x.obtainedMarks+"/"+x.fullMarks,x.grade,x.gpa]))}
-$("resultForm").onsubmit=async e=>{e.preventDefault();let ex=C.examinations.find(x=>x.id===v("resultExam")),s=C.students.find(x=>x.id===v("resultStudent")),f=n("resultFull"),m=n("resultObtained");if(!ex||!s||!f||m>f){say("resultMsg","সঠিক Exam/Student/Marks দিন");return}let pc=m/f*100,g=pc>=80?"A+":pc>=70?"A":pc>=60?"A-":pc>=50?"B":pc>=40?"C":pc>=33?"D":"F",gp={"A+":5,A:4,"A-":3.5,B:3,C:2,D:1,F:0}[g];try{await addDoc(collection(db,"results"),{examId:ex.id,examName:ex.name,studentId:s.id,studentName:s.name,studentCode:s.studentCode||"",className:s.className||"",subject:v("resultSubject"),fullMarks:f,obtainedMarks:m,percentage:pc,grade:g,gpa:gp,createdAt:serverTimestamp()});clearForm("resultForm");$("resultFull").value=100;refresh();say("resultMsg","Result saved: "+g)}catch(x){say("resultMsg",x.message)}};
-window.makeIdCard=async()=>{let s=C.students.find(x=>x.id===v("idStudent")),p=$("idCardPreview");p.replaceChildren();if(!s){p.textContent="Student নির্বাচন করুন";return}let b=C.batches.find(x=>x.id===s.batchId),card=document.createElement("div");card.className="idcard";let img=document.createElement("img");img.className="photo";if(s.photoId){img.src=await photo(s.photoId);if(!img.src)img.hidden=true}else img.hidden=true;card.innerHTML=`<h2>NEXTGEN ACADEMY</h2><h3>STUDENT ID CARD</h3>`;card.append(img);let d=document.createElement("div");d.innerHTML=`<hr><h3>${safe(s.name)}</h3><p>ID: ${safe(s.studentCode||s.id)}</p><p>${safe(s.className||"")} • ${safe(s.division||"")}</p><p>Batch: ${safe(b?.name||"")}</p><p>Guardian: ${safe(s.guardianPhone||"")}</p>`;card.append(d);p.append(card)};
-function table(id,heads,rows){let p=$(id);p.replaceChildren();let t=document.createElement("table"),h=document.createElement("tr");heads.forEach(x=>{let c=document.createElement("th");c.textContent=x;h.append(c)});let thead=document.createElement("thead");thead.append(h);let body=document.createElement("tbody");rows.forEach(row=>{let r=document.createElement("tr");row.forEach(x=>{let c=document.createElement("td");c.textContent=x??"";r.append(c)});body.append(r)});t.append(thead,body);p.append(t)}
-window.exportCollection=async c=>{let rows=await all(c);if(!rows.length){alert("No data");return}let keys=[...new Set(rows.flatMap(x=>Object.keys(x)))],csv=[keys.join(","),...rows.map(x=>keys.map(k=>'"'+String(x[k]??"").replace(/"/g,'""')+'"').join(","))].join("\n"),u=URL.createObjectURL(new Blob(["\ufeff"+csv],{type:"text/csv"})),a=document.createElement("a");a.href=u;a.download=c+".csv";a.click();URL.revokeObjectURL(u)};
-async function loadSettings(){try{let s=await getDoc(doc(db,"site","main"));if(!s.exists())return;let x=s.data();["name","tagline","logo","phone1","phone2","whatsapp","heroText","about"].forEach((k,i)=>$("s"+["Name","Tagline","Logo","Phone1","Phone2","Whatsapp","Hero","About"][i]).value=x[k]||"");$("sClock").value=String(x.showClock!==false);$("sCalc").value=String(x.showCalculator!==false);social.forEach(k=>{if($("social_"+k))$("social_"+k).value=x.socials?.[k]||""})}catch(e){console.warn(e)}}
-$("settingsForm").onsubmit=async e=>{e.preventDefault();try{await setDoc(doc(db,"site","main"),{name:v("sName"),tagline:v("sTagline"),logo:v("sLogo"),phone1:v("sPhone1"),phone2:v("sPhone2"),whatsapp:v("sWhatsapp"),heroText:v("sHero"),about:v("sAbout"),showClock:v("sClock")==="true",showCalculator:v("sCalc")==="true",updatedAt:serverTimestamp()},{merge:true});say("settingsMsg","Settings saved")}catch(x){say("settingsMsg",x.message)}};
-$("socialFields").innerHTML=social.map(k=>`<div><label>${k.toUpperCase()} URL</label><input id="social_${k}" type="url"></div>`).join("");
-$("socialForm").onsubmit=async e=>{e.preventDefault();let socials={};social.forEach(k=>socials[k]=v("social_"+k));try{await setDoc(doc(db,"site","main"),{socials,updatedAt:serverTimestamp()},{merge:true});say("socialMsg","Social links saved")}catch(x){say("socialMsg",x.message)}};
-window.testDrive=async()=>{try{let r=await fetch(DRIVE);say("driveMsg",JSON.stringify(await r.json()))}catch(x){say("driveMsg","API/CORS error: "+x.message)}};
-window.createBackup=async()=>{try{say("driveMsg","Backup তৈরি হচ্ছে...");let collections={};for(let c of cols)collections[c]=await all(c);let backupData={version:1,createdAt:new Date().toISOString(),projectId:"nextgen-academy-ba9ed",collections};let r=await drive("createBackup",{backupData,data:backupData,fileName:"NextGen-Academy-"+new Date().toISOString().replace(/[:.]/g,"-")+".json"});say("driveMsg","Backup saved: "+(r.fileName||r.name||r.fileId||"OK"));listBackups()}catch(x){say("driveMsg","Backup failed: "+x.message)}};
-window.listBackups=async()=>{try{let r=await drive("listBackups"),arr=r.files||r.backups||r.data||[],p=$("backupList");p.replaceChildren();if(!arr.length){p.textContent="কোনো backup নেই";return}arr.forEach(f=>item(p,f.name||f.fileName||f.id,f.createdTime||"",[["Restore",()=>restore(f.id||f.fileId)]]))}catch(x){say("driveMsg","List failed: "+x.message)}};
-async function restore(id){if(!confirm("আগে বর্তমান ডেটার Backup নিয়েছেন? Restore ডেটা merge করবে।"))return;try{let r=await drive("readBackup",{fileId:id}),data=r.backupData||r.data||r.content||r.fileData;if(typeof data==="string")data=JSON.parse(data);if(!data?.collections)throw Error("Backup structure invalid");for(let [c,rows] of Object.entries(data.collections)){if(!cols.includes(c)||!Array.isArray(rows))continue;for(let row of rows){if(row.id){let {id,...v}=row;await setDoc(doc(db,c,id),v,{merge:true})}}}await refresh();say("driveMsg","Restore সম্পন্ন; backup-এ না থাকা পুরোনো ডেটা delete করা হয়নি।")}catch(x){say("driveMsg","Restore failed: "+x.message)}}
-</script></body></html>
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
+
+import {
+  getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut
+} from "https://www.gstatic.com/firebasejs/13.3.0/firebase-auth.js";
+
+import {
+  getFirestore, collection, addDoc, getDocs, doc, getDoc,
+  updateDoc, deleteDoc, setDoc, serverTimestamp, runTransaction
+} from "https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
+
+/* =============== FIREBASE CONFIG =============== */
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCiuVDN52fNvW53wZ7qXUf6lVxXNOPPsLM",
+  authDomain: "nextgen-academy-ba9ed.firebaseapp.com",
+  projectId: "nextgen-academy-ba9ed",
+  storageBucket: "nextgen-academy-ba9ed.firebasestorage.app",
+  messagingSenderId: "250055044170",
+  appId: "1:250055044170:web:a1781adf499d33570f4ab3",
+  measurementId: "G-58XX0MKTPE"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+const DRIVE_API_URL =
+"https://script.google.com/macros/s/AKfycbxMe63aC_tUc6DAh3mbLAAsoYqzhvz0XCD24QuuxxU89zomGc0q8nkjqHX0WiLLZ52R/exec";
+
+const ADMIN_EMAIL = "sagorrana097@gmail.com";
+
+let students = [];
+let teachers = [];
+let courses = [];
+let batches = [];
+let attendance = [];
+let routines = [];
+let notices = [];
+let feeRecords = [];
+let salaryPayments = [];
+let examinations = [];
+let results = [];
+let selectedPhotoBase64 = "";
+let selectedPhotoType = "";
+
+/* =============== HELPERS =============== */
+
+const $ = id => document.getElementById(id);
+
+function message(id, text) {
+  if ($(id)) $(id).textContent = text;
+}
+
+function money(value) {
+  return "৳" + Number(value || 0).toLocaleString("en-IN");
+}
+
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&":"&amp;", "<":"&lt;", ">":"&gt;",
+    '"':"&quot;", "'":"&#039;"
+  })[char]);
+}
+
+function today() {
+  return new Date().toISOString().slice(0,10);
+}
+
+function showTab(tab) {
+  document.querySelectorAll(".tab").forEach(x => x.classList.remove("active"));
+  document.querySelectorAll("#nav button").forEach(x => x.classList.remove("active"));
+
+  if ($ (tab)) $(tab).classList.add("active");
+
+  const button = document.querySelector(`#nav button[data-tab="${tab}"]`);
+  if (button) button.classList.add("active");
+}
+
+document.querySelectorAll("#nav button").forEach(button => {
+  button.addEventListener("click", () => showTab(button.dataset.tab));
+});
+
+/* =============== LOGIN =============== */
+
+$("loginForm").addEventListener("submit", async e => {
+  e.preventDefault();
+
+  try {
+    message("loginMsg", "Login হচ্ছে...");
+    await signInWithEmailAndPassword(
+      auth,
+      $("email").value.trim(),
+      $("password").value
+    );
+  } catch (error) {
+    message("loginMsg", "Login হয়নি: " + error.message);
+  }
+});
+
+$("logout").addEventListener("click", async () => {
+  await signOut(auth);
+});
+
+onAuthStateChanged(auth, async user => {
+  if (!user) {
+    $("loginBox").style.display = "block";
+    $("app").style.display = "none";
+    return;
+  }
+
+  try {
+    if (user.email !== ADMIN_EMAIL) {
+      throw new Error("এই ইমেইলটি Admin হিসেবে অনুমোদিত নয়।");
+    }
+
+    const adminDoc = await getDoc(doc(db, "admins", user.uid));
+
+    if (!adminDoc.exists()) {
+      throw new Error("Firestore admins collection-এ আপনার UID নেই।");
+    }
+
+    $("loginBox").style.display = "none";
+    $("app").style.display = "block";
+    $("who").textContent = user.email;
+
+    await loadAll();
+
+  } catch (error) {
+    message("loginMsg", error.message);
+    await signOut(auth);
+  }
+});
+
+/* =============== FIRESTORE LOAD =============== */
+
+async function getCollection(name) {
+  const snapshot = await getDocs(collection(db, name));
+  return snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+}
+
+async function loadAll() {
+  try {
+    [
+      students, teachers, courses, batches, attendance,
+      routines, notices, feeRecords, salaryPayments,
+      examinations, results
+    ] = await Promise.all([
+      getCollection("students"),
+      getCollection("teachers"),
+      getCollection("courses"),
+      getCollection("batches"),
+      getCollection("attendance"),
+      getCollection("routines"),
+      getCollection("notices"),
+      getCollection("feeRecords"),
+      getCollection("salaryPayments"),
+      getCollection("examinations"),
+      getCollection("results")
+    ]);
+
+    refreshSelects();
+    renderAll();
+    updateDashboard();
+
+  } catch (error) {
+    alert("ডেটা লোড হয়নি: " + error.message);
+  }
+}
+
+function renderAll() {
+  renderStudents();
+  renderTeachers();
+  renderCourses();
+  renderBatches();
+  renderRoutines();
+  renderNotices();
+  renderFees();
+  renderSalary();
+  renderExams();
+  renderResults();
+  renderSettings();
+  renderSocial();
+}
+
+/* =============== SELECT OPTIONS =============== */
+
+function fillSelect(id, items, labelFn, placeholder = "Select") {
+  const el = $(id);
+  if (!el) return;
+
+  const oldValue = el.value;
+  el.innerHTML = `<option value="">${placeholder}</option>`;
+
+  items.forEach(item => {
+    el.innerHTML += `<option value="${escapeHTML(item.id)}">${escapeHTML(labelFn(item))}</option>`;
+  });
+
+  if (items.some(x => x.id === oldValue)) el.value = oldValue;
+}
+
+function refreshSelects() {
+  const classes = [
+    "Class 1","Class 2","Class 3","Class 4","Class 5",
+    "Class 6","Class 7","Class 8","Class 9","Class 10",
+    "Class 11","Class 12"
+  ];
+
+  ["courseClass","stClass"].forEach(id => {
+    if ($(id)) {
+      const old = $(id).value;
+      $(id).innerHTML = '<option value="">Select Class</option>' +
+        classes.map(c => `<option>${c}</option>`).join("");
+      $(id).value = old;
+    }
+  });
+
+  fillSelect("stBatch", batches, x => x.name);
+  fillSelect("attBatch", batches, x => x.name);
+  fillSelect("rBatch", batches, x => x.name);
+  fillSelect("bTeacher", teachers, x => x.name);
+  fillSelect("feeStudent", students, x => x.name);
+  fillSelect("salaryTeacher", teachers, x => x.name);
+  fillSelect("idStudent", students, x => x.name);
+  fillSelect("resultStudent", students, x => x.name);
+  fillSelect("resultExam", examinations, x => x.name);
+}
+
+/* =============== DASHBOARD =============== */
+
+function updateDashboard() {
+  $("countStudents").textContent = students.length;
+  $("countTeachers").textContent = teachers.length;
+  $("countCourses").textContent = courses.length;
+  $("countBatches").textContent = batches.length;
+
+  const due = feeRecords.reduce((sum, x) =>
+    sum + Math.max(0, Number(x.total || 0) -
+      Number(x.discount || 0) - Number(x.paid || 0)), 0);
+
+  const paid = salaryPayments.reduce((sum, x) =>
+    sum + Number(x.paid || 0), 0);
+
+  $("countDue").textContent = money(due);
+  $("countSalary").textContent = money(paid);
+}
+
+/* =============== SERIAL STUDENT ID =============== */
+
+async function generateStudentCode() {
+  return await runTransaction(db, async transaction => {
+    const counterRef = doc(db, "counters", "studentSerial");
+    const counterSnap = await transaction.get(counterRef);
+
+    let serial = counterSnap.exists()
+      ? Number(counterSnap.data().value || 0)
+      : 0;
+
+    if (!counterSnap.exists()) {
+      const existing = await getDocs(collection(db, "students"));
+
+      existing.forEach(d => {
+        const code = String(d.data().studentCode || d.data().code || "");
+        const match = code.match(/^NGA-(\d+)$/);
+        if (match) serial = Math.max(serial, Number(match[1]));
+      });
+    }
+
+    serial++;
+    transaction.set(counterRef, {
+      value: serial,
+      updatedAt: serverTimestamp()
+    });
+
+    return "NGA-" + String(serial).padStart(4, "0");
+  });
+}
+
+/* =============== STUDENT PHOTO =============== */
+
+$("stPhoto").addEventListener("change", async e => {
+  const file = e.target.files[0];
+  selectedPhotoBase64 = "";
+  selectedPhotoType = "";
+
+  if (!file) return;
+
+  if (!file.type.startsWith("image/")) {
+    alert("শুধু Image ফাইল নির্বাচন করুন।");
+    e.target.value = "";
+    return;
+  }
+
+  if (file.size > 5 * 1024 * 1024) {
+    alert("ছবির সাইজ ৫ MB-এর বেশি হতে পারবে না।");
+    e.target.value = "";
+    return;
+  }
+
+  selectedPhotoType = file.type;
+
+  const reader = new FileReader();
+
+  reader.onload = () => {
+    const data = String(reader.result);
+    selectedPhotoBase64 = data.split(",")[1] || "";
+    $("stPhotoPreview").src = data;
+    $("stPhotoPreview").hidden = false;
+  };
+
+  reader.readAsDataURL(file);
+});
+
+/*
+  Drive API-এর upload action Code.gs-এর সঙ্গে মিলিয়ে নিতে হবে।
+  নিচের action/field নামগুলো Code.gs-এ একই নামে না থাকলে
+  ছবি আপলোড হবে না।
+*/
+
+async function driveApi(payload) {
+  if (!auth.currentUser) throw new Error("Admin login প্রয়োজন।");
+
+  const token = await auth.currentUser.getIdToken();
+
+  const response = await fetch(DRIVE_API_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "text/plain;charset=utf-8"
+    },
+    body: JSON.stringify({
+      ...payload,
+      idToken: token
+    })
+  });
+
+  const result = await response.json();
+
+  if (result.success === false) {
+    throw new Error(result.message || "Drive API error");
+  }
+
+  return result;
+}
+
+async function uploadStudentPhoto(studentId) {
+  if (!selectedPhotoBase64) return "";
+
+  const result = await driveApi({
+    action: "uploadPhoto",
+    studentId,
+    fileName: studentId + "_" + Date.now() + ".jpg",
+    mimeType: selectedPhotoType,
+    base64: selectedPhotoBase64
+  });
+
+  return result.fileId || result.photoId || "";
+}
+
+/* =============== STUDENTS =============== */
+
+$("studentForm").addEventListener("submit", async e => {
+  e.preventDefault();
+
+  try {
+    const id = $("studentId").value;
+    const codeInput = $("stCode").value.trim();
+
+    let studentCode = codeInput;
+
+    if (!id && !studentCode) {
+      studentCode = await generateStudentCode();
+    }
+
+    const data = {
+      name: $("stName").value.trim(),
+      studentCode,
+      className: $("stClass").value,
+      division: $("stDivision").value,
+      batchId: $("stBatch").value,
+      guardian: $("stGuardian").value.trim(),
+      phone: $("stPhone").value.trim(),
+      admissionDate: $("stDate").value,
+      monthlyFee: Number($("stMonthlyFee").value || 0),
+      updatedAt: serverTimestamp()
+    };
+
+    if (id) {
+      if (selectedPhotoBase64) {
+        data.photoFileId = await uploadStudentPhoto(id);
+      }
+
+      await updateDoc(doc(db, "students", id), data);
+    } else {
+      const ref = await addDoc(collection(db, "students"), {
+        ...data,
+        createdAt: serverTimestamp()
+      });
+
+      if (selectedPhotoBase64) {
+        const photoFileId = await uploadStudentPhoto(ref.id);
+        await updateDoc(ref, { photoFileId });
+      }
+    }
+
+    message("studentMsg", "Student সফলভাবে Save হয়েছে।");
+    clearStudentForm();
+    await loadAll();
+
+  } catch (error) {
+    message("studentMsg", "সমস্যা: " + error.message);
+  }
+});
+
+function clearStudentForm() {
+  $("studentForm").reset();
+  $("studentId").value = "";
+  $("stPhotoPreview").hidden = true;
+  selectedPhotoBase64 = "";
+  selectedPhotoType = "";
+}
+
+window.clearStudentForm = clearStudentForm;
+
+function renderStudents() {
+  const search = ($("studentSearch")?.value || "").toLowerCase();
+
+  const filtered = students.filter(s =>
+    String(s.name || "").toLowerCase().includes(search) ||
+    String(s.studentCode || "").toLowerCase().includes(search) ||
+    String(s.phone || "").includes(search)
+  );
+
+  $("studentList").innerHTML = filtered.map(s => `
+    <div class="listitem">
+      <strong>${escapeHTML(s.name)}</strong>
+      <p>ID: ${escapeHTML(s.studentCode || s.code || s.id)}</p>
+      <p>Class: ${escapeHTML(s.className || s.class || "")}</p>
+      <p>Phone: ${escapeHTML(s.phone || "")}</p>
+      <p>Batch: ${escapeHTML(batches.find(b => b.id === s.batchId)?.name || "")}</p>
+      <div class="actions">
+        <button onclick="editStudent('${s.id}')">Edit</button>
+        <button class="secondary" onclick="selectID('${s.id}')">ID Card</button>
+        <button class="danger" onclick="removeRecord('students','${s.id}')">Delete</button>
+      </div>
+    </div>
+  `).join("") || "কোনো Student পাওয়া যায়নি।";
+}
+
+window.editStudent = id => {
+  const s = students.find(x => x.id === id);
+  if (!s) return;
+
+  $("studentId").value = id;
+  $("stName").value = s.name || "";
+  $("stCode").value = s.studentCode || s.code || "";
+  $("stClass").value = s.className || s.class || "";
+  $("stDivision").value = s.division || "General";
+  $("stBatch").value = s.batchId || "";
+  $("stGuardian").value = s.guardian || "";
+  $("stPhone").value = s.phone || "";
+  $("stDate").value = s.admissionDate || "";
+  $("stMonthlyFee").value = s.monthlyFee || "";
+
+  showTab("students");
+  window.scrollTo(0, 0);
+};
+
+window.selectID = id => {
+  $("idStudent").value = id;
+  showTab("idcard");
+  makeIdCard();
+};
+
+/* =============== TEACHERS =============== */
+
+$("teacherForm").addEventListener("submit", async e => {
+  e.preventDefault();
+
+  try {
+    const id = $("teacherId").value;
+
+    const data = {
+      name: $("tName").value.trim(),
+      phone: $("tPhone").value.trim(),
+      email: $("tEmail").value.trim(),
+      subject: $("tSubject").value.trim(),
+      salary: Number($("tSalary").value || 0),
+      updatedAt: serverTimestamp()
+    };
+
+    if (id) await updateDoc(doc(db, "teachers", id), data);
+    else await addDoc(collection(db, "teachers"), {
+      ...data, createdAt: serverTimestamp()
+    });
+
+    $("teacherForm").reset();
+    $("teacherId").value = "";
+    message("teacherMsg", "Teacher Save হয়েছে।");
+    await loadAll();
+
+  } catch (error) {
+    message("teacherMsg", error.message);
+  }
+});
+
+function renderTeachers() {
+  const search = ($("teacherSearch")?.value || "").toLowerCase();
+
+  $("teacherList").innerHTML = teachers
+    .filter(t => String(t.name || "").toLowerCase().includes(search))
+    .map(t => `
+      <div class="listitem">
+        <strong>${escapeHTML(t.name)}</strong>
+        <p>Phone: ${escapeHTML(t.phone || "")}</p>
+        <p>Subject: ${escapeHTML(t.subject || "")}</p>
+        <p>Salary: ${money(t.salary)}</p>
+        <button onclick="editTeacher('${t.id}')">Edit</button>
+        <button class="danger" onclick="removeRecord('teachers','${t.id}')">Delete</button>
+      </div>
+    `).join("") || "কোনো Teacher নেই।";
+}
+
+window.editTeacher = id => {
+  const t = teachers.find(x => x.id === id);
+  if (!t) return;
+
+  $("teacherId").value = id;
+  $("tName").value = t.name || "";
+  $("tPhone").value = t.phone || "";
+  $("tEmail").value = t.email || "";
+  $("tSubject").value = t.subject || "";
+  $("tSalary").value = t.salary || "";
+  showTab("teachers");
+};
+
+/* =============== COURSES =============== */
+
+$("courseForm").addEventListener("submit", async e => {
+  e.preventDefault();
+
+  try {
+    const id = $("courseId").value;
+
+    const data = {
+      name: $("courseName").value.trim(),
+      className: $("courseClass").value,
+      division: $("division").value,
+      subject: $("subject").value.trim(),
+      fee: Number($("fee").value || 0),
+      description: $("description").value,
+      updatedAt: serverTimestamp()
+    };
+
+    if (id) await updateDoc(doc(db, "courses", id), data);
+    else await addDoc(collection(db, "courses"), {
+      ...data, createdAt: serverTimestamp()
+    });
+
+    $("courseForm").reset();
+    $("courseId").value = "";
+    message("courseMsg", "Course Save হয়েছে।");
+    await loadAll();
+
+  } catch (error) {
+    message("courseMsg", error.message);
+  }
+});
+
+function renderCourses() {
+  $("courseList").innerHTML = courses.map(c => `
+    <div class="listitem">
+      <strong>${escapeHTML(c.name)}</strong>
+      <p>${escapeHTML(c.className || "")} | ${escapeHTML(c.subject || "")}</p>
+      <p>Fee: ${money(c.fee)}</p>
+      <button onclick="editCourse('${c.id}')">Edit</button>
+      <button class="danger" onclick="removeRecord('courses','${c.id}')">Delete</button>
+    </div>
+  `).join("") || "কোনো Course নেই।";
+}
+
+window.editCourse = id => {
+  const c = courses.find(x => x.id === id);
+  if (!c) return;
+
+  $("courseId").value = id;
+  $("courseName").value = c.name || "";
+  $("courseClass").value = c.className || "";
+  $("division").value = c.division || "General";
+  $("subject").value = c.subject || "";
+  $("fee").value = c.fee || "";
+  $("description").value = c.description || "";
+  showTab("courses");
+};
+
+/* =============== BATCHES =============== */
+
+$("batchForm").addEventListener("submit", async e => {
+  e.preventDefault();
+
+  try {
+    const id = $("batchId").value;
+
+    const data = {
+      name: $("bName").value.trim(),
+      className: $("bClass").value,
+      division: $("bDivision").value,
+      teacherId: $("bTeacher").value,
+      schedule: $("bSchedule").value,
+      updatedAt: serverTimestamp()
+    };
+
+    if (id) await updateDoc(doc(db, "batches", id), data);
+    else await addDoc(collection(db, "batches"), {
+      ...data, createdAt: serverTimestamp()
+    });
+
+    $("batchForm").reset();
+    $("batchId").value = "";
+    message("batchMsg", "Batch Save হয়েছে।");
+    await loadAll();
+
+  } catch (error) {
+    message("batchMsg", error.message);
+  }
+});
+
+function renderBatches() {
+  $("batchList").innerHTML = batches.map(b => `
+    <div class="listitem">
+      <strong>${escapeHTML(b.name)}</strong>
+      <p>${escapeHTML(b.className || "")} | ${escapeHTML(b.schedule || "")}</p>
+      <button onclick="editBatch('${b.id}')">Edit</button>
+      <button class="danger" onclick="removeRecord('batches','${b.id}')">Delete</button>
+    </div>
+  `).join("") || "কোনো Batch নেই।";
+}
+
+window.editBatch = id => {
+  const b = batches.find(x => x.id === id);
+  if (!b) return;
+
+  $("batchId").value = id;
+  $("bName").value = b.name || "";
+  $("bClass").value = b.className || "";
+  $("bDivision").value = b.division || "";
+  $("bTeacher").value = b.teacherId || "";
+  $("bSchedule").value = b.schedule || "";
+  showTab("batches");
+};
+
+/* =============== ATTENDANCE =============== */
+
+window.loadAttendanceForm = () => {
+  const batchId = $("attBatch").value;
+  const list = students.filter(s => s.batchId === batchId);
+
+  $("attendanceList").innerHTML = list.map(s => `
+    <div class="listitem">
+      <label>
+        <input type="checkbox" class="attCheck" value="${s.id}" checked>
+        ${escapeHTML(s.name)}
+      </label>
+      <select class="attStatus" data-id="${s.id}">
+        <option>Present</option>
+        <option>Absent</option>
+        <option>Late</option>
+      </select>
+    </div>
+  `).join("") || "এই Batch-এ কোনো Student নেই।";
+};
+
+window.saveAttendance = async () => {
+  try {
+    const batchId = $("attBatch").value;
+    const date = $("attDate").value;
+
+    if (!batchId || !date) {
+      throw new Error("Batch এবং Date নির্বাচন করুন।");
+    }
+
+    const checks = [...document.querySelectorAll(".attCheck")];
+
+    for (const check of checks) {
+      const statusSelect = document.querySelector(
+        `.attStatus[data-id="${check.value}"]`
+      );
+
+      await addDoc(collection(db, "attendance"), {
+        studentId: check.value,
+        batchId,
+        date,
+        status: check.checked ? statusSelect.value : "Absent",
+        createdAt: serverTimestamp()
+      });
+    }
+
+    message("attendanceMsg", "Attendance Save হয়েছে।");
+    await loadAll();
+
+  } catch (error) {
+    message("attendanceMsg", error.message);
+  }
+};
+
+/* =============== ROUTINE =============== */
+
+$("routineForm").addEventListener("submit", async e => {
+  e.preventDefault();
+
+  try {
+    await addDoc(collection(db, "routines"), {
+      batchId: $("rBatch").value,
+      day: $("rDay").value,
+      subject: $("rSubject").value,
+      time: $("rTime").value,
+      room: $("rRoom").value,
+      createdAt: serverTimestamp()
+    });
+
+    $("routineForm").reset();
+    message("routineMsg", "Routine Save হয়েছে।");
+    await loadAll();
+
+  } catch (error) {
+    message("routineMsg", error.message);
+  }
+});
+
+function renderRoutines() {
+  $("routineList").innerHTML = routines.map(r => `
+    <div class="listitem">
+      <strong>${escapeHTML(r.day)}</strong>
+      <p>${escapeHTML(batches.find(b => b.id === r.batchId)?.name || "")}</p>
+      <p>${escapeHTML(r.subject)} | ${escapeHTML(r.time || "")}</p>
+      <button class="danger" onclick="removeRecord('routines','${r.id}')">Delete</button>
+    </div>
+  `).join("") || "কোনো Routine নেই।";
+}
+
+/* =============== NOTICES =============== */
+
+$("noticeForm").addEventListener("submit", async e => {
+  e.preventDefault();
+
+  try {
+    const id = $("noticeId").value;
+
+    const data = {
+      title: $("nTitle").value.trim(),
+      body: $("nBody").value.trim(),
+      date: today(),
+      updatedAt: serverTimestamp()
+    };
+
+    if (id) await updateDoc(doc(db, "notices", id), data);
+    else await addDoc(collection(db, "notices"), {
+      ...data, createdAt: serverTimestamp()
+    });
+
+    $("noticeForm").reset();
+    $("noticeId").value = "";
+    message("noticeMsg", "Notice Publish হয়েছে।");
+    await loadAll();
+
+  } catch (error) {
+    message("noticeMsg", error.message);
+  }
+});
+
+function renderNotices() {
+  $("noticeList").innerHTML = notices.map(n => `
+    <div class="listitem">
+      <strong>${escapeHTML(n.title)}</strong>
+      <p>${escapeHTML(n.body)}</p>
+      <button onclick="editNotice('${n.id}')">Edit</button>
+      <button class="danger" onclick="removeRecord('notices','${n.id}')">Delete</button>
+    </div>
+  `).join("") || "কোনো Notice নেই।";
+}
+
+window.editNotice = id => {
+  const n = notices.find(x => x.id === id);
+  if (!n) return;
+
+  $("noticeId").value = id;
+  $("nTitle").value = n.title || "";
+  $("nBody").value = n.body || "";
+  showTab("notices");
+};
+
+/* =============== FEES =============== */
+
+function calculateFee() {
+  const total = Number($("feeTotal").value || 0);
+  const discount = Number($("feeDiscount").value || 0);
+  const paid = Number($("feePaid").value || 0);
+
+  $("feeCalc").textContent =
+    "Due: " + money(Math.max(0, total - discount - paid));
+}
+
+["feeTotal","feeDiscount","feePaid"].forEach(id => {
+  $(id).addEventListener("input", calculateFee);
+});
+
+$("feeForm").addEventListener("submit", async e => {
+  e.preventDefault();
+
+  try {
+    const total = Number($("feeTotal").value);
+    const discount = Number($("feeDiscount").value || 0);
+    const paid = Number($("feePaid").value);
+
+    if (discount + paid > total) {
+      throw new Error("Discount ও Paid-এর যোগফল Total-এর বেশি হতে পারবে না।");
+    }
+
+    await addDoc(collection(db, "feeRecords"), {
+      studentId: $("feeStudent").value,
+      type: $("feeType").value,
+      month: $("feeMonth").value,
+      total,
+      discount,
+      paid,
+      due: total - discount - paid,
+      date: $("feeDate").value,
+      note: $("feeNote").value,
+      createdAt: serverTimestamp()
+    });
+
+    $("feeForm").reset();
+    message("feeMsg", "Fee Record Save হয়েছে।");
+    await loadAll();
+
+  } catch (error) {
+    message("feeMsg", error.message);
+  }
+});
+
+function renderFees() {
+  $("feeList").innerHTML = `
+    <table>
+      <tr><th>Student</th><th>Type</th><th>Total</th><th>Paid</th><th>Due</th><th>Action</th></tr>
+      ${feeRecords.map(f => `
+        <tr>
+          <td>${escapeHTML(students.find(s => s.id === f.studentId)?.name || "Unknown")}</td>
+          <td>${escapeHTML(f.type)}</td>
+          <td>${money(f.total)}</td>
+          <td>${money(f.paid)}</td>
+          <td>${money(f.due)}</td>
+          <td><button class="danger" onclick="removeRecord('feeRecords','${f.id}')">Delete</button></td>
+        </tr>
+      `).join("")}
+    </table>`;
+}
+
+/* =============== SALARY =============== */
+
+function calculateSalary() {
+  const base = Number($("salaryBase").value || 0);
+  const bonus = Number($("salaryBonus").value || 0);
+  const deduction = Number($("salaryDeduction").value || 0);
+
+  $("salaryCalc").textContent =
+    "Net Salary: " + money(base + bonus - deduction);
+}
+
+["salaryBase","salaryBonus","salaryDeduction"].forEach(id => {
+  $(id).addEventListener("input", calculateSalary);
+});
+
+$("salaryForm").addEventListener("submit", async e => {
+  e.preventDefault();
+
+  try {
+    const base = Number($("salaryBase").value);
+    const bonus = Number($("salaryBonus").value || 0);
+    const deduction = Number($("salaryDeduction").value || 0);
+    const paid = Number($("salaryPaid").value);
+
+    if (paid > base + bonus - deduction) {
+      throw new Error("Paid amount Net Salary-এর বেশি।");
+    }
+
+    await addDoc(collection(db, "salaryPayments"), {
+      teacherId: $("salaryTeacher").value,
+      month: $("salaryMonth").value,
+      base,
+      bonus,
+      deduction,
+      paid,
+      date: $("salaryDate").value,
+      note: $("salaryNote").value,
+      createdAt: serverTimestamp()
+    });
+
+    $("salaryForm").reset();
+    message("salaryMsg", "Salary Payment Save হয়েছে।");
+    await loadAll();
+
+  } catch (error) {
+    message("salaryMsg", error.message);
+  }
+});
+
+function renderSalary() {
+  $("salaryList").innerHTML = `
+    <table>
+      <tr><th>Teacher</th><th>Month</th><th>Net</th><th>Paid</th><th>Action</th></tr>
+      ${salaryPayments.map(s => `
+        <tr>
+          <td>${escapeHTML(teachers.find(t => t.id === s.teacherId)?.name || "Unknown")}</td>
+          <td>${escapeHTML(s.month)}</td>
+          <td>${money(s.base + s.bonus - s.deduction)}</td>
+          <td>${money(s.paid)}</td>
+          <td><button class="danger" onclick="removeRecord('salaryPayments','${s.id}')">Delete</button></td>
+        </tr>
+      `).join("")}
+    </table>`;
+}
+
+/* =============== EXAM =============== */
+
+$("examForm").addEventListener("submit", async e => {
+  e.preventDefault();
+
+  try {
+    await addDoc(collection(db, "examinations"), {
+      name: $("examName").value,
+      className: $("examClass").value,
+      division: $("examDivision").value,
+      date: $("examDate").value,
+      createdAt: serverTimestamp()
+    });
+
+    $("examForm").reset();
+    message("examMsg", "Exam Save হয়েছে।");
+    await loadAll();
+
+  } catch (error) {
+    message("examMsg", error.message);
+  }
+});
+
+function renderExams() {
+  $("examList").innerHTML = examinations.map(x => `
+    <div class="listitem">
+      <strong>${escapeHTML(x.name)}</strong>
+      <p>${escapeHTML(x.className || "")} | ${escapeHTML(x.date || "")}</p>
+      <button class="danger" onclick="removeRecord('examinations','${x.id}')">Delete</button>
+    </div>
+  `).join("");
+}
+
+$("resultForm").addEventListener("submit", async e => {
+  e.preventDefault();
+
+  try {
+    const full = Number($("resultFull").value);
+    const obtained = Number($("resultObtained").value);
+
+    if (obtained > full) throw new Error("Obtained Marks Full Marks-এর বেশি।");
+
+    await addDoc(collection(db, "results"), {
+      examId: $("resultExam").value,
+      studentId: $("resultStudent").value,
+      subject: $("resultSubject").value,
+      full,
+      obtained,
+      percentage: (obtained / full) * 100,
+      createdAt: serverTimestamp()
+    });
+
+    $("resultForm").reset();
+    message("resultMsg", "Result Save হয়েছে।");
+    await loadAll();
+
+  } catch (error) {
+    message("resultMsg", error.message);
+  }
+});
+
+function renderResults() {
+  $("resultList").innerHTML = `
+    <table>
+      <tr><th>Student</th><th>Exam</th><th>Subject</th><th>Marks</th><th>Action</th></tr>
+      ${results.map(r => `
+        <tr>
+          <td>${escapeHTML(students.find(s => s.id === r.studentId)?.name || "")}</td>
+          <td>${escapeHTML(examinations.find(x => x.id === r.examId)?.name || "")}</td>
+          <td>${escapeHTML(r.subject)}</td>
+          <td>${r.obtained}/${r.full}</td>
+          <td><button class="danger" onclick="removeRecord('results','${r.id}')">Delete</button></td>
+        </tr>
+      `).join("")}
+    </table>`;
+}
+
+/* =============== ID CARD =============== */
+
+window.makeIdCard = () => {
+  const s = students.find(x => x.id === $("idStudent").value);
+
+  if (!s) {
+    $("idCardPreview").innerHTML = "Student নির্বাচন করুন।";
+    return;
+  }
+
+  const batch = batches.find(b => b.id === s.batchId);
+
+  $("idCardPreview").innerHTML = `
+    <div class="idcard">
+      <h3>🎓 NEXTGEN ACADEMY</h3>
+      <p>STUDENT IDENTITY CARD</p>
+      <hr>
+      <h2>${escapeHTML(s.name)}</h2>
+      <p><b>ID:</b> ${escapeHTML(s.studentCode || s.code || s.id)}</p>
+      <p><b>Class:</b> ${escapeHTML(s.className || s.class || "")}</p>
+      <p><b>Division:</b> ${escapeHTML(s.division || "")}</p>
+      <p><b>Batch:</b> ${escapeHTML(batch?.name || "")}</p>
+      <p><b>Guardian:</b> ${escapeHTML(s.guardian || "")}</p>
+      <p><b>Phone:</b> ${escapeHTML(s.phone || "")}</p>
+      <p style="font-size:11px">NextGen Academy | Student Card</p>
+    </div>`;
+};
+
+/* =============== SETTINGS =============== */
+
+async function renderSettings() {
+  try {
+    const snap = await getDoc(doc(db, "site", "settings"));
+    if (!snap.exists()) return;
+
+    const s = snap.data();
+
+    $("sName").value = s.name || "";
+    $("sTagline").value = s.tagline || "";
+    $("sLogo").value = s.logo || "";
+    $("sPhone1").value = s.phone1 || "";
+    $("sPhone2").value = s.phone2 || "";
+    $("sWhatsapp").value = s.whatsapp || "";
+    $("sHero").value = s.hero || "";
+    $("sAbout").value = s.about || "";
+    $("sClock").value = String(s.clock ?? true);
+    $("sCalc").value = String(s.calculator ?? true);
+
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+$("settingsForm").addEventListener("submit", async e => {
+  e.preventDefault();
+
+  try {
+    await setDoc(doc(db, "site", "settings"), {
+      name: $("sName").value,
+      tagline: $("sTagline").value,
+      logo: $("sLogo").value,
+      phone1: $("sPhone1").value,
+      phone2: $("sPhone2").value,
+      whatsapp: $("sWhatsapp").value,
+      hero: $("sHero").value,
+      about: $("sAbout").value,
+      clock: $("sClock").value === "true",
+      calculator: $("sCalc").value === "true",
+      updatedAt: serverTimestamp()
+    }, { merge: true });
+
+    message("settingsMsg", "Website Settings Save হয়েছে।");
+
+  } catch (error) {
+    message("settingsMsg", error.message);
+  }
+});
+
+/* =============== SOCIAL LINKS =============== */
+
+const socialNames = [
+  ["Facebook","facebook"],
+  ["YouTube","youtube"],
+  ["Instagram","instagram"],
+  ["TikTok","tiktok"],
+  ["WhatsApp","whatsapp"]
+];
+
+function renderSocial() {
+  $("socialFields").innerHTML = socialNames.map(([label,key]) => `
+    <div>
+      <label>${label} URL</label>
+      <input id="social_${key}" type="url" placeholder="https://">
+    </div>
+  `).join("");
+
+  loadSocial();
+}
+
+async function loadSocial() {
+  try {
+    const snap = await getDoc(doc(db, "site", "social"));
+    if (!snap.exists()) return;
+
+    const data = snap.data();
+
+    socialNames.forEach(([label,key]) => {
+      $("social_" + key).value = data[key] || "";
+    });
+
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+$("socialForm").addEventListener("submit", async e => {
+  e.preventDefault();
+
+  try {
+    const data = {};
+
+    socialNames.forEach(([label,key]) => {
+      data[key] = $("social_" + key).value.trim();
+    });
+
+    data.updatedAt = serverTimestamp();
+
+    await setDoc(doc(db, "site", "social"), data, { merge: true });
+
+    message("socialMsg", "Social Links Save হয়েছে।");
+
+  } catch (error) {
+    message("socialMsg", error.message);
+  }
+});
+
+/* =============== GOOGLE DRIVE =============== */
+
+window.testDrive = async () => {
+  try {
+    message("driveMsg", "Drive API পরীক্ষা হচ্ছে...");
+
+    const response = await fetch(DRIVE_API_URL);
+    const data = await response.json();
+
+    message("driveMsg", JSON.stringify(data));
+
+  } catch (error) {
+    message("driveMsg", "API পরীক্ষা ব্যর্থ: " + error.message);
+  }
+};
+
+/*
+  Backup/Restore-এর action ও payload অবশ্যই Apps Script Code.gs-এর
+  নির্ধারিত API contract অনুযায়ী হতে হবে। নিচের action নামগুলো
+  Code.gs-এ একইভাবে implement না থাকলে এগুলো কাজ করবে না।
+*/
+
+window.createBackup = async () => {
+  try {
+    message("driveMsg", "Backup তৈরি হচ্ছে...");
+
+    const backupData = {};
+
+    const collections = [
+      "students","teachers","courses","batches",
+      "attendance","routines","notices","feeRecords",
+      "salaryPayments","examinations","results",
+      "site","counters"
+    ];
+
+    for (const name of collections) {
+      const snapshot = await getDocs(collection(db, name));
+
+      backupData[name] = snapshot.docs.map(d => ({
+        id: d.id,
+        data: d.data()
+      }));
+    }
+
+    const result = await driveApi({
+      action: "createBackup",
+      fileName: "NextGen_Academy_Backup_" + today() + ".json",
+      backupData: JSON.stringify(backupData)
+    });
+
+    message("driveMsg", "Backup API response: " + JSON.stringify(result));
+    await listBackups();
+
+  } catch (error) {
+    message("driveMsg", "Backup ব্যর্থ: " + error.message);
+  }
+};
+
+window.listBackups = async () => {
+  try {
+    message("driveMsg", "Backup list লোড হচ্ছে...");
+
+    const result = await driveApi({
+      action: "listBackups"
+    });
+
+    const files = result.files || result.backups || [];
+
+    $("backupList").innerHTML = files.map(f => `
+      <div class="listitem">
+        <strong>${escapeHTML(f.name || f.fileName || "Backup")}</strong>
+        <p>${escapeHTML(f.id || f.fileId || "")}</p>
+        <button onclick="restoreBackup('${escapeHTML(f.id || f.fileId)}')">Restore</button>
+      </div>
+    `).join("") || "কোনো Backup পাওয়া যায়নি।";
+
+    message("driveMsg", "Backup list পাওয়া গেছে।");
+
+  } catch (error) {
+    message("driveMsg", "Backup list ব্যর্থ: " + error.message);
+  }
+};
+
+window.restoreBackup = async fileId => {
+  if (!confirm("Backup Restore করবেন? বর্তমান ডেটার সঙ্গে Backup-এর ডেটা যুক্ত হবে।")) return;
+
+  try {
+    message("driveMsg", "Restore হচ্ছে...");
+
+    const result = await driveApi({
+      action: "getBackupFile",
+      fileId
+    });
+
+    let backup = result.backupData || result.data || result.content;
+
+    if (typeof backup === "string") backup = JSON.parse(backup);
+
+    if (!backup || typeof backup !== "object") {
+      throw new Error("Backup ডেটা পাওয়া যায়নি।");
+    }
+
+    for (const [name, rows] of Object.entries(backup)) {
+      if (!Array.isArray(rows)) continue;
+
+      for (const row of rows) {
+        if (!row.id || !row.data) continue;
+
+        await setDoc(doc(db, name, row.id), row.data, { merge: true });
+      }
+    }
+
+    message("driveMsg", "Restore সম্পন্ন হয়েছে।");
+    await loadAll();
+
+  } catch (error) {
+    message("driveMsg", "Restore ব্যর্থ: " + error.message);
+  }
+};
+
+/* =============== CSV REPORT =============== */
+
+window.exportCollection = async name => {
+  try {
+    const data = await getCollection(name);
+
+    if (!data.length) {
+      alert("এই Collection-এ কোনো ডেটা নেই।");
+      return;
+    }
+
+    const keys = [...new Set(data.flatMap(x => Object.keys(x)))];
+
+    const csvCell = value => {
+      if (value && typeof value === "object") {
+        value = JSON.stringify(value);
+      }
+
+      return '"' + String(value ?? "").replace(/"/g, '""') + '"';
+    };
+
+    const csv = [
+      keys.map(csvCell).join(","),
+      ...data.map(row => keys.map(k => csvCell(row[k])).join(","))
+    ].join("\n");
+
+    const blob = new Blob(["\uFEFF" + csv], {
+      type: "text/csv;charset=utf-8"
+    });
+
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+
+    a.href = url;
+    a.download = name + "_" + today() + ".csv";
+    a.click();
+
+    URL.revokeObjectURL(url);
+
+  } catch (error) {
+    alert("CSV তৈরি হয়নি: " + error.message);
+  }
+};
+
+/* =============== DELETE =============== */
+
+window.removeRecord = async (collectionName, id) => {
+  if (!confirm("আপনি কি নিশ্চিতভাবে Delete করতে চান?")) return;
+
+  try {
+    await deleteDoc(doc(db, collectionName, id));
+    await loadAll();
+    alert("Delete সম্পন্ন হয়েছে।");
+
+  } catch (error) {
+    alert("Delete হয়নি: " + error.message);
+  }
+};
+
+/* =============== INITIAL DEFAULTS =============== */
+
+$("attDate").value = today();
+$("feeDate").value = today();
+$("salaryDate").value = today();
+
+</script>
+</body>
+</html>
