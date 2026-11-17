@@ -407,7 +407,34 @@ async function loadAllData() {
   renderAll();
 }
 
-function renderAll() {
+function populateSelects() {
+  const classNames = [
+    ...new Set(
+      C.courses
+        .map(course => course.className)
+        .filter(name => name && name.trim())
+    )
+  ];
+
+  const classOptions = classNames.map(name => ({
+    name: name
+  }));
+
+  setOptions("stClass", classOptions, item => item.name, item => item.name);
+
+  setOptions("stBatch", C.batches, item => item.id, item => item.name);
+  setOptions("attBatch", C.batches, item => item.id, item => item.name);
+  setOptions("rBatch", C.batches, item => item.id, item => item.name);
+  setOptions("waBatch", C.batches, item => item.id, item => item.name);
+  setOptions("onlineBatch", C.batches, item => item.id, item => item.name);
+  setOptions("hwBatch", C.batches, item => item.id, item => item.name);
+
+  setOptions("feeStudent", C.students, item => item.id, item => item.name);
+  setOptions("salaryTeacher", C.teachers, item => item.id, item => item.name);
+  setOptions("resultStudent", C.students, item => item.id, item => item.name);
+  setOptions("resultExam", C.exams, item => item.id, item => item.name);
+}
+  function renderAll() {
   renderStudents();
   renderTeachers();
   renderFees();
